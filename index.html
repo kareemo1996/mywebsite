@@ -132,9 +132,13 @@
     .product-topline { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
     .product-type { color: var(--muted); font-family: 'Montserrat', sans-serif; font-size: .75rem; font-weight: 800; }
     .price { color: var(--accent); font-family: 'Montserrat', sans-serif; font-size: 1.25rem; font-weight: 900; white-space: nowrap; }
-    .product-card h3 { margin: 8px 0 20px; font-size: 1.15rem; letter-spacing: -.02em; }
-    .product-note { min-height: 23px; margin: 0 0 20px; color: var(--muted); font-size: .85rem; }
-    .add-to-cart { width: 100%; min-height: 48px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-muted); color: var(--ink); font-size: .95rem; font-weight: 900; transition: color .2s ease, background .2s ease, border-color .2s ease; }
+    .product-card h3 { margin: 8px 0 10px; font-size: 1.15rem; letter-spacing: -.02em; }
+    
+    /* تنسيق تفاصيل المنتجات */
+    .product-features { margin: 0 0 20px; padding: 0 20px 0 0; color: var(--muted); font-size: .85rem; line-height: 1.6; }
+    .product-features li { margin-bottom: 6px; }
+
+    .add-to-cart { width: 100%; min-height: 48px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-muted); color: var(--ink); font-size: .95rem; font-weight: 900; transition: color .2s ease, background .2s ease, border-color .2s ease; cursor:pointer; }
     .add-to-cart:hover { border-color: var(--accent); background: var(--accent); color: #000; }
 
     .site-footer { border-top: 1px solid rgba(255, 255, 255, .08); background: var(--footer); color: #f7f1ff; margin-top: 50px; }
@@ -145,6 +149,7 @@
     .footer-links { display: flex; gap: 17px; color: rgba(255, 255, 255, .72); font-size: .9rem; font-weight: 700; }
     .footer-links a:hover { color: var(--accent); cursor: pointer; }
 
+    /* Cart & Auth Modals */
     .cart-backdrop, .auth-backdrop { position: fixed; z-index: 70; inset: 0; background: rgba(3, 2, 6, .75); backdrop-filter: blur(4px); opacity: 0; pointer-events: none; transition: opacity .3s ease; }
     .cart-backdrop.is-open, .auth-backdrop.is-open { opacity: 1; pointer-events: auto; }
     
@@ -165,12 +170,12 @@
     .cart-info { min-width: 0; }
     .cart-item-heading { display: flex; align-items: start; justify-content: space-between; gap: 8px; }
     .cart-item-name { margin: 0; font-size: .9rem; font-weight: 800; line-height: 1.35; }
-    .cart-delete { padding: 0; border: 0; background: transparent; color: var(--muted); font-size: .75rem; font-weight: 700; }
+    .cart-delete { padding: 0; border: 0; background: transparent; color: var(--muted); font-size: .75rem; font-weight: 700; cursor:pointer;}
     .cart-delete:hover { color: #e64e64; }
     .cart-meta { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 6px; color: var(--muted); font-size: .75rem; }
     .cart-item-price { color: var(--accent); font-size: .95rem; font-family: 'Montserrat', sans-serif; font-weight: 900; }
     .quantity-controls { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; padding: 4px; border: 1px solid var(--line); border-radius: 8px; direction: ltr; font-family: 'Montserrat', sans-serif; }
-    .quantity-controls button { display: grid; width: 24px; height: 24px; place-items: center; padding: 0; border: 0; border-radius: 5px; background: var(--surface-muted); color: var(--ink); font-weight: 900; }
+    .quantity-controls button { display: grid; width: 24px; height: 24px; place-items: center; padding: 0; border: 0; border-radius: 5px; background: var(--surface-muted); color: var(--ink); font-weight: 900; cursor:pointer;}
     .quantity-controls button:hover { background: var(--accent-soft); color: var(--accent); }
     .quantity-controls span { min-width: 18px; text-align: center; font-size: .85rem; font-weight: 800; }
     .cart-summary { padding: 20px; border-top: 1px solid var(--line); background: var(--surface); }
@@ -193,6 +198,15 @@
     .auth-header-title h2 { margin: 0; font-size: 1.4rem; font-weight: 900; }
     .auth-header-title span { color: var(--accent); font-family: 'Montserrat', sans-serif; }
     
+    .google-btn {
+      display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%;
+      padding: 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface-muted);
+      color: var(--ink); font-weight: 800; font-size: .95rem; font-family: 'Cairo', sans-serif;
+      transition: all .2s ease; margin-bottom: 20px; cursor:pointer;
+    }
+    .google-btn:hover { background: #fff; color: #000; border-color: #fff; transform: translateY(-2px); }
+    .google-btn svg { width: 22px; height: 22px; }
+
     .auth-divider { display: flex; align-items: center; text-align: center; color: var(--muted); font-size: .85rem; margin-bottom: 20px; font-weight: 700; }
     .auth-divider::before, .auth-divider::after { content: ""; flex: 1; border-bottom: 1px solid var(--line); margin: 0 15px; }
 
@@ -311,7 +325,12 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / PC</span><span class="price">4500 ر.س.</span></div>
               <h3>تجميعة بي سي ألعاب احترافية</h3>
-              <p class="product-note">أداء فائق لتشغيل أحدث الألعاب بأعلى الإعدادات.</p>
+              <ul class="product-features">
+                <li>معالج قوي يضمن أداء سلس وثابت.</li>
+                <li>كرت شاشة لرسوميات واقعية وسرعة إطارات عالية.</li>
+                <li>تبريد مائي متطور للحفاظ على حرارة ممتازة.</li>
+                <li>تصميم زجاجي عصري مع إضاءة RGB قابلة للتخصيص.</li>
+              </ul>
               <button class="add-to-cart" data-id="pc-setup" data-name="بي سي ألعاب احترافية" data-price="4500" data-image="device/pc.png">أضف إلى السلة</button>
             </div>
           </article>
@@ -320,7 +339,12 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / LAPTOP</span><span class="price">5200 ر.س.</span></div>
               <h3>لابتوب قيمنج MSI</h3>
-              <p class="product-note">شاشة بتردد عالي وتبريد ممتاز لجلسات اللعب الطويلة.</p>
+              <ul class="product-features">
+                <li>شاشة بتردد عالي (144Hz) لاستجابة فورية.</li>
+                <li>معالج عالي الأداء من الفئة المتقدمة.</li>
+                <li>كرت شاشة مخصص للألعاب القوية.</li>
+                <li>نظام تبريد ثنائي متطور لجلسات اللعب الطويلة.</li>
+              </ul>
               <button class="add-to-cart" data-id="msi-laptop" data-name="لابتوب قيمنج MSI" data-price="5200" data-image="device/laptop msi.png">أضف إلى السلة</button>
             </div>
           </article>
@@ -329,7 +353,12 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / CONSOLE</span><span class="price">2000 ر.س.</span></div>
               <h3>بلايستيشن 5 برو / سليم</h3>
-              <p class="product-note">الجيل الجديد من منصات الألعاب بتجربة بصرية مذهلة.</p>
+              <ul class="product-features">
+                <li>تجربة الجيل الجديد بدقة 4K حقيقية.</li>
+                <li>يد تحكم DualSense لتجربة حسية غير مسبوقة.</li>
+                <li>قرص تخزين SSD فائق السرعة لتقليل أوقات التحميل.</li>
+                <li>تصميم سليم مدمج يوفر مساحة في السيت أب.</li>
+              </ul>
               <button class="add-to-cart" data-id="ps5-slim" data-name="بلايستيشن 5" data-price="2000" data-image="device/playstation 5 pro slim.png">أضف إلى السلة</button>
             </div>
           </article>
@@ -350,7 +379,12 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / MOUSE</span><span class="price">250 ر.س.</span></div>
               <h3>ماوس قيمنج احترافي</h3>
-              <p class="product-note">دقة عالية مع إضاءة RGB قابلة للتخصيص والاستجابة السريعة.</p>
+              <ul class="product-features">
+                <li>مستشعر ضوئي بدقة تصل إلى 16000 DPI.</li>
+                <li>أزرار قابلة للبرمجة المخصصة للألعاب.</li>
+                <li>تصميم مريح لقبضة اليد يمنع الإرهاق.</li>
+                <li>إضاءة RGB ديناميكية وقابلة للتعديل.</li>
+              </ul>
               <button class="add-to-cart" data-id="gaming-mouse" data-name="ماوس قيمنج" data-price="250" data-image="accessories/mouse.png">أضف إلى السلة</button>
             </div>
           </article>
@@ -359,7 +393,12 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / KEYBOARD</span><span class="price">350 ر.س.</span></div>
               <h3>كيبورد قيمنج ميكانيكي</h3>
-              <p class="product-note">استجابة سريعة وإضاءة تفاعلية متزامنة مع ألعابك المفضلة.</p>
+              <ul class="product-features">
+                <li>سويتشات ميكانيكية سريعة الاستجابة وعالية الدقة.</li>
+                <li>إضاءة تفاعلية متزامنة مع ألعابك المفضلة.</li>
+                <li>هيكل معدني قوي يتحمل أصعب ظروف الاستخدام.</li>
+                <li>تقنية Anti-Ghosting لجميع المفاتيح.</li>
+              </ul>
               <button class="add-to-cart" data-id="gaming-keyboard" data-name="كيبورد ميكانيكي" data-price="350" data-image="accessories/keyboard gaming.png">أضف إلى السلة</button>
             </div>
           </article>
@@ -368,7 +407,12 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / AUDIO</span><span class="price">290 ر.س.</span></div>
               <h3>سماعة ألعاب محيطية</h3>
-              <p class="product-note">صوت نقي جداً ومايك عازل للضجيج لتواصل واضح تماماً.</p>
+              <ul class="product-features">
+                <li>صوت محيطي 7.1 لتحديد أماكن الأعداء بدقة.</li>
+                <li>مايكروفون احترافي عازل للضجيج لتواصل واضح.</li>
+                <li>وسادات أذن مريحة جداً لجلسات اللعب الطويلة.</li>
+                <li>إطار مرن وقوي لمتانة تدوم طويلاً.</li>
+              </ul>
               <button class="add-to-cart" data-id="gaming-headphone" data-name="سماعة محيطية" data-price="290" data-image="accessories/headphone.png">أضف إلى السلة</button>
             </div>
           </article>
@@ -389,7 +433,12 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / ASSASSIN'S</span><span class="price">120 ر.س.</span></div>
               <h3>تيشيرت Assassin's Creed</h3>
-              <p class="product-note">تصميم حصري لشخصية بايك (مصر) بطابع الستريت وير الأنيق.</p>
+              <ul class="product-features">
+                <li>تصميم حصري لشخصية بايك (مصر) بجودة عالية.</li>
+                <li>خامة قطنية 100% لراحة مثالية طول اليوم.</li>
+                <li>طباعة حرارية متينة لا تتأثر بالغسيل.</li>
+                <li>طابع Streetwear أنيق يناسب الخروجات السريعة.</li>
+              </ul>
               <button class="add-to-cart" data-id="ac-egypt" data-name="تيشيرت Assassin's Creed" data-price="120" data-image="look/assassin's creed egypt-black.png">أضف إلى السلة</button>
             </div>
           </article>
@@ -398,7 +447,12 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / PUBG</span><span class="price">95 ر.س.</span></div>
               <h3>تيشيرت PUBG الأبيض</h3>
-              <p class="product-note">لوك عصري لعشاق الباتل رويال بخامة قطنية مريحة.</p>
+              <ul class="product-features">
+                <li>لوك عصري وأنيق لعشاق ألعاب الباتل رويال.</li>
+                <li>نسيج يسمح بمرور الهواء ومناسب للأجواء الحارة.</li>
+                <li>ألوان ثابتة وزاهية تعكس حماس اللعبة.</li>
+                <li>مقاس مريح (Oversized fit) يمنحك حرية الحركة.</li>
+              </ul>
               <button class="add-to-cart" data-id="pubg-white" data-name="تيشيرت PUBG" data-price="95" data-image="look/pubg-white.png">أضف إلى السلة</button>
             </div>
           </article>
@@ -407,7 +461,12 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / VALORANT</span><span class="price">100 ر.س.</span></div>
               <h3>تيشيرت Jett الأسود</h3>
-              <p class="product-note">أسود عميق بتفاصيل حمراء وباردة لمحبي شخصية جيت.</p>
+              <ul class="product-features">
+                <li>أسود عميق بتفاصيل حمراء وباردة لمحبي Jett.</li>
+                <li>قماش ناعم الملمس يحمي من التعرق.</li>
+                <li>خياطة مزدوجة لضمان المتانة العالية.</li>
+                <li>قصة حديثة تناسب الجيمرز المحترفين.</li>
+              </ul>
               <button class="add-to-cart" data-id="jett-black" data-name="تيشيرت Jett" data-price="100" data-image="look/jett-black.png">أضف إلى السلة</button>
             </div>
           </article>
@@ -416,7 +475,12 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / VALORANT</span><span class="price">100 ر.س.</span></div>
               <h3>تيشيرت Raze البرتقالي</h3>
-              <p class="product-note">تباين قوي ومفعم بالطاقة يلفت الانتباه من أول نظرة.</p>
+              <ul class="product-features">
+                <li>تباين لوني قوي ومفعم بالطاقة يلفت الانتباه.</li>
+                <li>تصميم يجسد طابع الإثارة والمتعة لشخصية Raze.</li>
+                <li>مقاوم للانكماش بعد تكرار دورات الغسيل.</li>
+                <li>مثالي للتصوير وصناعة محتوى الجيمنج.</li>
+              </ul>
               <button class="add-to-cart" data-id="raze-orange" data-name="تيشيرت Raze برتقالي" data-price="100" data-image="look/raze-orange.png">أضف إلى السلة</button>
             </div>
           </article>
@@ -425,7 +489,12 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / VALORANT</span><span class="price">100 ر.س.</span></div>
               <h3>تيشيرت Raze الأبيض</h3>
-              <p class="product-note">تصميم أبيض أنيق بتفاصيل برتقالية نابضة بالحياة.</p>
+              <ul class="product-features">
+                <li>تصميم أبيض ناصع بتفاصيل برتقالية نابضة بالحياة.</li>
+                <li>خفيف الوزن ولطيف جداً على البشرة.</li>
+                <li>ياقة مريحة لا تسبب الانزعاج عند الارتداء.</li>
+                <li>لوك يجمع بين بساطة الألوان وقوة التفاصيل.</li>
+              </ul>
               <button class="add-to-cart" data-id="raze-white" data-name="تيشيرت Raze أبيض" data-price="100" data-image="look/raze-white.png">أضف إلى السلة</button>
             </div>
           </article>
@@ -444,41 +513,65 @@
       </button>
     </div>
     
-    <div class="auth-divider">تسجيل الدخول / إنشاء حساب</div>
+    <div class="auth-divider" id="auth-title-text">إنشاء حساب جديد</div>
     
     <form id="auth-form">
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label" for="auth-fname">الاسم الأول</label>
-          <input class="form-input" type="text" id="auth-fname" placeholder="محمد" required>
+      <!-- أزرار التبديل بين الدخول والتسجيل -->
+      <div style="text-align: center; margin-bottom: 20px;">
+        <button type="button" id="btn-show-login" style="background:none; border:none; color:var(--accent); font-weight:bold; cursor:pointer; font-family: 'Cairo', sans-serif; font-size: 0.9rem;">لديك حساب بالفعل؟ تسجيل الدخول</button>
+        <button type="button" id="btn-show-signup" style="display:none; background:none; border:none; color:var(--accent); font-weight:bold; cursor:pointer; font-family: 'Cairo', sans-serif; font-size: 0.9rem;">ليس لديك حساب؟ إنشاء حساب جديد</button>
+      </div>
+
+      <!-- زر تسجيل الدخول بجوجل -->
+      <button class="google-btn" id="google-btn" type="button">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        المتابعة باستخدام حساب Google
+      </button>
+
+      <div class="auth-divider">أو عبر البريد الإلكتروني</div>
+
+      <!-- الحقول الخاصة بإنشاء الحساب (تختفي عند اختيار تسجيل الدخول) -->
+      <div id="signup-fields">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="auth-fname">الاسم الأول</label>
+            <input class="form-input" type="text" id="auth-fname" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="auth-lname">الاسم الثاني</label>
+            <input class="form-input" type="text" id="auth-lname" required>
+          </div>
         </div>
+        
         <div class="form-group">
-          <label class="form-label" for="auth-lname">الاسم الثاني</label>
-          <input class="form-input" type="text" id="auth-lname" placeholder="أحمد" required>
+          <label class="form-label" for="auth-phone">رقم الهاتف</label>
+          <input class="form-input" type="tel" id="auth-phone" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="auth-address">العنوان بالتفصيل</label>
+          <input class="form-input" type="text" id="auth-address" required>
         </div>
       </div>
-      
+
+      <!-- الحقول المشتركة -->
       <div class="form-group">
-        <label class="form-label" for="auth-email">البريد الإلكتروني (أساسي)</label>
+        <label class="form-label" for="auth-email">البريد الإلكتروني</label>
         <input class="form-input" type="email" id="auth-email" placeholder="example@gmail.com" required>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="auth-phone">رقم الهاتف</label>
-        <input class="form-input" type="tel" id="auth-phone" placeholder="05xxxxxxxx" required>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="auth-address">العنوان بالتفصيل</label>
-        <input class="form-input" type="text" id="auth-address" placeholder="المدينة، الحي، اسم الشارع، رقم المبنى" required>
       </div>
       
       <div class="form-group">
         <label class="form-label" for="auth-pwd">الرقم السري</label>
         <input class="form-input" type="password" id="auth-pwd" placeholder="8 خانات (حروف وأرقام)" required>
       </div>
+
+      <!-- تأكيد الرقم السري (لإنشاء الحساب فقط) -->
+      <div class="form-group" id="confirm-pwd-group">
+        <label class="form-label" for="auth-confirm-pwd">تأكيد الرقم السري</label>
+        <input class="form-input" type="password" id="auth-confirm-pwd" required>
+      </div>
       
-      <button class="auth-submit-btn" type="submit">متابعة الدخول</button>
+      <button class="auth-submit-btn" id="auth-submit-btn" type="submit">إنشاء حساب جديد</button>
     </form>
   </aside>
 
@@ -500,7 +593,7 @@
   <!-- سكربت الموقع و ربط Firebase -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
     import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -525,9 +618,51 @@
     var authModal = document.getElementById("auth-modal");
     var authClose = document.getElementById("auth-close");
     var authForm = document.getElementById("auth-form");
+    var googleBtn = document.getElementById("google-btn");
     var toast = document.getElementById("toast");
     var toastText = document.getElementById("toast-text");
     var toastTimer;
+
+    // عناصر تبديل تسجيل الدخول/إنشاء الحساب
+    var isLoginMode = false;
+    var btnShowLogin = document.getElementById("btn-show-login");
+    var btnShowSignup = document.getElementById("btn-show-signup");
+    var signupFields = document.getElementById("signup-fields");
+    var confirmPwdGroup = document.getElementById("confirm-pwd-group");
+    var submitBtn = document.getElementById("auth-submit-btn");
+    var authTitleText = document.getElementById("auth-title-text");
+
+    btnShowLogin.addEventListener("click", () => {
+        isLoginMode = true;
+        signupFields.style.display = "none";
+        confirmPwdGroup.style.display = "none";
+        btnShowLogin.style.display = "none";
+        btnShowSignup.style.display = "inline-block";
+        submitBtn.textContent = "تسجيل الدخول";
+        authTitleText.textContent = "تسجيل الدخول";
+        
+        document.getElementById("auth-fname").required = false;
+        document.getElementById("auth-lname").required = false;
+        document.getElementById("auth-phone").required = false;
+        document.getElementById("auth-address").required = false;
+        document.getElementById("auth-confirm-pwd").required = false;
+    });
+
+    btnShowSignup.addEventListener("click", () => {
+        isLoginMode = false;
+        signupFields.style.display = "block";
+        confirmPwdGroup.style.display = "block";
+        btnShowSignup.style.display = "none";
+        btnShowLogin.style.display = "inline-block";
+        submitBtn.textContent = "إنشاء حساب جديد";
+        authTitleText.textContent = "إنشاء حساب جديد";
+        
+        document.getElementById("auth-fname").required = true;
+        document.getElementById("auth-lname").required = true;
+        document.getElementById("auth-phone").required = true;
+        document.getElementById("auth-address").required = true;
+        document.getElementById("auth-confirm-pwd").required = true;
+    });
 
     function showToast(message) {
       window.clearTimeout(toastTimer);
@@ -553,6 +688,9 @@
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
            authToggle.style.color = "var(--accent)"; 
+        } else {
+           // في حال تسجيل الدخول لأول مرة بجوجل ولم يُحفظ في قاعدة البيانات
+           authToggle.style.color = "var(--accent)"; 
         }
       } else {
         authToggle.style.color = "";
@@ -565,52 +703,98 @@
       }
     });
 
+    // تسجيل الدخول بواسطة Google
+    const provider = new GoogleAuthProvider();
+    googleBtn.addEventListener("click", async () => {
+      try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+        
+        // التحقق مما إذا كان المستخدم موجود مسبقاً في قاعدة البيانات
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+        
+        if (!docSnap.exists()) {
+          // إنشاء وثيقة جديدة للمستخدم إذا لم تكن موجودة
+          await setDoc(docRef, {
+            firstName: user.displayName || "مستخدم",
+            lastName: "جوجل",
+            email: user.email,
+            phone: "غير مسجل",
+            address: "غير مسجل"
+          });
+        }
+        
+        closeAuth();
+        showToast("تم تسجيل الدخول بواسطة حساب Google بنجاح!");
+      } catch (error) {
+        showToast("فشل تسجيل الدخول: " + error.message);
+      }
+    });
+
     authForm.addEventListener("submit", async function(e) {
       e.preventDefault();
       const email = document.getElementById("auth-email").value.trim();
       const pwd = document.getElementById("auth-pwd").value;
-      const fName = document.getElementById("auth-fname").value.trim();
-      const lName = document.getElementById("auth-lname").value.trim();
-      const phone = document.getElementById("auth-phone").value.trim();
-      const address = document.getElementById("auth-address").value.trim();
-
-      var hasLetter = /[a-zA-Z\u0600-\u06FF]/.test(pwd);
-      var hasNumber = /[0-9]/.test(pwd);
-      if(pwd.length < 8 || !hasLetter || !hasNumber) {
-        showToast("الرقم السري يجب أن يكون 8 خانات ويحتوي حروف وأرقام.");
-        return;
-      }
 
       showToast("جاري المعالجة...");
 
-      try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, pwd);
-        const user = userCredential.user;
+      if (isLoginMode) {
+        // --- عملية تسجيل الدخول ---
+        try {
+          await signInWithEmailAndPassword(auth, email, pwd);
+          closeAuth();
+          showToast("تم تسجيل الدخول بنجاح! أهلاً بعودتك.");
+          authForm.reset();
+        } catch(error) {
+          if(error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential') {
+             showToast("عفواً، البريد الإلكتروني أو الرقم السري غير صحيح.");
+          } else {
+             showToast("حدث خطأ: " + error.message);
+          }
+        }
+      } else {
+        // --- عملية إنشاء حساب جديد ---
+        const fName = document.getElementById("auth-fname").value.trim();
+        const lName = document.getElementById("auth-lname").value.trim();
+        const phone = document.getElementById("auth-phone").value.trim();
+        const address = document.getElementById("auth-address").value.trim();
+        const confirmPwd = document.getElementById("auth-confirm-pwd").value;
 
-        await setDoc(doc(db, "users", user.uid), {
-          firstName: fName,
-          lastName: lName,
-          phone: phone,
-          address: address,
-          email: email
-        });
+        if (pwd !== confirmPwd) {
+          showToast("عفواً، الرقم السري وتأكيد الرقم السري غير متطابقين!");
+          return;
+        }
 
-        closeAuth();
-        showToast("تم إنشاء الحساب بنجاح! أهلاً بك يا " + fName);
-        authForm.reset();
+        var hasLetter = /[a-zA-Z\u0600-\u06FF]/.test(pwd);
+        var hasNumber = /[0-9]/.test(pwd);
+        if(pwd.length < 8 || !hasLetter || !hasNumber) {
+          showToast("الرقم السري يجب أن يكون 8 خانات ويحتوي حروف وأرقام.");
+          return;
+        }
 
-      } catch (error) {
-        if (error.code === 'auth/email-already-in-use') {
-           try {
-              await signInWithEmailAndPassword(auth, email, pwd);
-              closeAuth();
-              showToast("تم تسجيل الدخول بنجاح! أهلاً بعودتك.");
-              authForm.reset();
-           } catch(loginError) {
-              showToast("البريد مسجل مسبقاً، ولكن الرقم السري غير صحيح!");
-           }
-        } else {
-           showToast("حدث خطأ: " + error.message);
+        try {
+          const userCredential = await createUserWithEmailAndPassword(auth, email, pwd);
+          const user = userCredential.user;
+
+          await setDoc(doc(db, "users", user.uid), {
+            firstName: fName,
+            lastName: lName,
+            phone: phone,
+            address: address,
+            email: email
+          });
+
+          closeAuth();
+          showToast("تم إنشاء الحساب بنجاح! أهلاً بك يا " + fName);
+          authForm.reset();
+
+        } catch (error) {
+          if (error.code === 'auth/email-already-in-use') {
+             showToast("هذا البريد الإلكتروني مسجل بالفعل. يرجى تسجيل الدخول.");
+          } else {
+             showToast("حدث خطأ: " + error.message);
+          }
         }
       }
     });
@@ -651,7 +835,7 @@
     });
 
     // ------------------------------------
-    // أكواد سلة المشتريات المُحدثة
+    // أكواد سلة المشتريات
     // ------------------------------------
     var cart = [];
     var cartCount = document.getElementById("cart-count");
@@ -702,7 +886,6 @@
               <button class="cart-delete" data-action="remove" data-key="${item.key}">حذف</button>
             </div>
             <div class="cart-meta">
-              ${item.size ? `<span>الخيار: ${item.size}</span>` : '<span></span>'}
               <strong style="color:var(--accent);font-family:Montserrat">${formatPrice(item.price * item.quantity)}</strong>
             </div>
             <div class="quantity-controls" style="margin-top:8px;">
@@ -720,10 +903,7 @@
 
     document.querySelectorAll(".add-to-cart").forEach(function (button) {
       button.addEventListener("click", function () {
-        var card = button.closest(".product-card");
-        var selectedSize = card.querySelector(".size-button.is-selected");
-        var size = selectedSize ? selectedSize.dataset.size : "";
-        var item = { id: button.dataset.id, name: button.dataset.name, price: Number(button.dataset.price), image: button.dataset.image, size: size, key: button.dataset.id + "-" + size };
+        var item = { id: button.dataset.id, name: button.dataset.name, price: Number(button.dataset.price), image: button.dataset.image, key: button.dataset.id };
         var existing = cart.find(ci => ci.key === item.key);
         if (existing) { existing.quantity += 1; } else { item.quantity = 1; cart.push(item); }
         saveCart(); renderCart();
