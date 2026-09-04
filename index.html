@@ -135,21 +135,21 @@
     .collection-count b { color: var(--accent); }
 
     .products-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
-    .product-card { position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: 24px; background: var(--surface-solid); box-shadow: 0 10px 24px rgba(25, 16, 43, .05); transition: transform .3s cubic-bezier(.2, .75, .25, 1), box-shadow .3s ease, border-color .3s ease; }
+    .product-card { position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: 24px; background: var(--surface-solid); box-shadow: 0 10px 24px rgba(25, 16, 43, .05); transition: transform .3s cubic-bezier(.2, .75, .25, 1), box-shadow .3s ease, border-color .3s ease; display: flex; flex-direction: column; }
     .product-card:hover { border-color: rgba(0, 243, 255, .7); box-shadow: 0 15px 40px rgba(0, 243, 255, 0.18); transform: translateY(-8px); }
     .product-media { position: relative; display: grid; min-height: 310px; place-items: center; overflow: hidden; padding: 22px; background: radial-gradient(circle at 50% 31%, rgba(0, 243, 255, .15), transparent 37%), var(--surface-muted); }
     .product-media::before { position: absolute; inset: 14px; border: 1px solid rgba(255, 255, 255, .15); border-radius: 14px; content: ""; opacity: .6; }
     .product-media img { position: relative; z-index: 1; width: 100%; height: 270px; object-fit: contain; filter: drop-shadow(0 15px 14px rgba(0, 0, 0, .25)); transition: transform .4s cubic-bezier(.2, .75, .25, 1); }
     .product-card:hover .product-media img { transform: scale(1.08) translateY(-6px); }
     .product-badge { position: absolute; z-index: 2; top: 15px; right: 15px; padding: 6px 12px; border: 1px solid rgba(255, 255, 255, .24); border-radius: 999px; background: rgba(12, 8, 18, .75); color: #fff; font-size: .75rem; font-weight: 800; backdrop-filter: blur(8px); }
-    .product-body { padding: 24px; }
+    .product-body { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; }
     .product-topline { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
     .product-type { color: var(--muted); font-family: 'Montserrat', sans-serif; font-size: .75rem; font-weight: 800; }
     .price { color: var(--accent); font-family: 'Montserrat', sans-serif; font-size: 1.25rem; font-weight: 900; white-space: nowrap; }
     .product-card h3 { margin: 8px 0 10px; font-size: 1.15rem; letter-spacing: -.02em; }
-    .product-features { margin: 0 0 20px; padding: 0 20px 0 0; color: var(--muted); font-size: .85rem; line-height: 1.6; }
+    .product-features { margin: 0 0 20px; padding: 0 20px 0 0; color: var(--muted); font-size: .85rem; line-height: 1.6; flex-grow: 1; }
     .product-features li { margin-bottom: 6px; }
-    .add-to-cart { width: 100%; min-height: 48px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-muted); color: var(--ink); font-size: .95rem; font-weight: 900; transition: color .2s ease, background .2s ease, border-color .2s ease; cursor:pointer; }
+    .add-to-cart { width: 100%; min-height: 48px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-muted); color: var(--ink); font-size: .95rem; font-weight: 900; transition: color .2s ease, background .2s ease, border-color .2s ease; cursor:pointer; margin-top: auto; }
     .add-to-cart:hover { border-color: var(--accent); background: var(--accent); color: #000; }
 
     .site-footer { border-top: 1px solid rgba(255, 255, 255, .08); background: var(--footer); color: #f7f1ff; margin-top: 50px; }
@@ -291,7 +291,7 @@
            </div>
            <div id="mobile-logged-in" style="display: none;">
               <span id="mobile-user-name" style="font-weight: bold; color: var(--accent); margin-bottom: 10px; display: block;"></span>
-              <a id="mobile-logout-btn" style="color: #e64e64;">تسجيل الخروج</a>
+              <a id="mobile-logout-btn" style="color: #e64e64; cursor: pointer;">تسجيل الخروج</a>
            </div>
         </div>
       </nav>
@@ -465,8 +465,11 @@
         <div class="section-heading">
           <div><p class="section-kicker">APPAREL / 03</p><h2>تشكيلة اللوك</h2></div>
           <p>أزياء مستوحاة من عوالم الألعاب.</p>
+          <span class="collection-count"><b>13</b> قطع متاحة</span>
         </div>
         <div class="products-grid">
+          
+          <!-- Assassin's Creed -->
           <article class="product-card">
             <div class="product-media"><span class="product-badge">إصدار خاص</span><img src="look/assassin's creed egypt-black.png" alt="تيشيرت" loading="lazy"></div>
             <div class="product-body">
@@ -481,6 +484,8 @@
               <button class="add-to-cart" data-id="ac-egypt" data-name="تيشيرت Assassin's Creed" data-price="120" data-image="look/assassin's creed egypt-black.png">أضف إلى السلة</button>
             </div>
           </article>
+
+          <!-- PUBG White -->
           <article class="product-card">
             <div class="product-media"><img src="look/pubg-white.png" alt="تيشيرت" loading="lazy"></div>
             <div class="product-body">
@@ -495,6 +500,8 @@
               <button class="add-to-cart" data-id="pubg-white" data-name="تيشيرت PUBG" data-price="95" data-image="look/pubg-white.png">أضف إلى السلة</button>
             </div>
           </article>
+
+          <!-- JETT Black -->
           <article class="product-card">
             <div class="product-media"><span class="product-badge">الأكثر طلباً</span><img src="look/jett-black.png" alt="تيشيرت" loading="lazy"></div>
             <div class="product-body">
@@ -509,6 +516,8 @@
               <button class="add-to-cart" data-id="jett-black" data-name="تيشيرت Jett" data-price="100" data-image="look/jett-black.png">أضف إلى السلة</button>
             </div>
           </article>
+
+          <!-- RAZE Orange -->
           <article class="product-card">
             <div class="product-media"><img src="look/raze-orange.png" alt="تيشيرت" loading="lazy"></div>
             <div class="product-body">
@@ -523,6 +532,8 @@
               <button class="add-to-cart" data-id="raze-orange" data-name="تيشيرت Raze برتقالي" data-price="100" data-image="look/raze-orange.png">أضف إلى السلة</button>
             </div>
           </article>
+
+          <!-- RAZE White -->
           <article class="product-card">
             <div class="product-media"><img src="look/raze-white.png" alt="تيشيرت" loading="lazy"></div>
             <div class="product-body">
@@ -537,6 +548,135 @@
               <button class="add-to-cart" data-id="raze-white" data-name="تيشيرت Raze أبيض" data-price="100" data-image="look/raze-white.png">أضف إلى السلة</button>
             </div>
           </article>
+
+          <!-- Fortnite White -->
+          <article class="product-card">
+            <div class="product-media"><img src="look/fortnite-white.png" alt="تيشيرت" loading="lazy"></div>
+            <div class="product-body">
+              <div class="product-topline"><span class="product-type">GAMORA / FORTNITE</span><span class="price">95 ر.س.</span></div>
+              <h3>تيشيرت Fortnite الأبيض</h3>
+              <ul class="product-features">
+                <li>تصميم عصري وحيوي لعشاق Fortnite.</li>
+                <li>خامة مريحة تناسب اللعب والحركة.</li>
+                <li>طباعة عالية الجودة لا تبهت.</li>
+                <li>ستايل شبابي ملفت.</li>
+              </ul>
+              <button class="add-to-cart" data-id="fortnite-white" data-name="تيشيرت Fortnite" data-price="95" data-image="look/fortnite-white.png">أضف إلى السلة</button>
+            </div>
+          </article>
+
+          <!-- Ghost White (COD) -->
+          <article class="product-card">
+            <div class="product-media"><img src="look/ghost-white.png" alt="تيشيرت" loading="lazy"></div>
+            <div class="product-body">
+              <div class="product-topline"><span class="product-type">GAMORA / CALL OF DUTY</span><span class="price">110 ر.س.</span></div>
+              <h3>تيشيرت Ghost الأبيض</h3>
+              <ul class="product-features">
+                <li>تصميم قوي لشخصية Ghost الأيقونية.</li>
+                <li>تفاصيل دقيقة تجسد أجواء الأكشن.</li>
+                <li>قماش يتحمل الاستخدام اليومي.</li>
+                <li>مثالي لعشاق ألعاب التصويب.</li>
+              </ul>
+              <button class="add-to-cart" data-id="ghost-white" data-name="تيشيرت Ghost" data-price="110" data-image="look/ghost-white.png">أضف إلى السلة</button>
+            </div>
+          </article>
+
+          <!-- God of War White -->
+          <article class="product-card">
+            <div class="product-media"><span class="product-badge">أسطوري</span><img src="look/god of war-white.png" alt="تيشيرت" loading="lazy"></div>
+            <div class="product-body">
+              <div class="product-topline"><span class="product-type">GAMORA / GOD OF WAR</span><span class="price">120 ر.س.</span></div>
+              <h3>تيشيرت God of War</h3>
+              <ul class="product-features">
+                <li>تصميم ملحمي يعكس قوة اللعبة الأسطورية.</li>
+                <li>تفاصيل فنية رائعة بلمسات حمراء.</li>
+                <li>خامة بريميوم تناسب الأجواء المختلفة.</li>
+                <li>يبرز هويتك كلاعب محترف.</li>
+              </ul>
+              <button class="add-to-cart" data-id="gow-white" data-name="تيشيرت God of War" data-price="120" data-image="look/god of war-white.png">أضف إلى السلة</button>
+            </div>
+          </article>
+
+          <!-- Hitman White -->
+          <article class="product-card">
+            <div class="product-media"><img src="look/Hitman-white.png" alt="تيشيرت" loading="lazy"></div>
+            <div class="product-body">
+              <div class="product-topline"><span class="product-type">GAMORA / HITMAN</span><span class="price">110 ر.س.</span></div>
+              <h3>تيشيرت Hitman الأبيض</h3>
+              <ul class="product-features">
+                <li>تصميم أنيق وبسيط يعكس شخصية العميل 47.</li>
+                <li>طباعة هادئة بلمسة كلاسيكية.</li>
+                <li>مريح جداً للاستخدام اليومي.</li>
+                <li>خياطة متينة ومتقنة.</li>
+              </ul>
+              <button class="add-to-cart" data-id="hitman-white" data-name="تيشيرت Hitman" data-price="110" data-image="look/Hitman-white.png">أضف إلى السلة</button>
+            </div>
+          </article>
+
+          <!-- Omen White -->
+          <article class="product-card">
+            <div class="product-media"><img src="look/omen-white.png" alt="تيشيرت" loading="lazy"></div>
+            <div class="product-body">
+              <div class="product-topline"><span class="product-type">GAMORA / VALORANT</span><span class="price">100 ر.س.</span></div>
+              <h3>تيشيرت Omen الأبيض</h3>
+              <ul class="product-features">
+                <li>تصميم غامض لشخصية Omen بتباين لوني رائع.</li>
+                <li>لمسات بنفسجية وزرقاء تبرز التفاصيل.</li>
+                <li>قماش قطني ناعم ومريح.</li>
+                <li>مثالي للتنسيق مع أي ستايل.</li>
+              </ul>
+              <button class="add-to-cart" data-id="omen-white" data-name="تيشيرت Omen" data-price="100" data-image="look/omen-white.png">أضف إلى السلة</button>
+            </div>
+          </article>
+
+          <!-- Red Dead Redemption White -->
+          <article class="product-card">
+            <div class="product-media"><span class="product-badge">إصدار خاص</span><img src="look/red dead redemption-white.png" alt="تيشيرت" loading="lazy"></div>
+            <div class="product-body">
+              <div class="product-topline"><span class="product-type">GAMORA / RED DEAD</span><span class="price">120 ر.س.</span></div>
+              <h3>تيشيرت Red Dead</h3>
+              <ul class="product-features">
+                <li>تصميم كلاسيكي لعشاق عالم الغرب الأمريكي.</li>
+                <li>ألوان سينمائية قوية مع طباعة فاخرة.</li>
+                <li>لوك فخم يجذب الأنظار.</li>
+                <li>خامة تتحمل الاستخدام الشاق.</li>
+              </ul>
+              <button class="add-to-cart" data-id="rdr-white" data-name="تيشيرت Red Dead" data-price="120" data-image="look/red dead redemption-white.png">أضف إلى السلة</button>
+            </div>
+          </article>
+
+          <!-- Tekken Black -->
+          <article class="product-card">
+            <div class="product-media"><img src="look/tekken-black.png" alt="تيشيرت" loading="lazy"></div>
+            <div class="product-body">
+              <div class="product-topline"><span class="product-type">GAMORA / TEKKEN</span><span class="price">110 ر.س.</span></div>
+              <h3>تيشيرت Tekken الأسود</h3>
+              <ul class="product-features">
+                <li>تصميم قتالي قوي لعشاق ألعاب القتال.</li>
+                <li>ألوان حمراء متداخلة مع الأسود لستايل جريء.</li>
+                <li>مناسب جداً للستريت وير.</li>
+                <li>طباعة متينة لا تتشقق.</li>
+              </ul>
+              <button class="add-to-cart" data-id="tekken-black" data-name="تيشيرت Tekken" data-price="110" data-image="look/tekken-black.png">أضف إلى السلة</button>
+            </div>
+          </article>
+
+          <!-- Tomb Raider White -->
+          <article class="product-card">
+            <div class="product-media"><img src="look/tomb Raider-white.png" alt="تيشيرت" loading="lazy"></div>
+            <div class="product-body">
+              <div class="product-topline"><span class="product-type">GAMORA / TOMB RAIDER</span><span class="price">110 ر.س.</span></div>
+              <h3>تيشيرت Tomb Raider</h3>
+              <ul class="product-features">
+                <li>تصميم مغامرات لشخصية لارا كروفت الأيقونية.</li>
+                <li>خلفية بيضاء مع تفاصيل ملونة بارزة.</li>
+                <li>ملمس ناعم لا يسبب حساسية.</li>
+                <li>قصة واسعة تناسب الجميع.</li>
+              </ul>
+              <button class="add-to-cart" data-id="tomb-raider" data-name="تيشيرت Tomb Raider" data-price="110" data-image="look/tomb Raider-white.png">أضف إلى السلة</button>
+            </div>
+          </article>
+
         </div>
       </div>
     </section>
@@ -590,11 +730,11 @@
       <div class="form-row">
         <div class="form-group">
           <label class="form-label" for="signup-fname">الاسم الأول</label>
-          <input class="form-input" type="text" id="signup-fname" placeholder="أدخل الاسم الأول">
+          <input class="form-input" type="text" id="signup-fname" placeholder="الاسم الأول">
         </div>
         <div class="form-group">
           <label class="form-label" for="signup-lname">الاسم الأخير</label>
-          <input class="form-input" type="text" id="signup-lname" placeholder="أدخل الاسم الأخير">
+          <input class="form-input" type="text" id="signup-lname" placeholder="الاسم الأخير">
         </div>
       </div>
       <div class="form-group">
@@ -607,7 +747,7 @@
       </div>
       <div class="form-group">
         <label class="form-label" for="signup-address">العنوان بالتفصيل</label>
-        <input class="form-input" type="text" id="signup-address" placeholder="المدينة، الحي، اسم الشارع، رقم المبنى">
+        <input class="form-input" type="text" id="signup-address" placeholder="المدينة، الحي، الشارع، المبنى">
       </div>
       <div class="form-group">
         <label class="form-label" for="signup-pwd">الرقم السري</label>
@@ -622,7 +762,6 @@
     </form>
   </aside>
 
-  <!-- سلة المشتريات -->
   <div class="cart-backdrop" id="cart-backdrop"></div>
   <aside class="cart-drawer" id="cart-drawer">
     <div class="cart-header">
@@ -818,7 +957,7 @@
           email: email
         });
         closeAuth();
-        showToast("تم إنشاء الحساب بنجاح! أهلاً بك يا " + fName);
+        showToast("تم التسجيل بنجاح! أهلاً بك يا " + fName);
         signupForm.reset();
       } catch (error) {
         if (error.code === 'auth/email-already-in-use') {
@@ -848,7 +987,7 @@
           });
         }
         closeAuth();
-        showToast("تم الدخول بحساب Google بنجاح!");
+        showToast("تم التسجيل بنجاح عبر حساب جوجل!");
       } catch (error) {
         showToast("فشل التسجيل: " + error.message);
       }
