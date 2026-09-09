@@ -266,6 +266,14 @@
     .pay-now-btn { width: 100%; padding: 18px; border: 0; border-radius: 14px; background: linear-gradient(135deg, var(--accent), var(--accent-strong)); color: #000; font-weight: 900; font-size: 1.1rem; margin-top: 20px; font-family: 'Cairo'; cursor: pointer; transition: transform .2s ease; }
     .pay-now-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0, 243, 255, .3); }
 
+    /* ==============================================
+         مقاسات منتجات قسم اللوك (أزرار بدلاً من قائمة)
+    =============================================== */
+    .style-size-container { display: flex; gap: 8px; margin: 0 0 16px; justify-content: center; }
+    .size-btn { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface-solid); color: var(--ink); font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.95rem; cursor: pointer; transition: all 0.2s ease; display: grid; place-items: center; }
+    .size-btn:hover { border-color: var(--accent); background: var(--surface-muted); }
+    .size-btn.is-active { background: var(--accent); color: #000; border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 243, 255, 0.25); }
+
     @media (max-width: 900px) { .products-grid { gap: 18px; } }
     @media (max-width: 720px) {
       .shell { width: min(100% - 28px, 570px); }
@@ -401,21 +409,21 @@
           <article class="product-card">
             <div class="product-media">
               <span class="product-badge">أداء جبار</span>
-              <button class="info-btn" type="button" aria-label="مواصفات الجهاز" data-title="لابتوب جيمنج MSI" data-details="انسخ محتوى ملف laptop msi.txt هنا">
+              <button class="info-btn" type="button" aria-label="مواصفات الجهاز" data-title="لابتوب قيمنج MSI" data-details="انسخ محتوى ملف laptop msi.txt هنا">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
               </button>
               <img src="device/laptop msi.png" alt="لابتوب" loading="lazy">
             </div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / LAPTOP</span><span class="price">52000 ج.م</span></div>
-              <h3>لابتوب جيمنج MSI</h3>
+              <h3>لابتوب قيمنج MSI</h3>
               <ul class="product-features">
                 <li>شاشة بتردد عالي لاستجابة فورية.</li>
                 <li>معالج عالي الأداء من الفئة المتقدمة.</li>
                 <li>كرت شاشة مخصص للألعاب القوية.</li>
                 <li>نظام تبريد ثنائي متطور.</li>
               </ul>
-              <button class="add-to-cart" data-id="msi-laptop" data-name="لابتوب جيمنج MSI" data-price="52000" data-image="device/laptop msi.png">أضف إلى السلة</button>
+              <button class="add-to-cart" data-id="msi-laptop" data-name="لابتوب قيمنج MSI" data-price="52000" data-image="device/laptop msi.png">أضف إلى السلة</button>
             </div>
           </article>
           <article class="product-card">
@@ -451,34 +459,34 @@
         <div class="products-grid">
           <article class="product-card">
             <div class="product-media">
-              <button class="info-btn" type="button" aria-label="مواصفات المنتج" data-title="ماوس جيمنج احترافي" data-details="انسخ محتوى ملف mouse.txt هنا">
+              <button class="info-btn" type="button" aria-label="مواصفات المنتج" data-title="ماوس قيمنج احترافي" data-details="انسخ محتوى ملف mouse.txt هنا">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
               </button>
               <img src="accessories/mouse.png" alt="ماوس" loading="lazy">
             </div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / MOUSE</span><span class="price">750 ج.م</span></div>
-              <h3>ماوس جيمنج احترافي</h3>
+              <h3>ماوس قيمنج احترافي</h3>
               <ul class="product-features">
                 <li>مستشعر ضوئي بدقة فائقة.</li>
                 <li>أزرار قابلة للبرمجة المخصصة للألعاب.</li>
                 <li>تصميم مريح لقبضة اليد.</li>
                 <li>إضاءة RGB ديناميكية.</li>
               </ul>
-              <button class="add-to-cart" data-id="gaming-mouse" data-name="ماوس جيمنج" data-price="750" data-image="accessories/mouse.png">أضف إلى السلة</button>
+              <button class="add-to-cart" data-id="gaming-mouse" data-name="ماوس قيمنج" data-price="750" data-image="accessories/mouse.png">أضف إلى السلة</button>
             </div>
           </article>
           <article class="product-card">
             <div class="product-media">
               <span class="product-badge">احترافي</span>
-              <button class="info-btn" type="button" aria-label="مواصفات المنتج" data-title="كيبورد جيمنج ميكانيكي" data-details="انسخ محتوى ملف keyboard gaming.txt هنا">
+              <button class="info-btn" type="button" aria-label="مواصفات المنتج" data-title="كيبورد قيمنج ميكانيكي" data-details="انسخ محتوى ملف keyboard gaming.txt هنا">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
               </button>
               <img src="accessories/keyboard gaming.png" alt="كيبورد" loading="lazy">
             </div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / KEYBOARD</span><span class="price">1200 ج.م</span></div>
-              <h3>كيبورد جيمنج ميكانيكي</h3>
+              <h3>كيبورد قيمنج ميكانيكي</h3>
               <ul class="product-features">
                 <li>سويتشات ميكانيكية سريعة الاستجابة.</li>
                 <li>إضاءة تفاعلية متزامنة.</li>
@@ -1351,7 +1359,7 @@
         showToast("عفواً، الرقم السري وتأكيد الرقم السري غير متطابقين!");
         return;
       }
-      var hasLetter = /[a-zA-Z\u0600-\u06FF]/.test(pwd);
+      var hasLetter = /[a-zA-Z؀-ۿ]/.test(pwd);
       var hasNumber = /[0-9]/.test(pwd);
       if(pwd.length < 8 || !hasLetter || !hasNumber) {
         showToast("الرقم السري يجب أن يكون 8 خانات ويحتوي حروف وأرقام.");
@@ -1477,7 +1485,7 @@
           <div class="cart-thumb"><img src="${item.image}" alt=""></div>
           <div class="cart-info">
             <div class="cart-item-heading"><p class="cart-item-name" style="margin:0;font-size:0.85rem;font-weight:bold;">${item.name}</p><button class="cart-delete" data-action="remove" data-key="${item.key}">حذف</button></div>
-            <div class="cart-meta"><strong style="color:var(--accent);font-family:Montserrat">${formatPrice(item.price * item.quantity)}</strong></div>
+            <div class="cart-meta">${item.size ? `<span>المقاس: ${getSizeLabel(item.size)}</span>` : ""}<strong style="color:var(--accent);font-family:Montserrat">${formatPrice(item.price * item.quantity)}</strong></div>
             <div class="quantity-controls" style="margin-top:8px;">
               <button type="button" data-action="decrease" data-key="${item.key}">−</button>
               <span style="font-size:0.8rem;">${item.quantity}</span>
@@ -1488,11 +1496,84 @@
       `).join("");
     }
 
+    // إضافة اختيارات المقاس لمنتجات قسم اللوك فقط (عبر أزرار).
+    var sizeLabels = {
+      S: "مقاس صغير small",
+      M: "مقاس وسط meduim",
+      L: "مقاس كبير large",
+      X: "مقاس أكبر x large"
+    };
+
+    function getSizeLabel(size) { return sizeLabels[size] || ""; }
+
+    function getStyleProductPrice(button, size) {
+      return Number(button.dataset.price) + (size === "X" ? 30 : 0);
+    }
+
+    function updateStyleProductPrice(button, size) {
+      var priceElement = button.closest(".product-card").querySelector(".price");
+      if (priceElement) priceElement.textContent = `${getStyleProductPrice(button, size)} ج.م`;
+    }
+
     cart = getSavedCart(); renderCart();
+
+    document.querySelectorAll("#style .add-to-cart").forEach(function (button, index) {
+      // إزالة الرسالة القديمة (X: +30)
+      
+      var sizeContainer = document.createElement("div");
+      sizeContainer.className = "style-size-container";
+      
+      // متغير لتخزين المقاس المختار حالياً لهذا المنتج (الافتراضي L مثلاً أو بدون)
+      // سنجعله يختار أول مقاس افتراضياً أو يتركه بدون اختيار، الأفضل بدون اختيار لإجباره على الاختيار.
+      // لكن لتسهيل الاستخدام، سنجعل S هو الافتراضي.
+      var currentSelectedSize = "S";
+      button.dataset.selectedSize = currentSelectedSize; // حفظه في الزر نفسه
+
+      ["S", "M", "L", "X"].forEach(function (size) {
+        var sizeBtn = document.createElement("button");
+        sizeBtn.type = "button";
+        sizeBtn.className = "size-btn";
+        if(size === currentSelectedSize) sizeBtn.classList.add("is-active");
+        sizeBtn.textContent = size;
+        
+        sizeBtn.addEventListener("click", function() {
+            // إزالة الكلاس النشط من كل الأزرار في هذه المجموعة
+            sizeContainer.querySelectorAll(".size-btn").forEach(b => b.classList.remove("is-active"));
+            // تفعيل الزر الحالي
+            sizeBtn.classList.add("is-active");
+            // حفظ المقاس المختار
+            button.dataset.selectedSize = size;
+            
+            // تحديث السعر الظاهري
+            updateStyleProductPrice(button, size);
+
+            // إظهار تنبيه فقط إذا كان المقاس X
+            if(size === "X") {
+                showToast("تنويه: مقاس X يزيد 30 جنيهاً عن السعر الأساسي للمنتج.");
+            }
+        });
+        
+        sizeContainer.appendChild(sizeBtn);
+      });
+
+      button.before(sizeContainer);
+      // تحديث السعر المبدئي بناء على المقاس الافتراضي
+      updateStyleProductPrice(button, currentSelectedSize);
+    });
 
     document.querySelectorAll(".add-to-cart").forEach(function (button) {
       button.addEventListener("click", function () {
-        var item = { id: button.dataset.id, name: button.dataset.name, price: Number(button.dataset.price), image: button.dataset.image, key: button.dataset.id };
+        var size = button.dataset.selectedSize || null; // جلب المقاس من الزر نفسه
+        
+        var item = {
+          id: button.dataset.id,
+          name: button.dataset.name,
+          basePrice: Number(button.dataset.price),
+          price: size ? getStyleProductPrice(button, size) : Number(button.dataset.price),
+          image: button.dataset.image,
+          size: size,
+          key: size ? `${button.dataset.id}::${size}` : button.dataset.id
+        };
         var existing = cart.find(ci => ci.key === item.key);
         if (existing) { existing.quantity += 1; } else { item.quantity = 1; cart.push(item); }
         saveCart(); renderCart(); showToast("تمت إضافة المنتج إلى السلة.");
@@ -1582,6 +1663,7 @@
           <img src="${item.image}" alt="">
           <div class="checkout-item-details">
             <h4>${item.name}</h4>
+            ${item.size ? `<span style="color: var(--muted); font-size: 0.8rem; display: block;">المقاس: ${getSizeLabel(item.size)}</span>` : ""}
             <span style="color: var(--muted); font-size: 0.8rem;">الكمية: ${item.quantity}</span>
           </div>
           <div class="checkout-item-price" style="margin-right: auto;">${formatPrice(item.price * item.quantity)}</div>
@@ -1650,7 +1732,9 @@
       // 3. تجميع الأوردر
       var orderDetails = "";
       cart.forEach((item, index) => {
-        orderDetails += `${index + 1}- ${item.name} (الكمية: ${item.quantity})\n`;
+        var sizeDetails = item.size ? ` — المقاس: ${getSizeLabel(item.size)}` : "";
+        orderDetails += `${index + 1}- ${item.name}${sizeDetails} (الكمية: ${item.quantity})
+`;
       });
 
       var subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -1660,19 +1744,37 @@
       var myWhatsAppNumber = "201556472722"; 
 
       // 4. تجهيز الرسالة
-      var whatsappMessage = `مرحباً GAMORA STORE 🎮\n\nأريد تأكيد هذا الطلب:\n-------------------\n`;
+      var whatsappMessage = `مرحباً GAMORA STORE 🎮
+
+أريد تأكيد هذا الطلب:
+-------------------
+`;
       whatsappMessage += orderDetails;
-      whatsappMessage += `-------------------\n`;
-      whatsappMessage += `👤 بيانات العميل:\n`;
-      whatsappMessage += `الاسم: ${cFname} ${cLname}\n`;
-      whatsappMessage += `رقم الهاتف: ${cPhone}\n`;
-      whatsappMessage += `المحافظة: ${cGovName}\n`;
-      whatsappMessage += `العنوان: ${cAddress}\n`;
-      whatsappMessage += `-------------------\n`;
-      whatsappMessage += `المبلغ الفرعي: ${subtotal} ج.م\n`;
-      whatsappMessage += `رسوم الشحن: ${shippingFee} ج.م\n`;
-      whatsappMessage += `الإجمالي المطلوب: ${grandTotal} ج.م\n\n`;
-      whatsappMessage += `طريقة الدفع: ${methodText}\nالرقم المحول منه: ${transferRef}\n\n`;
+      whatsappMessage += `-------------------
+`;
+      whatsappMessage += `👤 بيانات العميل:
+`;
+      whatsappMessage += `الاسم: ${cFname} ${cLname}
+`;
+      whatsappMessage += `رقم الهاتف: ${cPhone}
+`;
+      whatsappMessage += `المحافظة: ${cGovName}
+`;
+      whatsappMessage += `العنوان: ${cAddress}
+`;
+      whatsappMessage += `-------------------
+`;
+      whatsappMessage += `المبلغ الفرعي: ${subtotal} ج.م
+`;
+      whatsappMessage += `رسوم الشحن: ${shippingFee} ج.م
+`;
+      whatsappMessage += `الإجمالي المطلوب: ${grandTotal} ج.م
+
+`;
+      whatsappMessage += `طريقة الدفع: ${methodText}
+الرقم المحول منه: ${transferRef}
+
+`;
       whatsappMessage += `في انتظار تأكيد الطلب من طرفكم.`;
 
       var encodedMessage = encodeURIComponent(whatsappMessage);
