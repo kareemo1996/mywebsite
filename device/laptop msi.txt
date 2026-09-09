@@ -1,0 +1,6 @@
+MSI Laptop
+المعالج: AMD Ryzen 9 8940HX
+كارت الشاشة: NVIDIA GeForce RTX 5060
+الرام: 16GB DDR5
+التخزين: 1TB SSD
+الشاشة: 16" QHD+ — 2560×1600 — 240Hz

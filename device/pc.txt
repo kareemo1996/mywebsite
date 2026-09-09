@@ -1,0 +1,4 @@
+المعالج: Intel Core i5-14400F — 10 Cores — 2.5GHz
+كارت الشاشة: NVIDIA GeForce RTX 5060 — 8GB
+الرام: 16GB DDR5
+التخزين: 1TB NVMe SSD
