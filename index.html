@@ -142,6 +142,13 @@
     .product-type { color: var(--muted); font-family: 'Montserrat', sans-serif; font-size: .75rem; font-weight: 800; }
     .price { color: var(--accent); font-family: 'Montserrat', sans-serif; font-size: 1.25rem; font-weight: 900; white-space: nowrap; }
     .product-card h3 { margin: 8px 0 10px; font-size: 1.15rem; letter-spacing: -.02em; }
+    
+    /* فقاعة التقييمات والمواصفات تحت المنتج */
+    .rating-bubble { display: inline-flex; align-items: center; gap: 6px; background: var(--surface-muted); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s ease; width: fit-content; text-decoration: none; }
+    .rating-bubble:hover { border-color: #FFD700; background: rgba(255, 215, 0, 0.05); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(255, 215, 0, 0.1); }
+    .rating-bubble .stars { color: #FFD700; font-size: 0.95rem; letter-spacing: 1px; }
+    .rating-bubble .text { color: var(--muted); font-size: 0.8rem; font-weight: 800; font-family: 'Montserrat', 'Cairo', sans-serif; }
+
     .product-features { margin: 0 0 20px; padding: 0 20px 0 0; color: var(--muted); font-size: .85rem; line-height: 1.6; flex-grow: 1; }
     .product-features li { margin-bottom: 6px; }
     .add-to-cart { width: 100%; min-height: 48px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-muted); color: var(--ink); font-size: .95rem; font-weight: 900; transition: color .2s ease, background .2s ease, border-color .2s ease; cursor:pointer; margin-top: auto; }
@@ -219,12 +226,8 @@
     :focus-visible { outline: 3px solid var(--accent-soft); outline-offset: 3px; }
 
     /* ==============================================
-         تصميم أيقونة المعلومات ونافذة المواصفات والتقييمات
+         نافذة المواصفات والتقييمات
     =============================================== */
-    .info-btn { position: absolute; top: 15px; left: 15px; z-index: 3; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: rgba(12, 8, 18, 0.75); color: #fff; border: 1px solid rgba(255, 255, 255, 0.24); backdrop-filter: blur(8px); cursor: pointer; transition: all 0.3s ease; }
-    .info-btn:hover { background: var(--accent); color: #000; transform: scale(1.1); border-color: var(--accent); }
-    .info-btn svg { width: 18px; height: 18px; }
-    
     .details-modal { position: fixed; z-index: 150; top: 50%; left: 50%; transform: translate(-50%, -45%); width: min(600px, 92vw); max-height: 85vh; overflow-y: auto; background: var(--surface-solid); border: 1px solid var(--line); border-radius: 24px; padding: 30px; box-shadow: 0 25px 60px rgba(0, 0, 0, .5); opacity: 0; pointer-events: none; transition: all .3s cubic-bezier(.2, .75, .25, 1); }
     .details-modal.is-open { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%); }
     .details-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--line); }
@@ -234,7 +237,7 @@
     /* Review System CSS */
     .star-rating { display: flex; flex-direction: row-reverse; justify-content: flex-end; margin-bottom: 15px; gap: 5px; }
     .star-rating input { display: none; }
-    .star-rating label { cursor: pointer; width: 25px; height: 25px; background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23555"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>'); background-repeat: no-repeat; transition: all 0.2s; }
+    .star-rating label { cursor: pointer; width: 30px; height: 30px; background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23555"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>'); background-repeat: no-repeat; transition: all 0.2s; }
     .star-rating input:checked ~ label, .star-rating label:hover, .star-rating label:hover ~ label { background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23FFD700"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>'); }
     
     .review-card { padding: 18px; border: 1px solid var(--line); border-radius: 12px; margin-bottom: 15px; background: var(--surface); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
@@ -284,8 +287,8 @@
     /* ==============================================
          مقاسات منتجات قسم اللوك (أزرار بدلاً من قائمة)
     =============================================== */
-    .style-size-container { display: flex; gap: 8px; margin: 0 0 16px; justify-content: center; }
-    .size-btn { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface-solid); color: var(--ink); font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.95rem; cursor: pointer; transition: all 0.2s ease; display: grid; place-items: center; }
+    .style-size-container { display: flex; gap: 6px; margin: 0 0 16px; justify-content: center; flex-wrap: wrap;}
+    .size-btn { min-width: 38px; padding: 0 6px; height: 38px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface-solid); color: var(--ink); font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.85rem; cursor: pointer; transition: all 0.2s ease; display: grid; place-items: center; }
     .size-btn:hover { border-color: var(--accent); background: var(--surface-muted); }
     .size-btn.is-active { background: var(--accent); color: #000; border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 243, 255, 0.25); }
 
@@ -401,17 +404,18 @@
           <article class="product-card">
             <div class="product-media">
               <span class="product-badge">الأكثر مبيعاً</span>
-              <button class="info-btn" type="button" aria-label="مواصفات الجهاز" data-title="تجميعة بي سي ألعاب احترافية" data-details="Intel Core i5-14400F — 10 Cores — 2.5GHz
-كارت الشاشة: NVIDIA GeForce RTX 4060 — 8GB
-الرام: 16GB DDR5
-التخزين: 1TB NVMe SSD">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-              </button>
               <img src="device/pc.png" alt="بي سي" loading="lazy">
             </div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / PC</span><span class="price">45000 ج.م</span></div>
               <h3>تجميعة بي سي ألعاب احترافية</h3>
+              <!-- فقاعة التقييمات بدلاً من زر i -->
+              <button class="rating-bubble" type="button" data-title="تجميعة بي سي ألعاب احترافية" data-details="Intel Core i5-14400F — 10 Cores — 2.5GHz
+كارت الشاشة: NVIDIA GeForce RTX 4060 — 8GB
+الرام: 16GB DDR5
+التخزين: 1TB NVMe SSD">
+                <span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span>
+              </button>
               <ul class="product-features">
                 <li>معالج قوي يضمن أداء سلس وثابت.</li>
                 <li>كرت شاشة لرسوميات واقعية وسرعة إطارات عالية.</li>
@@ -424,14 +428,14 @@
           <article class="product-card">
             <div class="product-media">
               <span class="product-badge">أداء جبار</span>
-              <button class="info-btn" type="button" aria-label="مواصفات الجهاز" data-title="لابتوب قيمنج MSI" data-details="انسخ محتوى ملف laptop msi.txt هنا">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-              </button>
               <img src="device/laptop msi.png" alt="لابتوب" loading="lazy">
             </div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / LAPTOP</span><span class="price">52000 ج.م</span></div>
               <h3>لابتوب قيمنج MSI</h3>
+              <button class="rating-bubble" type="button" data-title="لابتوب قيمنج MSI" data-details="انسخ محتوى ملف laptop msi.txt هنا">
+                <span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span>
+              </button>
               <ul class="product-features">
                 <li>شاشة بتردد عالي لاستجابة فورية.</li>
                 <li>معالج عالي الأداء من الفئة المتقدمة.</li>
@@ -443,14 +447,14 @@
           </article>
           <article class="product-card">
             <div class="product-media">
-              <button class="info-btn" type="button" aria-label="مواصفات الجهاز" data-title="بلايستيشن 5 برو / سليم" data-details="انسخ محتوى ملف playstation 5 pro slim.txt هنا">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-              </button>
               <img src="device/playstation 5 pro slim.png" alt="بلايستيشن 5" loading="lazy">
             </div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / CONSOLE</span><span class="price">25000 ج.م</span></div>
               <h3>بلايستيشن 5 برو / سليم</h3>
+              <button class="rating-bubble" type="button" data-title="بلايستيشن 5 برو / سليم" data-details="انسخ محتوى ملف playstation 5 pro slim.txt هنا">
+                <span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span>
+              </button>
               <ul class="product-features">
                 <li>تجربة الجيل الجديد بدقة 4K حقيقية.</li>
                 <li>يد تحكم DualSense لتجربة حسية.</li>
@@ -474,14 +478,14 @@
         <div class="products-grid">
           <article class="product-card">
             <div class="product-media">
-              <button class="info-btn" type="button" aria-label="مواصفات المنتج" data-title="ماوس قيمنج احترافي" data-details="انسخ محتوى ملف mouse.txt هنا">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-              </button>
               <img src="accessories/mouse.png" alt="ماوس" loading="lazy">
             </div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / MOUSE</span><span class="price">750 ج.م</span></div>
               <h3>ماوس قيمنج احترافي</h3>
+              <button class="rating-bubble" type="button" data-title="ماوس قيمنج احترافي" data-details="انسخ محتوى ملف mouse.txt هنا">
+                <span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span>
+              </button>
               <ul class="product-features">
                 <li>مستشعر ضوئي بدقة فائقة.</li>
                 <li>أزرار قابلة للبرمجة المخصصة للألعاب.</li>
@@ -494,14 +498,14 @@
           <article class="product-card">
             <div class="product-media">
               <span class="product-badge">احترافي</span>
-              <button class="info-btn" type="button" aria-label="مواصفات المنتج" data-title="كيبورد قيمنج ميكانيكي" data-details="انسخ محتوى ملف keyboard gaming.txt هنا">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-              </button>
               <img src="accessories/keyboard gaming.png" alt="كيبورد" loading="lazy">
             </div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / KEYBOARD</span><span class="price">1200 ج.م</span></div>
               <h3>كيبورد قيمنج ميكانيكي</h3>
+              <button class="rating-bubble" type="button" data-title="كيبورد قيمنج ميكانيكي" data-details="انسخ محتوى ملف keyboard gaming.txt هنا">
+                <span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span>
+              </button>
               <ul class="product-features">
                 <li>سويتشات ميكانيكية سريعة الاستجابة.</li>
                 <li>إضاءة تفاعلية متزامنة.</li>
@@ -513,14 +517,14 @@
           </article>
           <article class="product-card">
             <div class="product-media">
-              <button class="info-btn" type="button" aria-label="مواصفات المنتج" data-title="سماعة ألعاب محيطية" data-details="انسخ محتوى ملف headphone.txt هنا">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-              </button>
               <img src="accessories/headphone.png" alt="سماعة" loading="lazy">
             </div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / AUDIO</span><span class="price">850 ج.م</span></div>
               <h3>سماعة ألعاب محيطية</h3>
+              <button class="rating-bubble" type="button" data-title="سماعة ألعاب محيطية" data-details="انسخ محتوى ملف headphone.txt هنا">
+                <span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span>
+              </button>
               <ul class="product-features">
                 <li>صوت محيطي 7.1 دقيق.</li>
                 <li>مايكروفون احترافي عازل للضجيج.</li>
@@ -546,15 +550,14 @@
           
           <!-- Genji Olive -->
           <article class="product-card">
-            <div class="product-media"><span class="product-badge">جديد وحصري</span><button class="info-btn" data-title="تيشيرت Genji" data-details="تيشيرت قطني 100% بتصميم Genji من Overwatch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/genji-olive.png" alt="تيشيرت Genji" loading="lazy"></div>
+            <div class="product-media"><span class="product-badge">جديد وحصري</span><img src="look/genji-olive.png" alt="تيشيرت Genji" loading="lazy"></div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / OVERWATCH</span><span class="price">240 ج.م</span></div>
               <h3>تيشيرت Genji (زيتوني داكن)</h3>
+              <button class="rating-bubble" type="button" data-title="تيشيرت Genji" data-details="تيشيرت قطني 100% بتصميم Genji من Overwatch"><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>تصميم السايبر نينجا مع تفاصيل خضراء مضيئة.</li>
-                <li>لون أخضر عسكري (Military Green) مميز جداً.</li>
-                <li>قماش قطني ناعم يتحمل الاستخدام.</li>
-                <li>طباعة نيون لا تبهت مع الغسيل.</li>
+                <li>لون أخضر عسكري مميز.</li>
               </ul>
               <button class="add-to-cart" data-id="genji-olive" data-name="تيشيرت Genji زيتوني" data-price="240" data-image="look/genji-olive.png">أضف إلى السلة</button>
             </div>
@@ -562,15 +565,14 @@
 
           <!-- Malenia Red -->
           <article class="product-card">
-            <div class="product-media"><span class="product-badge">أسطوري</span><button class="info-btn" data-title="تيشيرت Malenia" data-details="تصميم فني قوي لشخصية مالينيا. قطن نقي."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/malenia-red.png" alt="تيشيرت Malenia" loading="lazy"></div>
+            <div class="product-media"><span class="product-badge">أسطوري</span><img src="look/malenia-red.png" alt="تيشيرت Malenia" loading="lazy"></div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / ELDEN RING</span><span class="price">350 ج.م</span></div>
               <h3>تيشيرت Malenia (أحمر)</h3>
+              <button class="rating-bubble" type="button" data-title="تيشيرت Malenia" data-details="تصميم فني قوي لشخصية مالينيا. قطن نقي."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
-                <li>تفاصيل حادة ومجسمة بتصميم يروي قصة اللعبة بكل قوة.</li>
                 <li>ألوان سينمائية قوية خالية من أي بكسلة.</li>
                 <li>خامة بريميوم لعشاق ألعاب السولز.</li>
-                <li>تصميم جذاب وملفت للأنظار.</li>
               </ul>
               <button class="add-to-cart" data-id="malenia-red" data-name="تيشيرت Malenia أحمر" data-price="350" data-image="look/malenia-red.png">أضف إلى السلة</button>
             </div>
@@ -578,15 +580,14 @@
 
           <!-- Far Cry 5 Gray -->
           <article class="product-card">
-            <div class="product-media"><button class="info-btn" data-title="تيشيرت Far Cry 5" data-details="تيشيرت رمادي فحمي مميز، قماش مريح للاستخدام الشاق."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/farcry5-gray.png" alt="تيشيرت Far Cry 5" loading="lazy"></div>
+            <div class="product-media"><img src="look/farcry5-gray.png" alt="تيشيرت Far Cry 5" loading="lazy"></div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / FAR CRY</span><span class="price">300 ج.م</span></div>
               <h3>تيشيرت Far Cry 5 (فحمي)</h3>
+              <button class="rating-bubble" type="button" data-title="تيشيرت Far Cry 5" data-details="تيشيرت رمادي فحمي مميز، قماش مريح للاستخدام الشاق."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>لون رمادي فحمي (Charcoal) غاية في الأناقة.</li>
-                <li>تصميم مفرغ باحترافية لدمج الشخصيات مع لون التيشيرت.</li>
                 <li>جودة طباعة استثنائية بوضوح تام للكلمات.</li>
-                <li>لوك كلاسيكي قوي.</li>
               </ul>
               <button class="add-to-cart" data-id="farcry5-gray" data-name="تيشيرت Far Cry 5 فحمي" data-price="300" data-image="look/farcry5-gray.png">أضف إلى السلة</button>
             </div>
@@ -594,15 +595,14 @@
 
           <!-- Cyberpunk Yellow -->
           <article class="product-card">
-            <div class="product-media"><span class="product-badge">تريند</span><button class="info-btn" data-title="تيشيرت Cyberpunk" data-details="أصفر فاقع، ستايل الأوفر سايز لراحة أكبر."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/cyperpunk-yellow.png" alt="تيشيرت Cyberpunk" loading="lazy"></div>
+            <div class="product-media"><span class="product-badge">تريند</span><img src="look/cyperpunk-yellow.png" alt="تيشيرت Cyberpunk" loading="lazy"></div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / CYBERPUNK</span><span class="price">280 ج.م</span></div>
               <h3>تيشيرت Cyberpunk (أصفر)</h3>
+              <button class="rating-bubble" type="button" data-title="تيشيرت Cyberpunk" data-details="أصفر فاقع، ستايل الأوفر سايز لراحة أكبر."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
-                <li>لون أصفر فاقع يعكس أجواء Night City.</li>
                 <li>تصميم Silverhand مذهل وحيوي.</li>
                 <li>قصة واسعة مريحة (Oversized fit).</li>
-                <li>مثالي للتنسيق مع ستايل الستريت وير.</li>
               </ul>
               <button class="add-to-cart" data-id="cyperpunk-yellow" data-name="تيشيرت Cyberpunk أصفر" data-price="280" data-image="look/cyperpunk-yellow.png">أضف إلى السلة</button>
             </div>
@@ -610,14 +610,13 @@
 
           <!-- Jinx Arcane -->
           <article class="product-card">
-            <div class="product-media"><button class="info-btn" data-title="تيشيرت Arcane" data-details="تيشيرت أسود بطباعة Jinx نيون، قطن ممتاز."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/arcane-blue.png" alt="تيشيرت Arcane" loading="lazy"></div>
+            <div class="product-media"><img src="look/arcane-blue.png" alt="تيشيرت Arcane" loading="lazy"></div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / LEAGUE OF LEGENDS</span><span class="price">350 ج.م</span></div>
               <h3>تيشيرت Jinx Arcane</h3>
+              <button class="rating-bubble" type="button" data-title="تيشيرت Arcane" data-details="تيشيرت أسود بطباعة Jinx نيون، قطن ممتاز."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>ألوان نيون قوية متداخلة ببراعة.</li>
-                <li>تصميم فوضوي يعكس شخصية Jinx.</li>
-                <li>طباعة حرارية ناعمة لا تسبب التعرق.</li>
                 <li>خامة قطنية فائقة الجودة.</li>
               </ul>
               <button class="add-to-cart" data-id="jinx-arcane" data-name="تيشيرت Jinx Arcane" data-price="350" data-image="look/arcane-blue.png">أضف إلى السلة</button>
@@ -626,15 +625,14 @@
 
           <!-- The Witcher Black -->
           <article class="product-card">
-            <div class="product-media"><button class="info-btn" data-title="تيشيرت The Witcher" data-details="تصميم الناري لجيرالت، جودة خياطة مزدوجة."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/thewitcher-black.png" alt="تيشيرت The Witcher" loading="lazy"></div>
+            <div class="product-media"><img src="look/thewitcher-black.png" alt="تيشيرت The Witcher" loading="lazy"></div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / THE WITCHER</span><span class="price">240 ج.م</span></div>
               <h3>تيشيرت White Wolf (أسود)</h3>
+              <button class="rating-bubble" type="button" data-title="تيشيرت The Witcher" data-details="تصميم الناري لجيرالت، جودة خياطة مزدوجة."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>تصميم أسطوري لجيرالت من ريفيا.</li>
-                <li>خلفية سوداء تبرز التفاصيل النارية للطباعة.</li>
                 <li>خياطة مزدوجة لمتانة تدوم طويلاً.</li>
-                <li>قطعة أساسية لأي جيمر.</li>
               </ul>
               <button class="add-to-cart" data-id="witcher-black" data-name="تيشيرت The Witcher أسود" data-price="240" data-image="look/thewitcher-black.png">أضف إلى السلة</button>
             </div>
@@ -642,15 +640,14 @@
 
           <!-- Ghost Black -->
           <article class="product-card">
-            <div class="product-media"><button class="info-btn" data-title="تيشيرت Ghost" data-details="طباعة عالية التحمل، أسود داكن."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/ghostblack.png" alt="تيشيرت Ghost" loading="lazy"></div>
+            <div class="product-media"><img src="look/ghostblack.png" alt="تيشيرت Ghost" loading="lazy"></div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / CALL OF DUTY</span><span class="price">300 ج.م</span></div>
               <h3>تيشيرت Ghost (أسود)</h3>
+              <button class="rating-bubble" type="button" data-title="تيشيرت Ghost" data-details="طباعة عالية التحمل، أسود داكن."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>لوك عسكري وتكتيكي لشخصية جوست.</li>
                 <li>طباعة عالية الجودة مقاومة للتشقق.</li>
-                <li>قماش يسمح بمرور الهواء.</li>
-                <li>تصميم مرعب وجذاب في نفس الوقت.</li>
               </ul>
               <button class="add-to-cart" data-id="ghost-black" data-name="تيشيرت Ghost أسود" data-price="300" data-image="look/ghostblack.png">أضف إلى السلة</button>
             </div>
@@ -658,14 +655,13 @@
 
           <!-- Ghost White -->
           <article class="product-card">
-            <div class="product-media"><button class="info-btn" data-title="تيشيرت Ghost الأبيض" data-details="نسخة التيشيرت الأبيض من شخصية جوست."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/ghost-white.png" alt="تيشيرت Ghost" loading="lazy"></div>
+            <div class="product-media"><img src="look/ghost-white.png" alt="تيشيرت Ghost" loading="lazy"></div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / CALL OF DUTY</span><span class="price">320 ج.م</span></div>
               <h3>تيشيرت Ghost (أبيض)</h3>
+              <button class="rating-bubble" type="button" data-title="تيشيرت Ghost الأبيض" data-details="نسخة التيشيرت الأبيض من شخصية جوست."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
-                <li>تصميم قوي لشخصية Ghost الأيقونية.</li>
                 <li>تباين رائع للألوان الداكنة على خلفية بيضاء.</li>
-                <li>قماش يتحمل الاستخدام اليومي.</li>
                 <li>ستايل شبابي ملفت.</li>
               </ul>
               <button class="add-to-cart" data-id="ghost-white" data-name="تيشيرت Ghost أبيض" data-price="320" data-image="look/ghost-white.png">أضف إلى السلة</button>
@@ -674,14 +670,13 @@
 
           <!-- Resident Evil Black -->
           <article class="product-card">
-            <div class="product-media"><button class="info-btn" data-title="Resident Evil" data-details="طباعة DTF ممتازة، خامة قطنية ضد الوبر."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/residentevil-black.png" alt="تيشيرت Resident Evil" loading="lazy"></div>
+            <div class="product-media"><img src="look/residentevil-black.png" alt="تيشيرت Resident Evil" loading="lazy"></div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / RESIDENT EVIL</span><span class="price">300 ج.م</span></div>
               <h3>تيشيرت Resident Evil (أسود)</h3>
+              <button class="rating-bubble" type="button" data-title="Resident Evil" data-details="طباعة DTF ممتازة، خامة قطنية ضد الوبر."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
-                <li>تصميم البقاء والرعب المفضل للجميع (Leon).</li>
                 <li>ألوان داكنة تتناسب مع أجواء اللعبة.</li>
-                <li>خامة بريميوم مريحة.</li>
                 <li>طباعة DTF تتحمل أقصى الظروف.</li>
               </ul>
               <button class="add-to-cart" data-id="resident-evil-black" data-name="تيشيرت Resident Evil" data-price="300" data-image="look/residentevil-black.png">أضف إلى السلة</button>
@@ -690,15 +685,14 @@
 
           <!-- freestyle-man White -->
           <article class="product-card">
-            <div class="product-media"><button class="info-btn" data-title="Freestyle Man" data-details="تيشيرت ديناميكي بخامة ناعمة وصيفية."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/man-white.png" alt="تيشيرت freestyle-man" loading="lazy"></div>
+            <div class="product-media"><img src="look/man-white.png" alt="تيشيرت freestyle-man" loading="lazy"></div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / MARVEL</span><span class="price">220 ج.م</span></div>
               <h3>تيشيرت freestyle-man (أبيض)</h3>
+              <button class="rating-bubble" type="button" data-title="Freestyle Man" data-details="تيشيرت ديناميكي بخامة ناعمة وصيفية."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>حركة ديناميكية وتصميم ملئ بالطاقة.</li>
-                <li>نسيج ناعم ومريح لحركة غير مقيدة.</li>
                 <li>ألوان حمراء وزرقاء زاهية.</li>
-                <li>خياطة متينة ومتقنة.</li>
               </ul>
               <button class="add-to-cart" data-id="spiderman-white" data-name="تيشيرت freestyle-man" data-price="220" data-image="look/man-white.png">أضف إلى السلة</button>
             </div>
@@ -706,15 +700,14 @@
 
           <!-- Uncharted Black -->
           <article class="product-card">
-            <div class="product-media"><button class="info-btn" data-title="Uncharted" data-details="تصميم ناثان دريك، أسود، قطن ممتاز."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/uncharted-black.png" alt="تيشيرت Uncharted" loading="lazy"></div>
+            <div class="product-media"><img src="look/uncharted-black.png" alt="تيشيرت Uncharted" loading="lazy"></div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / UNCHARTED</span><span class="price">220 ج.م</span></div>
               <h3>تيشيرت Uncharted (أسود)</h3>
+              <button class="rating-bubble" type="button" data-title="Uncharted" data-details="تصميم ناثان دريك، أسود، قطن ممتاز."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>لوك المغامرات لشخصية ناثان دريك.</li>
-                <li>لمسات ترابية متناغمة مع اللون الأسود.</li>
                 <li>قماش متين يتحمل الاستخدام.</li>
-                <li>تصميم يبرز هويتك كلاعب محترف.</li>
               </ul>
               <button class="add-to-cart" data-id="uncharted-black" data-name="تيشيرت Uncharted" data-price="220" data-image="look/uncharted-black.png">أضف إلى السلة</button>
             </div>
@@ -722,15 +715,14 @@
 
           <!-- Joker White -->
           <article class="product-card">
-            <div class="product-media"><button class="info-btn" data-title="Persona 5 Joker" data-details="ألوان أنمي رائعة، رقبة مريحة جداً."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/joker-white.png" alt="تيشيرت Joker" loading="lazy"></div>
+            <div class="product-media"><img src="look/joker-white.png" alt="تيشيرت Joker" loading="lazy"></div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / PERSONA 5</span><span class="price">300 ج.م</span></div>
               <h3>تيشيرت Joker (أبيض)</h3>
+              <button class="rating-bubble" type="button" data-title="Persona 5 Joker" data-details="ألوان أنمي رائعة، رقبة مريحة جداً."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>ستايل أنمي مميز بألوان حمراء وسوداء.</li>
-                <li>لمسة فنية جريئة للستريت وير.</li>
                 <li>طوق ياقة مريح لا يسبب الانزعاج.</li>
-                <li>طباعة حرارية ناعمة جداً.</li>
               </ul>
               <button class="add-to-cart" data-id="joker-white" data-name="تيشيرت Joker" data-price="300" data-image="look/joker-white.png">أضف إلى السلة</button>
             </div>
@@ -738,15 +730,14 @@
 
           <!-- Omen 1 White -->
           <article class="product-card">
-            <div class="product-media"><button class="info-btn" data-title="Omen Valorant" data-details="تصميم أبيض بألوان بنفسجية، قطن صافي."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/omen1-white.png" alt="تيشيرت Omen" loading="lazy"></div>
+            <div class="product-media"><img src="look/omen1-white.png" alt="تيشيرت Omen" loading="lazy"></div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / VALORANT</span><span class="price">350 ج.م</span></div>
-              <h3>تيشيرت Omen - تصميم 1 (أبيض)</h3>
+              <h3>تيشيرت Omen - 1 (أبيض)</h3>
+              <button class="rating-bubble" type="button" data-title="Omen Valorant" data-details="تصميم أبيض بألوان بنفسجية، قطن صافي."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>تصميم غامض بألوان بنفسجية داكنة.</li>
-                <li>خلفية بيضاء تبرز روعة التفاصيل.</li>
                 <li>خامة قطنية صافية.</li>
-                <li>تصميم حصري لعشاق فالورانت.</li>
               </ul>
               <button class="add-to-cart" data-id="omen1-white" data-name="تيشيرت Omen تصميم 1" data-price="350" data-image="look/omen1-white.png">أضف إلى السلة</button>
             </div>
@@ -754,14 +745,13 @@
 
           <!-- Omen 2 White -->
           <article class="product-card">
-            <div class="product-media"><button class="info-btn" data-title="Omen Valorant 2" data-details="زاوية أخرى لشخصية أومن، تصميم مميز."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/omen2-white.png" alt="تيشيرت Omen 2" loading="lazy"></div>
+            <div class="product-media"><img src="look/omen2-white.png" alt="تيشيرت Omen 2" loading="lazy"></div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / VALORANT</span><span class="price">350 ج.م</span></div>
-              <h3>تيشيرت Omen - تصميم 2 (أبيض)</h3>
+              <h3>تيشيرت Omen - 2 (أبيض)</h3>
+              <button class="rating-bubble" type="button" data-title="Omen Valorant 2" data-details="زاوية أخرى لشخصية أومن، تصميم مميز."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
-                <li>زاوية مختلفة ومميزة لشخصية أومن.</li>
                 <li>توزيع لوني رائع يجذب العين.</li>
-                <li>قصة مناسبة للحركة واللعب.</li>
                 <li>ألوان ثابتة زاهية.</li>
               </ul>
               <button class="add-to-cart" data-id="omen2-white" data-name="تيشيرت Omen تصميم 2" data-price="350" data-image="look/omen2-white.png">أضف إلى السلة</button>
@@ -770,14 +760,13 @@
 
           <!-- Jett Black -->
           <article class="product-card">
-            <div class="product-media"><span class="product-badge">الأكثر طلباً</span><button class="info-btn" data-title="Jett Valorant" data-details="تيشيرت أسود عميق، خياطة متينة."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/jett-black.png" alt="تيشيرت Jett" loading="lazy"></div>
+            <div class="product-media"><span class="product-badge">الأكثر طلباً</span><img src="look/jett-black.png" alt="تيشيرت Jett" loading="lazy"></div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / VALORANT</span><span class="price">350 ج.م</span></div>
               <h3>تيشيرت Jett (أسود)</h3>
+              <button class="rating-bubble" type="button" data-title="Jett Valorant" data-details="تيشيرت أسود عميق، خياطة متينة."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>أسود عميق لمحبي Jett.</li>
-                <li>قماش ناعم الملمس.</li>
-                <li>خياطة مزدوجة للمتانة.</li>
                 <li>قصة حديثة للجيمرز.</li>
               </ul>
               <button class="add-to-cart" data-id="jett-black" data-name="تيشيرت Jett" data-price="350" data-image="look/jett-black.png">أضف إلى السلة</button>
@@ -786,14 +775,13 @@
 
           <!-- Raze White -->
           <article class="product-card">
-            <div class="product-media"><button class="info-btn" data-title="Raze Valorant" data-details="خفيف ومريح جداً، تفاصيل برتقالية."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/raze-white.png" alt="تيشيرت Raze" loading="lazy"></div>
+            <div class="product-media"><img src="look/raze-white.png" alt="تيشيرت Raze" loading="lazy"></div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / VALORANT</span><span class="price">350 ج.م</span></div>
               <h3>تيشيرت Raze (أبيض)</h3>
+              <button class="rating-bubble" type="button" data-title="Raze Valorant" data-details="خفيف ومريح جداً، تفاصيل برتقالية."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>تصميم ناصع بتفاصيل برتقالية.</li>
-                <li>خفيف الوزن ولطيف جداً.</li>
-                <li>ياقة مريحة لا تسبب الانزعاج.</li>
                 <li>يجمع بين البساطة وقوة التفاصيل.</li>
               </ul>
               <button class="add-to-cart" data-id="raze-white" data-name="تيشيرت Raze أبيض" data-price="350" data-image="look/raze-white.png">أضف إلى السلة</button>
@@ -802,14 +790,13 @@
 
           <!-- Mortal Kombat Black -->
           <article class="product-card">
-            <div class="product-media"><button class="info-btn" data-title="Mortal Kombat" data-details="تصميم Sub-Zero ثلجي مضيء، جودة عالية."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/mortalkombat-black.png" alt="تيشيرت Sub-Zero" loading="lazy"></div>
+            <div class="product-media"><img src="look/mortalkombat-black.png" alt="تيشيرت Sub-Zero" loading="lazy"></div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / MORTAL KOMBAT</span><span class="price">250 ج.م</span></div>
               <h3>تيشيرت Sub-Zero (أسود)</h3>
+              <button class="rating-bubble" type="button" data-title="Mortal Kombat" data-details="تصميم Sub-Zero ثلجي مضيء، جودة عالية."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
-                <li>برودة وغموض سب-زيرو في تصميم مبهر.</li>
                 <li>تفاصيل ثلجية مضيئة على خلفية سوداء.</li>
-                <li>طباعة سميكة بجودة المصانع.</li>
                 <li>ستايل قوي لعشاق ألعاب القتال.</li>
               </ul>
               <button class="add-to-cart" data-id="subzero-black" data-name="تيشيرت Sub-Zero" data-price="250" data-image="look/mortalkombat-black.png">أضف إلى السلة</button>
@@ -818,417 +805,16 @@
 
           <!-- Tekken Black -->
           <article class="product-card">
-            <div class="product-media"><button class="info-btn" data-title="Tekken" data-details="تيشيرت أسود مقاوم للانكماش، طباعة متينة."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/tekken-black.png" alt="تيشيرت Tekken" loading="lazy"></div>
+            <div class="product-media"><img src="look/tekken-black.png" alt="تيشيرت Tekken" loading="lazy"></div>
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / TEKKEN</span><span class="price">250 ج.م</span></div>
               <h3>تيشيرت Tekken (أسود)</h3>
+              <button class="rating-bubble" type="button" data-title="Tekken" data-details="تيشيرت أسود مقاوم للانكماش، طباعة متينة."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>ألوان حمراء متداخلة مع الأسود لستايل جريء.</li>
-                <li>مناسب جداً للستريت وير والمناسبات.</li>
-                <li>مقاوم للانكماش وتغير الألوان.</li>
                 <li>طباعة متينة لا تتشقق.</li>
               </ul>
               <button class="add-to-cart" data-id="tekken-black" data-name="تيشيرت Tekken" data-price="250" data-image="look/tekken-black.png">أضف إلى السلة</button>
-            </div>
-          </article>
-
-          <!-- Assassin's Creed Egypt Black -->
-          <article class="product-card">
-            <div class="product-media"><span class="product-badge">إصدار خاص</span><button class="info-btn" data-title="Assassin's Creed Origins" data-details="إصدار خاص لشخصية بايك، قطن 100%."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/assassin's creed egypt-black.png" alt="تيشيرت Assassin's Creed" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / ASSASSIN'S</span><span class="price">380 ج.م</span></div>
-              <h3>تيشيرت Assassin's Creed (Origins)</h3>
-              <ul class="product-features">
-                <li>تصميم حصري لشخصية بايك.</li>
-                <li>خامة قطنية 100%.</li>
-                <li>طباعة حرارية متينة.</li>
-                <li>طابع Streetwear أنيق.</li>
-              </ul>
-              <button class="add-to-cart" data-id="ac-egypt" data-name="تيشيرت Assassin's Creed Origins" data-price="380" data-image="look/assassin's creed egypt-black.png">أضف إلى السلة</button>
-            </div>
-          </article>
-
-          <!-- God of War White -->
-          <article class="product-card">
-            <div class="product-media"><button class="info-btn" data-title="God of War" data-details="خامة بريميوم تناسب الأجواء المختلفة."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/god of war-white.png" alt="تيشيرت God of War" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / GOD OF WAR</span><span class="price">380 ج.م</span></div>
-              <h3>تيشيرت God of War (أبيض)</h3>
-              <ul class="product-features">
-                <li>تصميم ملحمي يعكس قوة اللعبة الأسطورية.</li>
-                <li>تفاصيل فنية رائعة بلمسات حمراء داكنة.</li>
-                <li>خامة بريميوم تناسب الأجواء المختلفة.</li>
-                <li>يبرز هويتك كلاعب محترف.</li>
-              </ul>
-              <button class="add-to-cart" data-id="gow-white" data-name="تيشيرت God of War" data-price="380" data-image="look/god of war-white.png">أضف إلى السلة</button>
-            </div>
-          </article>
-
-          <!-- Red Dead Redemption White -->
-          <article class="product-card">
-            <div class="product-media"><span class="product-badge">إصدار خاص</span><button class="info-btn" data-title="Red Dead" data-details="طباعة فاخرة وألوان سينمائية."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/reddeadredemption-white.png" alt="تيشيرت Red Dead" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / RED DEAD</span><span class="price">350 ج.م</span></div>
-              <h3>تيشيرت Red Dead (أبيض)</h3>
-              <ul class="product-features">
-                <li>تصميم كلاسيكي لعشاق عالم الغرب الأمريكي.</li>
-                <li>ألوان سينمائية قوية مع طباعة فاخرة.</li>
-                <li>لوك فخم يجذب الأنظار.</li>
-                <li>خامة تتحمل الاستخدام الشاق.</li>
-              </ul>
-              <button class="add-to-cart" data-id="rdr-white" data-name="تيشيرت Red Dead" data-price="350" data-image="look/reddeadredemption-white.png">أضف إلى السلة</button>
-            </div>
-          </article>
-
-          <!-- Far Cry 3 Gray -->
-          <article class="product-card">
-            <div class="product-media"><button class="info-btn" data-title="Far Cry 3" data-details="شخصية Vaas بألوان استوائية بارزة."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/farcry3-gray.png" alt="تيشيرت Far Cry 3" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / FAR CRY</span><span class="price">300 ج.م</span></div>
-              <h3>تيشيرت Far Cry 3 (رمادي)</h3>
-              <ul class="product-features">
-                <li>لوحة فنية لشخصية Vaas المجنونة.</li>
-                <li>ألوان استوائية بارزة على خلفية رمادية.</li>
-                <li>نسيج يجمع بين الأناقة والراحة.</li>
-                <li>قصة رقبة مثالية التوسيع.</li>
-              </ul>
-              <button class="add-to-cart" data-id="farcry3-gray" data-name="تيشيرت Far Cry 3 رمادي" data-price="300" data-image="look/farcry3-gray.png">أضف إلى السلة</button>
-            </div>
-          </article>
-
-          <!-- Tomb Raider White -->
-          <article class="product-card">
-            <div class="product-media"><button class="info-btn" data-title="Tomb Raider" data-details="تصميم لارا كروفت، ملمس ناعم جداً."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/tombraider-white.png" alt="تيشيرت Tomb Raider" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / TOMB RAIDER</span><span class="price">300 ج.م</span></div>
-              <h3>تيشيرت Tomb Raider (أبيض)</h3>
-              <ul class="product-features">
-                <li>تصميم مغامرات لشخصية لارا كروفت الأيقونية.</li>
-                <li>خلفية بيضاء مع تفاصيل ملونة بارزة.</li>
-                <li>ملمس ناعم لا يسبب حساسية.</li>
-                <li>قصة واسعة تناسب الجميع.</li>
-              </ul>
-              <button class="add-to-cart" data-id="tomb-raider" data-name="تيشيرت Tomb Raider" data-price="300" data-image="look/tombraider-white.png">أضف إلى السلة</button>
-            </div>
-          </article>
-
-          <!-- Hitman White -->
-          <article class="product-card">
-            <div class="product-media"><button class="info-btn" data-title="Hitman" data-details="تصميم العميل 47 الأنيق والكلاسيكي."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/Hitman-white.png" alt="تيشيرت Hitman" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / HITMAN</span><span class="price">250 ج.م</span></div>
-              <h3>تيشيرت Hitman (أبيض)</h3>
-              <ul class="product-features">
-                <li>تصميم أنيق وبسيط يعكس شخصية العميل 47.</li>
-                <li>طباعة هادئة بلمسة كلاسيكية حمراء.</li>
-                <li>مريح جداً للاستخدام اليومي.</li>
-                <li>خياطة متينة ومتقنة.</li>
-              </ul>
-              <button class="add-to-cart" data-id="hitman-white" data-name="تيشيرت Hitman" data-price="250" data-image="look/Hitman-white.png">أضف إلى السلة</button>
-            </div>
-          </article>
-
-          <!-- Sniper Elite White -->
-          <article class="product-card">
-            <div class="product-media"><button class="info-btn" data-title="Sniper Elite" data-details="لوك عسكري شيك، طباعة قوية ضد التقشير."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/sniperelite-white.png" alt="تيشيرت Sniper Elite" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / SNIPER ELITE</span><span class="price">250 ج.م</span></div>
-              <h3>تيشيرت Sniper Elite (أبيض)</h3>
-              <ul class="product-features">
-                <li>دقة التصويب وتفاصيل الحرب العالمية بتصميم فريد.</li>
-                <li>طباعة صامدة أمام التقشير.</li>
-                <li>ملائمة ممتازة لشكل الجسم الرياضي.</li>
-                <li>لوك عسكري شيك جداً.</li>
-              </ul>
-              <button class="add-to-cart" data-id="sniper-elite" data-name="تيشيرت Sniper Elite" data-price="250" data-image="look/sniperelite-white.png">أضف إلى السلة</button>
-            </div>
-          </article>
-
-          <!-- Crash Team Racing White -->
-          <article class="product-card">
-            <div class="product-media"><button class="info-btn" data-title="CTR Crash" data-details="قطن خفيف ومريح بألوان مبهجة لسباقات كراش."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/ctr-white.png" alt="تيشيرت CTR" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / CRASH BANDICOOT</span><span class="price">350 ج.م</span></div>
-              <h3>تيشيرت CTR (أبيض)</h3>
-              <ul class="product-features">
-                <li>تصميم مبهج وملون لسباقات كراش الأيقونية.</li>
-                <li>ألوان برتقالية وحيوية على خلفية ناصعة.</li>
-                <li>قماش قطني خفيف لصيف مريح.</li>
-                <li>سعر ممتاز وقيمة عالية.</li>
-              </ul>
-              <button class="add-to-cart" data-id="ctr-white" data-name="تيشيرت CTR Crash" data-price="350" data-image="look/ctr-white.png">أضف إلى السلة</button>
-            </div>
-          </article>
-
-          <!-- PUBG White -->
-          <article class="product-card">
-            <div class="product-media"><button class="info-btn" data-title="PUBG" data-details="لوك الباتل رويال، قماش يسمح بمرور الهواء."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/pubg-white.png" alt="تيشيرت PUBG" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / PUBG</span><span class="price">300 ج.م</span></div>
-              <h3>تيشيرت PUBG (أبيض)</h3>
-              <ul class="product-features">
-                <li>لوك عصري لعشاق الباتل رويال.</li>
-                <li>نسيج يسمح بمرور الهواء أثناء اللعب.</li>
-                <li>ألوان ثابتة وزاهية.</li>
-                <li>مقاس مريح (Oversized).</li>
-              </ul>
-              <button class="add-to-cart" data-id="pubg-white" data-name="تيشيرت PUBG" data-price="300" data-image="look/pubg-white.png">أضف إلى السلة</button>
-            </div>
-          </article>
-
-          <!-- Fortnite White -->
-          <article class="product-card">
-            <div class="product-media"><button class="info-btn" data-title="Fortnite" data-details="ستايل شبابي ملفت بألوان فورتنايت الحيوية."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/fortnite-white.png" alt="تيشيرت Fortnite" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / FORTNITE</span><span class="price">300 ج.م</span></div>
-              <h3>تيشيرت Fortnite (أبيض)</h3>
-              <ul class="product-features">
-                <li>تصميم عصري وحيوي لعشاق Fortnite.</li>
-                <li>خامة مريحة تناسب اللعب والحركة.</li>
-                <li>طباعة عالية الجودة لا تبهت.</li>
-                <li>ستايل شبابي ملفت.</li>
-              </ul>
-              <button class="add-to-cart" data-id="fortnite-white" data-name="تيشيرت Fortnite" data-price="300" data-image="look/fortnite-white.png">أضف إلى السلة</button>
-            </div>
-          </article>
-          
-          <!-- Assassin's Creed Valhalla -->
-          <article class="product-card">
-            <div class="product-media"><span class="product-badge">جديد</span><button class="info-btn" data-title="Valhalla" data-details="تصميم الفايكنج الرائع على تيشيرت كحلي."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/assassin's creed valhalla-blue.png" alt="تيشيرت Assassin's Creed Valhalla" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / ASSASSIN'S CREED</span><span class="price">350 ج.م</span></div>
-              <h3>تيشيرت Valhalla (كحلي)</h3>
-              <ul class="product-features">
-                <li>تصميم أسطوري لعالم الفايكنج بتفاصيل مبهرة.</li>
-                <li>لون كحلي غامق يعكس قوة التصميم.</li>
-                <li>خامة قطنية ثقيلة ومريحة.</li>
-                <li>جودة طباعة عالية لا تبهت.</li>
-              </ul>
-              <button class="add-to-cart" data-id="valhalla-blue" data-name="تيشيرت Valhalla كحلي" data-price="350" data-image="look/assassin's creed valhalla-blue.png">أضف إلى السلة</button>
-            </div>
-          </article>
-
-          <!-- Bloodborne -->
-          <article class="product-card">
-            <div class="product-media"><span class="product-badge">جديد</span><button class="info-btn" data-title="Bloodborne" data-details="تصميم مظلم لعشاق السولز. طباعة DTF عالية."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/bloodborne-gray.png" alt="تيشيرت Bloodborne" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / BLOODBORNE</span><span class="price">280 ج.م</span></div>
-              <h3>تيشيرت Bloodborne (رمادي فحمي)</h3>
-              <ul class="product-features">
-                <li>تصميم مظلم وفخم يناسب عشاق السولز.</li>
-                <li>لون رمادي فحمي يبرز تباين الألوان الحمراء.</li>
-                <li>قماش ناعم يتحمل الاستخدام اليومي.</li>
-                <li>طباعة DTF خرافية الجودة.</li>
-              </ul>
-              <button class="add-to-cart" data-id="bloodborne-gray" data-name="تيشيرت Bloodborne فحمي" data-price="280" data-image="look/bloodborne-gray.png">أضف إلى السلة</button>
-            </div>
-          </article>
-
-          <!-- Control -->
-          <article class="product-card">
-            <div class="product-media"><span class="product-badge">جديد</span><button class="info-btn" data-title="Control" data-details="أحمر دموي بتصميم سينمائي غامض."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/control-red.png" alt="تيشيرت Control" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / CONTROL</span><span class="price">280 ج.م</span></div>
-              <h3>تيشيرت Control (أحمر)</h3>
-              <ul class="product-features">
-                <li>طابع سينمائي قوي يعكس غموض اللعبة.</li>
-                <li>لون أحمر دموي جرئ ومميز.</li>
-                <li>قصة شبابية تناسب الجنسين.</li>
-                <li>ألوان طباعة زاهية جداً.</li>
-              </ul>
-              <button class="add-to-cart" data-id="control-red" data-name="تيشيرت Control أحمر" data-price="280" data-image="look/control-red.png">أضف إلى السلة</button>
-            </div>
-          </article>
-
-          <!-- Demon's Souls -->
-          <article class="product-card">
-            <div class="product-media"><span class="product-badge">جديد</span><button class="info-btn" data-title="Demon's Souls" data-details="خلفية زرقاء سماوية وتصميم ملحمي."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/demonthsouls-skyblue.png" alt="تيشيرت Demon's Souls" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / DEMON'S SOULS</span><span class="price">180 ج.م</span></div>
-              <h3>تيشيرت Demon's Souls (لبني)</h3>
-              <ul class="product-features">
-                <li>تصميم ملحمي بارز بتفاصيل لا نهائية.</li>
-                <li>خلفية زرقاء سماوية تمنح التصميم حياة.</li>
-                <li>خامة قطنية صيفية مريحة.</li>
-                <li>طباعة تتحمل الغسيل المتكرر.</li>
-              </ul>
-              <button class="add-to-cart" data-id="demonssouls-skyblue" data-name="تيشيرت Demon's Souls لبني" data-price="180" data-image="look/demonthsouls-skyblue.png">أضف إلى السلة</button>
-            </div>
-          </article>
-
-          <!-- Devil May Cry -->
-          <article class="product-card">
-            <div class="product-media"><span class="product-badge">جديد</span><button class="info-btn" data-title="Devil May Cry" data-details="أكشن وتفاصيل نارية على خلفية زرقاء."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/devilmaycry-blue.png" alt="تيشيرت Devil May Cry" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / DEVIL MAY CRY</span><span class="price">220 ج.م</span></div>
-              <h3>تيشيرت Devil May Cry (أزرق)</h3>
-              <ul class="product-features">
-                <li>تصميم ناري وحماسي يجمع أبطال اللعبة.</li>
-                <li>لون كحلي زاهي يكمل أناقة الطباعة.</li>
-                <li>مناسب لإطلالة ستريت وير قوية.</li>
-                <li>متانة خياطة تدوم طويلاً.</li>
-              </ul>
-              <button class="add-to-cart" data-id="devilmaycry-blue" data-name="تيشيرت Devil May Cry أزرق" data-price="220" data-image="look/devilmaycry-blue.png">أضف إلى السلة</button>
-            </div>
-          </article>
-
-          <!-- GTA -->
-          <article class="product-card">
-            <div class="product-media"><span class="product-badge">جديد</span><button class="info-btn" data-title="GTA" data-details="ستايل البوسترات الكلاسيكية بقطن مريح."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/gta-beige.png" alt="تيشيرت GTA" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / GTA</span><span class="price">300 ج.م</span></div>
-              <h3>تيشيرت GTA (بيج رملي)</h3>
-              <ul class="product-features">
-                <li>تصميم أيقوني بستايل البوسترات الكلاسيكي.</li>
-                <li>لون بيج عصري يتناسق مع كل الإطلالات.</li>
-                <li>قماش ممتاز يوفر راحة تامة.</li>
-                <li>لوحة فنية على تيشيرت.</li>
-              </ul>
-              <button class="add-to-cart" data-id="gta-beige" data-name="تيشيرت GTA بيج" data-price="300" data-image="look/gta-beige.png">أضف إلى السلة</button>
-            </div>
-          </article>
-
-          <!-- It Takes Two -->
-          <article class="product-card">
-            <div class="product-media"><span class="product-badge">تريند</span><button class="info-btn" data-title="It Takes Two" data-details="لون كشمير رائع وتصميم مبهج جداً."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/ittakestwo-rose.png" alt="تيشيرت It Takes Two" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / IT TAKES TWO</span><span class="price">300 ج.م</span></div>
-              <h3>تيشيرت It Takes Two (كشمير)</h3>
-              <ul class="product-features">
-                <li>تصميم خرافي لعالم اللعبة السحري المبهج.</li>
-                <li>لون كشمير (وردي مطفي) أنيق جداً للجنسين.</li>
-                <li>ألوان سينمائية زاهية تخطف العين.</li>
-                <li>خامة قطنية فائقة الجودة.</li>
-              </ul>
-              <button class="add-to-cart" data-id="ittakestwo-rose" data-name="تيشيرت It Takes Two كشمير" data-price="300" data-image="look/ittakestwo-rose.png">أضف إلى السلة</button>
-            </div>
-          </article>
-
-          <!-- Kena -->
-          <article class="product-card">
-            <div class="product-media"><span class="product-badge">جديد</span><button class="info-btn" data-title="Kena" data-details="لوحة فنية طبيعية وألوان هادئة."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/kena-rose.png" alt="تيشيرت Kena" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / KENA</span><span class="price">250 ج.م</span></div>
-              <h3>تيشيرت Kena (كشمير)</h3>
-              <ul class="product-features">
-                <li>لوحة فنية طبيعية وساحرة من اللعبة.</li>
-                <li>درجة لون وردي هادئة ومريحة.</li>
-                <li>مناسب للاستخدام اليومي.</li>
-                <li>جودة طباعة تحافظ على دقة تفاصيل الوجوه.</li>
-              </ul>
-              <button class="add-to-cart" data-id="kena-rose" data-name="تيشيرت Kena كشمير" data-price="250" data-image="look/kena-rose.png">أضف إلى السلة</button>
-            </div>
-          </article>
-
-          <!-- Lara Croft -->
-          <article class="product-card">
-            <div class="product-media"><span class="product-badge">جديد</span><button class="info-btn" data-title="Lara Croft" data-details="لون زيتي مميز بطابع عسكري."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/laracroft-olivegreen.png" alt="تيشيرت Lara Croft" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / TOMB RAIDER</span><span class="price">180 ج.م</span></div>
-              <h3>تيشيرت Lara Croft (أخضر زيتي)</h3>
-              <ul class="product-features">
-                <li>تصميم المغامرة الكلاسيكي لشخصية لارا كروفت.</li>
-                <li>لون زيتي عسكري يتماشى بقوة مع بيئة اللعبة.</li>
-                <li>خامة قوية ومضادة للوبر.</li>
-                <li>طابع Streetwear فخم.</li>
-              </ul>
-              <button class="add-to-cart" data-id="laracroft-olive" data-name="تيشيرت Lara Croft زيتي" data-price="180" data-image="look/laracroft-olivegreen.png">أضف إلى السلة</button>
-            </div>
-          </article>
-
-          <!-- Marshmello -->
-          <article class="product-card">
-            <div class="product-media"><span class="product-badge">جديد</span><button class="info-btn" data-title="Marshmello" data-details="تصميم مشع وألوان زاهية لعشاق الموسيقى."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/marshmello-white.png" alt="تيشيرت Marshmello" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / MUSIC & GAMES</span><span class="price">300 ج.م</span></div>
-              <h3>تيشيرت Marshmello (أبيض)</h3>
-              <ul class="product-features">
-                <li>تصميم موسيقي مشع بالألوان والنيون.</li>
-                <li>أبيض ناصع يعطي خلفية مثالية للطباعة.</li>
-                <li>قماش خفيف وعملي للصيف.</li>
-                <li>مثالي لعشاق فورتنايت ومارشميلو.</li>
-              </ul>
-              <button class="add-to-cart" data-id="marshmello-white" data-name="تيشيرت Marshmello أبيض" data-price="300" data-image="look/marshmello-white.png">أضف إلى السلة</button>
-            </div>
-          </article>
-
-          <!-- Need For Speed Shift -->
-          <article class="product-card">
-            <div class="product-media"><span class="product-badge">جديد</span><button class="info-btn" data-title="NFS Shift" data-details="سرعة وسباقات على تيشرت أحمر جذاب."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/nfsshift-red.png" alt="تيشيرت Need for Speed" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / NEED FOR SPEED</span><span class="price">180 ج.م</span></div>
-              <h3>تيشيرت NFS Shift (أحمر)</h3>
-              <ul class="product-features">
-                <li>تصميم سباقات وأكشن وحماس.</li>
-                <li>لون أحمر دموي قوي يلفت الانتباه.</li>
-                <li>خياطة متينة وقصة مريحة.</li>
-                <li>طباعة تتحمل الظروف القاسية.</li>
-              </ul>
-              <button class="add-to-cart" data-id="nfs-red" data-name="تيشيرت NFS أحمر" data-price="180" data-image="look/nfsshift-red.png">أضف إلى السلة</button>
-            </div>
-          </article>
-
-          <!-- Sekiro -->
-          <article class="product-card">
-            <div class="product-media"><span class="product-badge">جديد</span><button class="info-btn" data-title="Sekiro" data-details="أجواء اليابان وتصميم الساموراي المظلم."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/sekiro-gray.png" alt="تيشيرت Sekiro" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / SEKIRO</span><span class="price">380 ج.م</span></div>
-              <h3>تيشيرت Sekiro (رمادي فحمي)</h3>
-              <ul class="product-features">
-                <li>تصميم نينجا مظلم من أجواء اليابان الإقطاعية.</li>
-                <li>خلفية رمادية تبرز الدماء والتفاصيل الفنية.</li>
-                <li>قطن ناعم جداً على البشرة.</li>
-                <li>قطعة فنية أساسية للجيمرز.</li>
-              </ul>
-              <button class="add-to-cart" data-id="sekiro-gray" data-name="تيشيرت Sekiro فحمي" data-price="380" data-image="look/sekiro-gray.png">أضف إلى السلة</button>
-            </div>
-          </article>
-
-          <!-- The Last Of Us -->
-          <article class="product-card">
-            <div class="product-media"><span class="product-badge">جديد</span><button class="info-btn" data-title="The Last of Us" data-details="بني مميز، يعكس قصة چول وإيلي العاطفية."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/thelastofus-brown.png" alt="تيشيرت The Last of Us" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / THE LAST OF US</span><span class="price">250 ج.م</span></div>
-              <h3>تيشيرت The Last of Us (بني)</h3>
-              <ul class="product-features">
-                <li>تصميم بقاء عاطفي لچول وإيلي.</li>
-                <li>لون بني شيكولاتة يتناسب مع أجواء اللعبة الأيقونية.</li>
-                <li>خامة بريميوم ذات وزن ثقيل.</li>
-                <li>صورة واضحة ودقيقة للطباعة.</li>
-              </ul>
-              <button class="add-to-cart" data-id="tlou-brown" data-name="تيشيرت The Last of Us بني" data-price="250" data-image="look/thelastofus-brown.png">أضف إلى السلة</button>
-            </div>
-          </article>
-
-          <!-- The Last Of Us Part 2 -->
-          <article class="product-card">
-            <div class="product-media"><span class="product-badge">جديد</span><button class="info-btn" data-title="The Last of Us Part II" data-details="لون بيج رملي، وخامة مرنة ومريحة."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/thelastofuspart2-beige.png" alt="تيشيرت The Last of Us 2" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / THE LAST OF US 2</span><span class="price">300 ج.م</span></div>
-              <h3>تيشيرت The Last of Us 2 (بيج)</h3>
-              <ul class="product-features">
-                <li>تفاصيل فنية رائعة للجزء الثاني من اللعبة.</li>
-                <li>بيج رملي هادئ ولون شبابي عصري.</li>
-                <li>قماش مرن لا يقيّد الحركة.</li>
-                <li>ألوان ثابتة بعد الغسيل.</li>
-              </ul>
-              <button class="add-to-cart" data-id="tlou2-beige" data-name="تيشيرت The Last of Us 2 بيج" data-price="300" data-image="look/thelastofuspart2-beige.png">أضف إلى السلة</button>
-            </div>
-          </article>
-
-          <!-- Watch Dogs -->
-          <article class="product-card">
-            <div class="product-media"><span class="product-badge">جديد</span><button class="info-btn" data-title="Watch Dogs" data-details="ستايل هاكرز سايبربانك على لون أزرق كهربائي."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button><img src="look/watchdogs-blue.png" alt="تيشيرت Watch Dogs" loading="lazy"></div>
-            <div class="product-body">
-              <div class="product-topline"><span class="product-type">GAMORA / WATCH DOGS</span><span class="price">300 ج.م</span></div>
-              <h3>تيشيرت Watch Dogs (أزرق كهربائي)</h3>
-              <ul class="product-features">
-                <li>تصميم هاكرز عصري مع لمسات تكنولوجية مذهلة.</li>
-                <li>لون أزرق كهربائي قوي ولافت للانتباه.</li>
-                <li>خياطة وتفنيش بمستوى البراندات.</li>
-                <li>مظهر سايبربانك رائع.</li>
-              </ul>
-              <button class="add-to-cart" data-id="watchdogs-blue" data-name="تيشيرت Watch Dogs أزرق" data-price="300" data-image="look/watchdogs-blue.png">أضف إلى السلة</button>
             </div>
           </article>
 
@@ -1273,6 +859,7 @@
       <div id="add-review-container" style="display: none; margin-top: 25px; background: var(--surface-muted); padding: 20px; border-radius: 12px; border: 1px solid var(--line);">
         <h4 style="margin-top: 0; margin-bottom: 15px;">أضف تقييمك للمنتج</h4>
         
+        <!-- التقييم بالنجوم -->
         <div class="star-rating">
           <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 نجوم - أسطوري"></label>
           <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 نجوم - ممتاز"></label>
@@ -1281,15 +868,18 @@
           <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="نجمة واحدة - سيء"></label>
         </div>
         
-        <textarea id="review-text-input" placeholder="إيه رأيك في المنتج؟ (اكتب تعليقك هنا)" rows="3" style="width: 100%; background: var(--surface-solid); border: 1px solid var(--line); color: var(--ink); padding: 10px; border-radius: 8px; font-family: inherit; margin-bottom: 15px; resize: vertical;"></textarea>
-        
-        <div class="upload-container" style="display: flex; gap: 10px; align-items: center; margin-bottom: 15px;">
-          <label for="review-image-input" class="upload-label" style="background: var(--surface); border: 1px solid var(--line); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: bold; transition: all 0.2s;">📷 إرفاق صورة (اختياري)</label>
-          <input type="file" id="review-image-input" accept="image/png, image/jpeg, image/webp" hidden />
-          <span id="review-image-name" style="font-size: 0.8rem; color: var(--muted);">لم يتم اختيار صورة</span>
+        <!-- حقول التعليق والصورة مخفية حتى يتم اختيار النجوم -->
+        <div id="review-extra-fields" style="display: none; margin-top: 15px; animation: fadeIn 0.3s ease;">
+            <textarea id="review-text-input" placeholder="إيه رأيك في المنتج؟ (اكتب تعليقك هنا)" rows="3" style="width: 100%; background: var(--surface-solid); border: 1px solid var(--line); color: var(--ink); padding: 10px; border-radius: 8px; font-family: inherit; margin-bottom: 15px; resize: vertical;"></textarea>
+            
+            <div class="upload-container" style="display: flex; gap: 10px; align-items: center; margin-bottom: 15px;">
+              <label for="review-image-input" class="upload-label" style="background: var(--surface); border: 1px solid var(--line); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: bold; transition: all 0.2s;">📷 إرفاق صورة (اختياري)</label>
+              <input type="file" id="review-image-input" accept="image/png, image/jpeg, image/webp" hidden />
+              <span id="review-image-name" style="font-size: 0.8rem; color: var(--muted);">لم يتم اختيار صورة</span>
+            </div>
+            
+            <button id="submit-review-btn" class="pay-now-btn" style="margin-top:0; padding: 12px; font-size: 1rem;">نشر التقييم</button>
         </div>
-        
-        <button id="submit-review-btn" class="pay-now-btn" style="margin-top:0; padding: 12px; font-size: 1rem;">نشر التقييم</button>
       </div>
 
       <!-- رسالة لغير المسجلين -->
@@ -1381,7 +971,6 @@
     </div>
     
     <div class="checkout-layout">
-      <!-- اليمين: بيانات التوصيل وطرق الدفع -->
       <div class="checkout-right">
         
         <div class="checkout-section-title">بيانات التوصيل</div>
@@ -1429,53 +1018,40 @@
 
         <div class="checkout-section-title">طريقة الدفع (آمن وموثوق)</div>
         <div class="payment-methods">
-          
-          <!-- خيار إنستاباي -->
           <label class="pay-method-label is-active" id="label-instapay">
             <input type="radio" name="payment_method" value="instapay" checked>
             <span>تحويل مباشر (InstaPay)</span>
             <div class="pay-icons"><img src="payment/instapay.png" alt="InstaPay"></div>
           </label>
-
-          <!-- تعليمات إنستاباي -->
           <div class="transfer-instructions is-visible" id="instapay-form">
             يرجى تحويل قيمة الطلب الإجمالية إلى عنوان إنستاباي التالي:
             <strong>01550825231</strong>
             بعد إتمام التحويل، يرجى كتابة الرقم المرجعي أو رقم الهاتف:
             <input class="form-input" type="text" id="instapay-ref" placeholder="رقم الهاتف أو الرقم المرجعي للتحويل" style="margin-top: 12px;">
           </div>
-
-          <!-- خيار المحافظ الإلكترونية -->
           <label class="pay-method-label" id="label-wallet">
             <input type="radio" name="payment_method" value="wallet">
             <span>فودافون كاش / محافظ إلكترونية</span>
             <div class="pay-icons"><img src="payment/vodafone cash.png" alt="Vodafone Cash"></div>
           </label>
-
-          <!-- تعليمات المحافظ الإلكترونية -->
           <div class="transfer-instructions" id="wallet-form">
             يرجى تحويل قيمة الطلب الإجمالية إلى رقم فودافون كاش التالي:
             <strong>01027256308</strong>
             بعد إتمام التحويل، يرجى كتابة رقم الهاتف الذي قمت بالتحويل منه:
             <input class="form-input" type="tel" id="wallet-ref" placeholder="رقم الهاتف المحول منه" style="margin-top: 12px;">
           </div>
-
         </div>
       </div>
 
-      <!-- اليسار: ملخص الطلب -->
       <div class="checkout-left">
         <div class="checkout-section-title">ملخص الطلب</div>
         <div id="checkout-order-items" style="max-height: 250px; overflow-y: auto; padding-left: 10px;">
-          <!-- سيتم توليد المنتجات هنا برمجياً -->
         </div>
-
         <div class="summary-totals">
           <div class="summary-row"><span>المبلغ الفرعي</span><span id="checkout-subtotal" style="font-family: Montserrat;">0 ج.م</span></div>
           <div class="summary-row"><span>رسوم الشحن</span><span id="checkout-shipping-cost" style="font-family: Montserrat;">60 ج.م</span></div>
           <div class="summary-row grand-total"><span>الإجمالي المطلوب</span><span id="checkout-grandtotal">0 ج.م</span></div>
         </div>
-        
         <button class="pay-now-btn" id="final-pay-btn" style="background: #25D366; color: white;">
           <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" style="vertical-align: middle; margin-left: 8px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
           تأكيد وإرسال الطلب عبر واتساب
@@ -1504,7 +1080,6 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
     import { getFirestore, doc, setDoc, getDoc, collection, addDoc, query, where, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-    // إضافة استدعاءات Firebase Storage لرفع الصور
     import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
 
     const firebaseConfig = {
@@ -1519,7 +1094,7 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
-    const storage = getStorage(app); // تفعيل الـ Storage
+    const storage = getStorage(app);
 
     var root = document.documentElement;
     var body = document.body;
@@ -1597,7 +1172,6 @@
     var mobileUserName = document.getElementById("mobile-user-name");
     var mobileLogoutBtn = document.getElementById("mobile-logout-btn");
 
-    // متغيرات الجلسة لمعرفة المستخدم الحالي للتقييمات
     let currentFirebaseUser = null;
     let currentUserName = "";
 
@@ -1610,7 +1184,6 @@
         mobileLoggedIn.style.display = "block";
         mobileUserName.textContent = "أهلاً بك يا " + userName;
         
-        // إظهار نموذج التقييم وإخفاء رسالة التسجيل
         document.getElementById("add-review-container").style.display = "block";
         document.getElementById("login-to-review-msg").style.display = "none";
       } else {
@@ -1619,7 +1192,6 @@
         mobileLoggedOut.style.display = "block";
         mobileLoggedIn.style.display = "none";
         
-        // إخفاء نموذج التقييم وإظهار رسالة التسجيل
         document.getElementById("add-review-container").style.display = "none";
         document.getElementById("login-to-review-msg").style.display = "block";
       }
@@ -1780,7 +1352,6 @@
     function openCart() { cartDrawer.classList.add("is-open"); document.getElementById("cart-backdrop").classList.add("is-open"); body.classList.add("no-scroll"); }
     function closeCart() { cartDrawer.classList.remove("is-open"); document.getElementById("cart-backdrop").classList.remove("is-open"); body.classList.remove("no-scroll"); }
     
-    // تنسيق السعر بالجنيه المصري
     function formatPrice(value) { return new Intl.NumberFormat("ar-EG", { style: "currency", currency: "EGP", maximumFractionDigits: 0 }).format(value); }
     
     function saveCart() { writeStorage("gamora-cart", JSON.stringify(cart)); }
@@ -1798,7 +1369,7 @@
           <div class="cart-thumb"><img src="${item.image}" alt=""></div>
           <div class="cart-info">
             <div class="cart-item-heading"><p class="cart-item-name" style="margin:0;font-size:0.85rem;font-weight:bold;">${item.name}</p><button class="cart-delete" data-action="remove" data-key="${item.key}">حذف</button></div>
-            <div class="cart-meta">${item.size ? `<span>المقاس: ${getSizeLabel(item.size)}</span>` : ""}<strong style="color:var(--accent);font-family:Montserrat">${formatPrice(item.price * item.quantity)}</strong></div>
+            <div class="cart-meta">${item.size ? `<span>المقاس: ${item.size}</span>` : ""}<strong style="color:var(--accent);font-family:Montserrat">${formatPrice(item.price * item.quantity)}</strong></div>
             <div class="quantity-controls" style="margin-top:8px;">
               <button type="button" data-action="decrease" data-key="${item.key}">−</button>
               <span style="font-size:0.8rem;">${item.quantity}</span>
@@ -1809,18 +1380,14 @@
       `).join("");
     }
 
-    // إضافة اختيارات المقاس لمنتجات قسم اللوك فقط (عبر أزرار).
-    var sizeLabels = {
-      S: "مقاس صغير small",
-      M: "مقاس وسط meduim",
-      L: "مقاس كبير large",
-      X: "مقاس أكبر x large"
-    };
-
-    function getSizeLabel(size) { return sizeLabels[size] || ""; }
-
+    // ==============================================
+    // نظام المقاسات الجديد (S / M / L / XL / XXL)
+    // ==============================================
     function getStyleProductPrice(button, size) {
-      return Number(button.dataset.price) + (size === "X" ? 30 : 0);
+      let basePrice = Number(button.dataset.price);
+      // إضافة 30 جنيه لو المقاس XL أو XXL
+      let extra = (size === "XL" || size === "XXL") ? 30 : 0;
+      return basePrice + extra;
     }
 
     function updateStyleProductPrice(button, size) {
@@ -1830,14 +1397,15 @@
 
     cart = getSavedCart(); renderCart();
 
-    document.querySelectorAll("#style .add-to-cart").forEach(function (button, index) {
+    // تطبيق المقاسات على منتجات اللوك فقط
+    document.querySelectorAll("#style .add-to-cart").forEach(function (button) {
       var sizeContainer = document.createElement("div");
       sizeContainer.className = "style-size-container";
       
-      var currentSelectedSize = "S";
+      var currentSelectedSize = "M"; // الديفولت M
       button.dataset.selectedSize = currentSelectedSize;
 
-      ["S", "M", "L", "X"].forEach(function (size) {
+      ["S", "M", "L", "XL", "XXL"].forEach(function (size) {
         var sizeBtn = document.createElement("button");
         sizeBtn.type = "button";
         sizeBtn.className = "size-btn";
@@ -1851,8 +1419,8 @@
             
             updateStyleProductPrice(button, size);
 
-            if(size === "X") {
-                showToast("تنويه: مقاس X يزيد 30 جنيهاً عن السعر الأساسي للمنتج.");
+            if(size === "XL" || size === "XXL") {
+                showToast(`تنويه: مقاس ${size} يزيد 30 جنيهاً عن السعر الأساسي للمنتج.`);
             }
         });
         
@@ -1897,14 +1465,14 @@
     document.getElementById("cart-backdrop").addEventListener("click", closeCart);
 
     // ==========================================
-    // نظام عرض مواصفات الأجهزة والتقييمات
+    // نظام عرض المواصفات والتقييمات عبر الفقاعة
     // ==========================================
     var detailsModal = document.getElementById("details-modal");
     var detailsBackdrop = document.getElementById("details-backdrop");
     var detailsTitle = document.getElementById("details-title");
     var detailsBody = document.getElementById("details-body");
     var detailsClose = document.getElementById("details-close");
-    let currentReviewProductId = null; // للاحتفاظ بـ ID المنتج المفتوح
+    let currentReviewProductId = null; 
 
     async function fetchReviews(productId) {
       const reviewsList = document.getElementById("product-reviews-list");
@@ -1918,7 +1486,6 @@
            reviewsData.push(doc.data());
         });
 
-        // ترتيب التقييمات تنازلياً حسب التاريخ
         reviewsData.sort((a, b) => {
           let timeA = a.createdAt ? a.createdAt.toMillis() : 0;
           let timeB = b.createdAt ? b.createdAt.toMillis() : 0;
@@ -1960,11 +1527,15 @@
       currentReviewProductId = productId;
       detailsTitle.textContent = title;
       detailsBody.textContent = content;
+      
+      // إخفاء حقول التعليق والصورة عند فتح النافذة
+      document.getElementById('review-extra-fields').style.display = 'none';
+      document.querySelectorAll('input[name="rating"]').forEach(r => r.checked = false);
+
       detailsModal.classList.add("is-open");
       detailsBackdrop.classList.add("is-open");
       body.classList.add("no-scroll");
       
-      // جلب التقييمات الخاصة بهذا المنتج
       fetchReviews(productId);
     }
     
@@ -1975,11 +1546,11 @@
       currentReviewProductId = null;
     }
 
-    document.querySelectorAll(".info-btn").forEach(btn => {
+    // ربط الحدث بـ فقاعة النجوم بدلاً من الأيقونة القديمة
+    document.querySelectorAll(".rating-bubble").forEach(btn => {
       btn.addEventListener("click", function(e) { 
         e.preventDefault(); 
         e.stopPropagation(); 
-        // استخراج ID المنتج من زر الشراء المجاور
         let card = this.closest(".product-card");
         let addBtn = card ? card.querySelector(".add-to-cart") : null;
         let pId = addBtn ? addBtn.dataset.id : "unknown";
@@ -1990,10 +1561,19 @@
     detailsClose.addEventListener("click", closeDetails);
     detailsBackdrop.addEventListener("click", closeDetails);
 
-    // نظام رفع التقييمات
+    // ==============================================
+    // نظام رفع التقييمات التفاعلي
+    // ==============================================
     const reviewImageInput = document.getElementById("review-image-input");
     const reviewImageName = document.getElementById("review-image-name");
     
+    // إظهار التعليقات ورفع الصور فقط بعد اختيار النجوم
+    document.querySelectorAll('input[name="rating"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+            document.getElementById('review-extra-fields').style.display = 'block';
+        });
+    });
+
     reviewImageInput.addEventListener("change", (e) => {
        if(e.target.files.length > 0) {
            reviewImageName.textContent = e.target.files[0].name;
@@ -2028,7 +1608,6 @@
            let uploadedImageUrl = "";
            if(file) {
                showToast("جاري رفع الصورة... يرجى الانتظار");
-               // إنشاء مسار عشوائي للصورة في Storage
                const storageRef = ref(storage, 'reviews/' + Date.now() + '_' + file.name);
                const uploadTask = await uploadBytesResumable(storageRef, file);
                uploadedImageUrl = await getDownloadURL(storageRef);
@@ -2046,13 +1625,13 @@
 
            showToast("تم نشر تقييمك بنجاح! شكراً لك.");
            
-           // تفريغ النموذج
+           // تفريغ وإخفاء النموذج
            document.querySelectorAll('input[name="rating"]').forEach(r => r.checked = false);
            document.getElementById("review-text-input").value = "";
            reviewImageInput.value = "";
            reviewImageName.textContent = "لم يتم اختيار صورة";
+           document.getElementById('review-extra-fields').style.display = 'none';
 
-           // تحديث قائمة التقييمات
            fetchReviews(currentReviewProductId);
 
        } catch (error) {
@@ -2103,7 +1682,7 @@
           <img src="${item.image}" alt="">
           <div class="checkout-item-details">
             <h4>${item.name}</h4>
-            ${item.size ? `<span style="color: var(--muted); font-size: 0.8rem; display: block;">المقاس: ${getSizeLabel(item.size)}</span>` : ""}
+            ${item.size ? `<span style="color: var(--muted); font-size: 0.8rem; display: block;">المقاس: ${item.size}</span>` : ""}
             <span style="color: var(--muted); font-size: 0.8rem;">الكمية: ${item.quantity}</span>
           </div>
           <div class="checkout-item-price" style="margin-right: auto;">${formatPrice(item.price * item.quantity)}</div>
@@ -2167,7 +1746,7 @@
 
       var orderDetails = "";
       cart.forEach((item, index) => {
-        var sizeDetails = item.size ? ` — المقاس: ${getSizeLabel(item.size)}` : "";
+        var sizeDetails = item.size ? ` — المقاس: ${item.size}` : "";
         orderDetails += `${index + 1}- ${item.name}${sizeDetails} (الكمية: ${item.quantity})\n`;
       });
 
