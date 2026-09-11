@@ -146,7 +146,8 @@
     /* فقاعة التقييمات والمواصفات تحت المنتج */
     .rating-bubble { display: inline-flex; align-items: center; gap: 6px; background: var(--surface-muted); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s ease; width: fit-content; text-decoration: none; }
     .rating-bubble:hover { border-color: #FFD700; background: rgba(255, 215, 0, 0.05); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(255, 215, 0, 0.1); }
-    .rating-bubble .stars { color: #FFD700; font-size: 0.95rem; letter-spacing: 1px; }
+    .rating-bubble .stars { color: #555; font-size: 1.2rem; letter-spacing: 2px; transition: color 0.3s ease; }
+    .rating-bubble:hover .stars { color: #FFD700; }
     .rating-bubble .text { color: var(--muted); font-size: 0.8rem; font-weight: 800; font-family: 'Montserrat', 'Cairo', sans-serif; }
 
     .product-features { margin: 0 0 20px; padding: 0 20px 0 0; color: var(--muted); font-size: .85rem; line-height: 1.6; flex-grow: 1; }
@@ -287,7 +288,7 @@
     /* ==============================================
          مقاسات منتجات قسم اللوك (أزرار بدلاً من قائمة)
     =============================================== */
-    .style-size-container { display: flex; gap: 6px; margin: 0 0 16px; justify-content: center; flex-wrap: wrap;}
+    .style-size-container { display: flex; gap: 6px; margin: 0 0 16px; justify-content: center; flex-wrap: wrap; direction: ltr; }
     .size-btn { min-width: 38px; padding: 0 6px; height: 38px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface-solid); color: var(--ink); font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.85rem; cursor: pointer; transition: all 0.2s ease; display: grid; place-items: center; }
     .size-btn:hover { border-color: var(--accent); background: var(--surface-muted); }
     .size-btn.is-active { background: var(--accent); color: #000; border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 243, 255, 0.25); }
@@ -409,12 +410,11 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / PC</span><span class="price">45000 ج.م</span></div>
               <h3>تجميعة بي سي ألعاب احترافية</h3>
-              <!-- فقاعة التقييمات بدلاً من زر i -->
               <button class="rating-bubble" type="button" data-title="تجميعة بي سي ألعاب احترافية" data-details="Intel Core i5-14400F — 10 Cores — 2.5GHz
 كارت الشاشة: NVIDIA GeForce RTX 4060 — 8GB
 الرام: 16GB DDR5
 التخزين: 1TB NVMe SSD">
-                <span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span>
+                <span class="stars">★★★★★</span> <span class="text">المواصفات والتقييمات</span>
               </button>
               <ul class="product-features">
                 <li>معالج قوي يضمن أداء سلس وثابت.</li>
@@ -434,7 +434,7 @@
               <div class="product-topline"><span class="product-type">GAMORA / LAPTOP</span><span class="price">52000 ج.م</span></div>
               <h3>لابتوب قيمنج MSI</h3>
               <button class="rating-bubble" type="button" data-title="لابتوب قيمنج MSI" data-details="انسخ محتوى ملف laptop msi.txt هنا">
-                <span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span>
+                <span class="stars">★★★★★</span> <span class="text">المواصفات والتقييمات</span>
               </button>
               <ul class="product-features">
                 <li>شاشة بتردد عالي لاستجابة فورية.</li>
@@ -453,7 +453,7 @@
               <div class="product-topline"><span class="product-type">GAMORA / CONSOLE</span><span class="price">25000 ج.م</span></div>
               <h3>بلايستيشن 5 برو / سليم</h3>
               <button class="rating-bubble" type="button" data-title="بلايستيشن 5 برو / سليم" data-details="انسخ محتوى ملف playstation 5 pro slim.txt هنا">
-                <span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span>
+                <span class="stars">★★★★★</span> <span class="text">المواصفات والتقييمات</span>
               </button>
               <ul class="product-features">
                 <li>تجربة الجيل الجديد بدقة 4K حقيقية.</li>
@@ -484,7 +484,7 @@
               <div class="product-topline"><span class="product-type">GAMORA / MOUSE</span><span class="price">750 ج.م</span></div>
               <h3>ماوس قيمنج احترافي</h3>
               <button class="rating-bubble" type="button" data-title="ماوس قيمنج احترافي" data-details="انسخ محتوى ملف mouse.txt هنا">
-                <span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span>
+                <span class="stars">★★★★★</span> <span class="text">المواصفات والتقييمات</span>
               </button>
               <ul class="product-features">
                 <li>مستشعر ضوئي بدقة فائقة.</li>
@@ -504,7 +504,7 @@
               <div class="product-topline"><span class="product-type">GAMORA / KEYBOARD</span><span class="price">1200 ج.م</span></div>
               <h3>كيبورد قيمنج ميكانيكي</h3>
               <button class="rating-bubble" type="button" data-title="كيبورد قيمنج ميكانيكي" data-details="انسخ محتوى ملف keyboard gaming.txt هنا">
-                <span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span>
+                <span class="stars">★★★★★</span> <span class="text">المواصفات والتقييمات</span>
               </button>
               <ul class="product-features">
                 <li>سويتشات ميكانيكية سريعة الاستجابة.</li>
@@ -523,7 +523,7 @@
               <div class="product-topline"><span class="product-type">GAMORA / AUDIO</span><span class="price">850 ج.م</span></div>
               <h3>سماعة ألعاب محيطية</h3>
               <button class="rating-bubble" type="button" data-title="سماعة ألعاب محيطية" data-details="انسخ محتوى ملف headphone.txt هنا">
-                <span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span>
+                <span class="stars">★★★★★</span> <span class="text">المواصفات والتقييمات</span>
               </button>
               <ul class="product-features">
                 <li>صوت محيطي 7.1 دقيق.</li>
@@ -554,7 +554,7 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / OVERWATCH</span><span class="price">240 ج.م</span></div>
               <h3>تيشيرت Genji (زيتوني داكن)</h3>
-              <button class="rating-bubble" type="button" data-title="تيشيرت Genji" data-details="تيشيرت قطني 100% بتصميم Genji من Overwatch"><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
+              <button class="rating-bubble" type="button" data-title="تيشيرت Genji" data-details="تيشيرت قطني 100% بتصميم Genji من Overwatch"><span class="stars">★★★★★</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>تصميم السايبر نينجا مع تفاصيل خضراء مضيئة.</li>
                 <li>لون أخضر عسكري مميز.</li>
@@ -569,7 +569,7 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / ELDEN RING</span><span class="price">350 ج.م</span></div>
               <h3>تيشيرت Malenia (أحمر)</h3>
-              <button class="rating-bubble" type="button" data-title="تيشيرت Malenia" data-details="تصميم فني قوي لشخصية مالينيا. قطن نقي."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
+              <button class="rating-bubble" type="button" data-title="تيشيرت Malenia" data-details="تصميم فني قوي لشخصية مالينيا. قطن نقي."><span class="stars">★★★★★</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>ألوان سينمائية قوية خالية من أي بكسلة.</li>
                 <li>خامة بريميوم لعشاق ألعاب السولز.</li>
@@ -584,7 +584,7 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / FAR CRY</span><span class="price">300 ج.م</span></div>
               <h3>تيشيرت Far Cry 5 (فحمي)</h3>
-              <button class="rating-bubble" type="button" data-title="تيشيرت Far Cry 5" data-details="تيشيرت رمادي فحمي مميز، قماش مريح للاستخدام الشاق."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
+              <button class="rating-bubble" type="button" data-title="تيشيرت Far Cry 5" data-details="تيشيرت رمادي فحمي مميز، قماش مريح للاستخدام الشاق."><span class="stars">★★★★★</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>لون رمادي فحمي (Charcoal) غاية في الأناقة.</li>
                 <li>جودة طباعة استثنائية بوضوح تام للكلمات.</li>
@@ -599,7 +599,7 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / CYBERPUNK</span><span class="price">280 ج.م</span></div>
               <h3>تيشيرت Cyberpunk (أصفر)</h3>
-              <button class="rating-bubble" type="button" data-title="تيشيرت Cyberpunk" data-details="أصفر فاقع، ستايل الأوفر سايز لراحة أكبر."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
+              <button class="rating-bubble" type="button" data-title="تيشيرت Cyberpunk" data-details="أصفر فاقع، ستايل الأوفر سايز لراحة أكبر."><span class="stars">★★★★★</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>تصميم Silverhand مذهل وحيوي.</li>
                 <li>قصة واسعة مريحة (Oversized fit).</li>
@@ -614,7 +614,7 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / LEAGUE OF LEGENDS</span><span class="price">350 ج.م</span></div>
               <h3>تيشيرت Jinx Arcane</h3>
-              <button class="rating-bubble" type="button" data-title="تيشيرت Arcane" data-details="تيشيرت أسود بطباعة Jinx نيون، قطن ممتاز."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
+              <button class="rating-bubble" type="button" data-title="تيشيرت Arcane" data-details="تيشيرت أسود بطباعة Jinx نيون، قطن ممتاز."><span class="stars">★★★★★</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>ألوان نيون قوية متداخلة ببراعة.</li>
                 <li>خامة قطنية فائقة الجودة.</li>
@@ -629,7 +629,7 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / THE WITCHER</span><span class="price">240 ج.م</span></div>
               <h3>تيشيرت White Wolf (أسود)</h3>
-              <button class="rating-bubble" type="button" data-title="تيشيرت The Witcher" data-details="تصميم الناري لجيرالت، جودة خياطة مزدوجة."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
+              <button class="rating-bubble" type="button" data-title="تيشيرت The Witcher" data-details="تصميم الناري لجيرالت، جودة خياطة مزدوجة."><span class="stars">★★★★★</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>تصميم أسطوري لجيرالت من ريفيا.</li>
                 <li>خياطة مزدوجة لمتانة تدوم طويلاً.</li>
@@ -644,7 +644,7 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / CALL OF DUTY</span><span class="price">300 ج.م</span></div>
               <h3>تيشيرت Ghost (أسود)</h3>
-              <button class="rating-bubble" type="button" data-title="تيشيرت Ghost" data-details="طباعة عالية التحمل، أسود داكن."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
+              <button class="rating-bubble" type="button" data-title="تيشيرت Ghost" data-details="طباعة عالية التحمل، أسود داكن."><span class="stars">★★★★★</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>لوك عسكري وتكتيكي لشخصية جوست.</li>
                 <li>طباعة عالية الجودة مقاومة للتشقق.</li>
@@ -659,7 +659,7 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / CALL OF DUTY</span><span class="price">320 ج.م</span></div>
               <h3>تيشيرت Ghost (أبيض)</h3>
-              <button class="rating-bubble" type="button" data-title="تيشيرت Ghost الأبيض" data-details="نسخة التيشيرت الأبيض من شخصية جوست."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
+              <button class="rating-bubble" type="button" data-title="تيشيرت Ghost الأبيض" data-details="نسخة التيشيرت الأبيض من شخصية جوست."><span class="stars">★★★★★</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>تباين رائع للألوان الداكنة على خلفية بيضاء.</li>
                 <li>ستايل شبابي ملفت.</li>
@@ -674,7 +674,7 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / RESIDENT EVIL</span><span class="price">300 ج.م</span></div>
               <h3>تيشيرت Resident Evil (أسود)</h3>
-              <button class="rating-bubble" type="button" data-title="Resident Evil" data-details="طباعة DTF ممتازة، خامة قطنية ضد الوبر."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
+              <button class="rating-bubble" type="button" data-title="Resident Evil" data-details="طباعة DTF ممتازة، خامة قطنية ضد الوبر."><span class="stars">★★★★★</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>ألوان داكنة تتناسب مع أجواء اللعبة.</li>
                 <li>طباعة DTF تتحمل أقصى الظروف.</li>
@@ -689,7 +689,7 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / MARVEL</span><span class="price">220 ج.م</span></div>
               <h3>تيشيرت freestyle-man (أبيض)</h3>
-              <button class="rating-bubble" type="button" data-title="Freestyle Man" data-details="تيشيرت ديناميكي بخامة ناعمة وصيفية."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
+              <button class="rating-bubble" type="button" data-title="Freestyle Man" data-details="تيشيرت ديناميكي بخامة ناعمة وصيفية."><span class="stars">★★★★★</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>حركة ديناميكية وتصميم ملئ بالطاقة.</li>
                 <li>ألوان حمراء وزرقاء زاهية.</li>
@@ -704,7 +704,7 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / UNCHARTED</span><span class="price">220 ج.م</span></div>
               <h3>تيشيرت Uncharted (أسود)</h3>
-              <button class="rating-bubble" type="button" data-title="Uncharted" data-details="تصميم ناثان دريك، أسود، قطن ممتاز."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
+              <button class="rating-bubble" type="button" data-title="Uncharted" data-details="تصميم ناثان دريك، أسود، قطن ممتاز."><span class="stars">★★★★★</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>لوك المغامرات لشخصية ناثان دريك.</li>
                 <li>قماش متين يتحمل الاستخدام.</li>
@@ -719,7 +719,7 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / PERSONA 5</span><span class="price">300 ج.م</span></div>
               <h3>تيشيرت Joker (أبيض)</h3>
-              <button class="rating-bubble" type="button" data-title="Persona 5 Joker" data-details="ألوان أنمي رائعة، رقبة مريحة جداً."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
+              <button class="rating-bubble" type="button" data-title="Persona 5 Joker" data-details="ألوان أنمي رائعة، رقبة مريحة جداً."><span class="stars">★★★★★</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>ستايل أنمي مميز بألوان حمراء وسوداء.</li>
                 <li>طوق ياقة مريح لا يسبب الانزعاج.</li>
@@ -734,7 +734,7 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / VALORANT</span><span class="price">350 ج.م</span></div>
               <h3>تيشيرت Omen - 1 (أبيض)</h3>
-              <button class="rating-bubble" type="button" data-title="Omen Valorant" data-details="تصميم أبيض بألوان بنفسجية، قطن صافي."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
+              <button class="rating-bubble" type="button" data-title="Omen Valorant" data-details="تصميم أبيض بألوان بنفسجية، قطن صافي."><span class="stars">★★★★★</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>تصميم غامض بألوان بنفسجية داكنة.</li>
                 <li>خامة قطنية صافية.</li>
@@ -749,7 +749,7 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / VALORANT</span><span class="price">350 ج.م</span></div>
               <h3>تيشيرت Omen - 2 (أبيض)</h3>
-              <button class="rating-bubble" type="button" data-title="Omen Valorant 2" data-details="زاوية أخرى لشخصية أومن، تصميم مميز."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
+              <button class="rating-bubble" type="button" data-title="Omen Valorant 2" data-details="زاوية أخرى لشخصية أومن، تصميم مميز."><span class="stars">★★★★★</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>توزيع لوني رائع يجذب العين.</li>
                 <li>ألوان ثابتة زاهية.</li>
@@ -764,7 +764,7 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / VALORANT</span><span class="price">350 ج.م</span></div>
               <h3>تيشيرت Jett (أسود)</h3>
-              <button class="rating-bubble" type="button" data-title="Jett Valorant" data-details="تيشيرت أسود عميق، خياطة متينة."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
+              <button class="rating-bubble" type="button" data-title="Jett Valorant" data-details="تيشيرت أسود عميق، خياطة متينة."><span class="stars">★★★★★</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>أسود عميق لمحبي Jett.</li>
                 <li>قصة حديثة للجيمرز.</li>
@@ -779,7 +779,7 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / VALORANT</span><span class="price">350 ج.م</span></div>
               <h3>تيشيرت Raze (أبيض)</h3>
-              <button class="rating-bubble" type="button" data-title="Raze Valorant" data-details="خفيف ومريح جداً، تفاصيل برتقالية."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
+              <button class="rating-bubble" type="button" data-title="Raze Valorant" data-details="خفيف ومريح جداً، تفاصيل برتقالية."><span class="stars">★★★★★</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>تصميم ناصع بتفاصيل برتقالية.</li>
                 <li>يجمع بين البساطة وقوة التفاصيل.</li>
@@ -794,7 +794,7 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / MORTAL KOMBAT</span><span class="price">250 ج.م</span></div>
               <h3>تيشيرت Sub-Zero (أسود)</h3>
-              <button class="rating-bubble" type="button" data-title="Mortal Kombat" data-details="تصميم Sub-Zero ثلجي مضيء، جودة عالية."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
+              <button class="rating-bubble" type="button" data-title="Mortal Kombat" data-details="تصميم Sub-Zero ثلجي مضيء، جودة عالية."><span class="stars">★★★★★</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>تفاصيل ثلجية مضيئة على خلفية سوداء.</li>
                 <li>ستايل قوي لعشاق ألعاب القتال.</li>
@@ -809,7 +809,7 @@
             <div class="product-body">
               <div class="product-topline"><span class="product-type">GAMORA / TEKKEN</span><span class="price">250 ج.م</span></div>
               <h3>تيشيرت Tekken (أسود)</h3>
-              <button class="rating-bubble" type="button" data-title="Tekken" data-details="تيشيرت أسود مقاوم للانكماش، طباعة متينة."><span class="stars">⭐⭐⭐⭐⭐</span> <span class="text">المواصفات والتقييمات</span></button>
+              <button class="rating-bubble" type="button" data-title="Tekken" data-details="تيشيرت أسود مقاوم للانكماش، طباعة متينة."><span class="stars">★★★★★</span> <span class="text">المواصفات والتقييمات</span></button>
               <ul class="product-features">
                 <li>ألوان حمراء متداخلة مع الأسود لستايل جريء.</li>
                 <li>طباعة متينة لا تتشقق.</li>
