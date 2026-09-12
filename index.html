@@ -1249,12 +1249,6 @@
         <div id="review-extra-fields" style="display: none; margin-top: 15px; animation: fadeIn 0.3s ease;">
             <textarea id="review-text-input" placeholder="إيه رأيك في المنتج؟ (اكتب تعليقك هنا)" rows="3" style="width: 100%; background: var(--surface-solid); border: 1px solid var(--line); color: var(--ink); padding: 10px; border-radius: 8px; font-family: inherit; margin-bottom: 15px; resize: vertical;"></textarea>
             
-            <div class="upload-container" style="display: flex; gap: 10px; align-items: center; margin-bottom: 15px;">
-              <label for="review-image-input" class="upload-label" style="background: var(--surface); border: 1px solid var(--line); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: bold; transition: all 0.2s;">📷 إرفاق صورة (اختياري)</label>
-              <input type="file" id="review-image-input" accept="image/png, image/jpeg, image/webp" hidden />
-              <span id="review-image-name" style="font-size: 0.8rem; color: var(--muted);">لم يتم اختيار صورة</span>
-            </div>
-            
             <button id="submit-review-btn" class="pay-now-btn" style="margin-top:0; padding: 12px; font-size: 1rem;">نشر التقييم</button>
         </div>
       </div>
@@ -1471,7 +1465,8 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
     import { getFirestore, doc, setDoc, getDoc, collection, addDoc, query, where, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
+    
+    // تم إزالة أكواد Storage بالكامل بناءً على طلبك
 
     const firebaseConfig = {
       apiKey: "AIzaSyBEtrijGax-o4mPQk34UX3gVYm81WEpD3I",
@@ -1485,7 +1480,6 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
-    const storage = getStorage(app);
 
     var root = document.documentElement;
     var body = document.body;
@@ -1892,6 +1886,7 @@
         reviewsData.forEach(review => {
           let dateStr = review.createdAt ? new Date(review.createdAt.toMillis()).toLocaleDateString('ar-EG') : '';
           let stars = '⭐'.repeat(review.rating);
+          // نعرض الصورة فقط إن كانت موجودة في التقييمات القديمة
           let imgHtml = review.imageUrl ? `<img src="${review.imageUrl}" class="review-card-img" onclick="window.open(this.src)" title="اضغط لتكبير الصورة">` : '';
           
           html += `
@@ -1919,7 +1914,7 @@
       detailsTitle.textContent = title;
       detailsBody.textContent = content;
       
-      // إخفاء حقول التعليق والصورة عند فتح النافذة
+      // إخفاء حقل التعليق عند فتح النافذة
       document.getElementById('review-extra-fields').style.display = 'none';
       document.querySelectorAll('input[name="rating"]').forEach(r => r.checked = false);
 
@@ -1937,7 +1932,6 @@
       currentReviewProductId = null;
     }
 
-    // ربط الحدث بـ فقاعة النجوم بدلاً من الأيقونة القديمة
     document.querySelectorAll(".rating-bubble").forEach(btn => {
       btn.addEventListener("click", function(e) { 
         e.preventDefault(); 
@@ -1953,24 +1947,14 @@
     detailsBackdrop.addEventListener("click", closeDetails);
 
     // ==============================================
-    // نظام رفع التقييمات التفاعلي
+    // نظام رفع التقييمات التفاعلي (بدون صور)
     // ==============================================
-    const reviewImageInput = document.getElementById("review-image-input");
-    const reviewImageName = document.getElementById("review-image-name");
     
-    // إظهار التعليقات ورفع الصور فقط بعد اختيار النجوم
+    // إظهار التعليق فقط بعد اختيار النجوم
     document.querySelectorAll('input[name="rating"]').forEach(radio => {
         radio.addEventListener('change', () => {
             document.getElementById('review-extra-fields').style.display = 'block';
         });
-    });
-
-    reviewImageInput.addEventListener("change", (e) => {
-       if(e.target.files.length > 0) {
-           reviewImageName.textContent = e.target.files[0].name;
-       } else {
-           reviewImageName.textContent = "لم يتم اختيار صورة";
-       }
     });
 
     document.getElementById("submit-review-btn").addEventListener("click", async () => {
@@ -1984,10 +1968,9 @@
 
        const ratingValue = parseInt(ratingRadio.value);
        const reviewText = document.getElementById("review-text-input").value.trim();
-       const file = reviewImageInput.files[0];
 
-       if(!reviewText && !file) {
-           showToast("يرجى كتابة تعليق أو إرفاق صورة مع التقييم.");
+       if(!reviewText) {
+           showToast("يرجى كتابة تعليق مع التقييم بالنجوم.");
            return;
        }
 
@@ -1996,21 +1979,12 @@
        submitBtn.textContent = "جاري نشر التقييم...";
 
        try {
-           let uploadedImageUrl = "";
-           if(file) {
-               showToast("جاري رفع الصورة... يرجى الانتظار");
-               const storageRef = ref(storage, 'reviews/' + Date.now() + '_' + file.name);
-               const uploadTask = await uploadBytes(storageRef, file);
-               uploadedImageUrl = await getDownloadURL(storageRef);
-           }
-
            await addDoc(collection(db, "reviews"), {
                productId: currentReviewProductId,
                userId: currentFirebaseUser.uid,
                userName: currentUserName || "مستخدم",
                rating: ratingValue,
                text: reviewText,
-               imageUrl: uploadedImageUrl,
                createdAt: serverTimestamp()
            });
 
@@ -2019,8 +1993,6 @@
            // تفريغ وإخفاء النموذج
            document.querySelectorAll('input[name="rating"]').forEach(r => r.checked = false);
            document.getElementById("review-text-input").value = "";
-           reviewImageInput.value = "";
-           reviewImageName.textContent = "لم يتم اختيار صورة";
            document.getElementById('review-extra-fields').style.display = 'none';
 
            fetchReviews(currentReviewProductId);
