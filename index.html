@@ -1796,7 +1796,7 @@
       var currentSelectedSize = "M"; // الديفولت M
       button.dataset.selectedSize = currentSelectedSize;
 
-      ["S", "M", "L", "XL", "XXL"].forEach(function (size) {
+      ["XXL", "XL", "L", "M", "S"].forEach(function (size) {
         var sizeBtn = document.createElement("button");
         sizeBtn.type = "button";
         sizeBtn.className = "size-btn";
@@ -2000,7 +2000,7 @@
            if(file) {
                showToast("جاري رفع الصورة... يرجى الانتظار");
                const storageRef = ref(storage, 'reviews/' + Date.now() + '_' + file.name);
-               const uploadTask = await uploadBytesResumable(storageRef, file);
+               const uploadTask = await uploadBytes(storageRef, file);
                uploadedImageUrl = await getDownloadURL(storageRef);
            }
 
