@@ -14,36 +14,43 @@
     * { box-sizing: border-box; font-family: 'Cairo', sans-serif; }
     body { background: var(--bg); color: var(--ink); margin: 0; display: flex; min-height: 100vh; }
     
-    /* Login Screen */
     #login-screen { position: fixed; inset: 0; background: var(--bg); display: flex; align-items: center; justify-content: center; z-index: 1000; }
     .login-box { background: var(--surface-solid); padding: 40px; border-radius: 24px; border: 1px solid var(--accent); box-shadow: 0 10px 40px rgba(0,243,255,0.1); width: 100%; max-width: 400px; text-align: center; }
     .login-box h1 { font-family: 'Montserrat', sans-serif; color: var(--accent); letter-spacing: 2px; margin-bottom: 30px; }
     .form-input { width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface-muted); color: var(--ink); font-size: 1rem; }
+    textarea.form-input { resize: vertical; min-height: 80px; }
     .form-input:focus { border-color: var(--accent); outline: none; }
     .btn { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--accent), var(--accent-strong)); color: #000; font-weight: 900; font-size: 1.1rem; border: none; border-radius: 12px; cursor: pointer; transition: 0.3s; }
     .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,243,255,0.3); }
 
-    /* Dashboard Layout */
     #dashboard { display: none; width: 100%; flex-direction: column; }
     .header { padding: 20px 40px; background: var(--surface-solid); border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
     .header h2 { margin: 0; color: var(--accent); font-family: 'Montserrat'; }
-    .logout-btn { background: transparent; color: var(--danger); border: 1px solid var(--danger); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+    .logout-btn { background: transparent; color: var(--danger); border: 1px solid var(--danger); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.2s; }
+    .logout-btn:hover { background: var(--danger); color: white; }
     
     .container { padding: 40px; display: grid; grid-template-columns: 1fr 2fr; gap: 30px; }
     .card { background: var(--surface-solid); border: 1px solid var(--line); border-radius: 20px; padding: 25px; }
-    .card h3 { margin-top: 0; color: var(--accent); border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+    .card h3 { margin-top: 0; color: var(--accent); border-bottom: 1px solid var(--line); padding-bottom: 10px; margin-bottom: 20px; }
     
-    label { display: block; margin-bottom: 8px; color: var(--muted); font-size: 0.9rem; }
-    .product-list { max-height: 500px; overflow-y: auto; }
-    .product-item { display: flex; align-items: center; justify-content: space-between; background: var(--surface-muted); padding: 15px; border-radius: 12px; margin-bottom: 10px; border: 1px solid var(--line); }
-    .product-info h4 { margin: 0 0 5px 0; }
-    .product-info span { color: var(--accent); font-weight: bold; }
-    .delete-btn { background: var(--danger); color: white; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+    label { display: block; margin-bottom: 8px; color: var(--muted); font-size: 0.9rem; font-weight: bold; }
+    .product-list { max-height: 700px; overflow-y: auto; padding-right: 10px; }
+    
+    .product-list::-webkit-scrollbar { width: 6px; }
+    .product-list::-webkit-scrollbar-thumb { background: var(--accent-strong); border-radius: 10px; }
+
+    .product-item { display: flex; align-items: center; justify-content: space-between; background: var(--surface-muted); padding: 15px; border-radius: 12px; margin-bottom: 12px; border: 1px solid var(--line); transition: 0.2s; }
+    .product-item:hover { border-color: var(--accent); }
+    .product-info-wrapper { display: flex; align-items: center; gap: 15px; }
+    .product-thumb { width: 60px; height: 60px; object-fit: contain; background: var(--surface-solid); border-radius: 10px; padding: 5px; border: 1px solid var(--line); }
+    .product-info h4 { margin: 0 0 5px 0; font-size: 1.1rem; }
+    .product-info span { color: var(--accent); font-weight: bold; font-family: 'Montserrat'; }
+    .delete-btn { background: var(--danger); color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.2s; }
+    .delete-btn:hover { transform: scale(1.05); }
   </style>
 </head>
 <body>
 
-  <!-- شاشة تسجيل الدخول -->
   <div id="login-screen">
     <div class="login-box">
       <h1>GAMORA ADMIN</h1>
@@ -54,7 +61,6 @@
     </div>
   </div>
 
-  <!-- لوحة التحكم -->
   <div id="dashboard">
     <header class="header">
       <h2>GAMORA CONTROL PANEL</h2>
@@ -62,31 +68,36 @@
     </header>
     
     <div class="container">
-      <!-- نموذج إضافة منتج -->
       <div class="card">
         <h3>إضافة منتج جديد</h3>
         <form id="add-product-form">
+          
           <label>اسم المنتج</label>
-          <input type="text" id="p-name" class="form-input" required>
+          <input type="text" id="p-name" class="form-input" placeholder="مثال: تجميعة بي سي احترافية" required>
           
           <label>القسم</label>
           <select id="p-category" class="form-input">
-            <option value="devices">الأجهزة</option>
-            <option value="accessories">الاكسسوارات</option>
-            <option value="style">اللوك (ملابس)</option>
+            <option value="devices">الأجهزة (Devices)</option>
+            <option value="accessories">الاكسسوارات (Accessories)</option>
+            <option value="style">اللوك وملابس الجيمنج (Style)</option>
           </select>
 
           <label>السعر (بالجنيه)</label>
-          <input type="number" id="p-price" class="form-input" required>
+          <input type="number" id="p-price" class="form-input" placeholder="مثال: 45000" required>
 
-          <label>رابط الصورة (مسار الصورة)</label>
-          <input type="text" id="p-image" class="form-input" placeholder="مثال: device/pc.png" required>
+          <label>رابط الصورة المباشر (URL)</label>
+          <input type="url" id="p-image-url" class="form-input" placeholder="مثال: https://i.postimg.cc/xxx/image.png" required>
 
-          <button type="submit" class="btn" style="margin-top: 15px;">إضافة للموقع</button>
+          <label>تفاصيل المواصفات (تظهر في فقاعة التقييم)</label>
+          <textarea id="p-details" class="form-input" placeholder="مثال: معالج Core i5، كارت شاشة RTX 4060، رامات 16 جيجا..." required></textarea>
+
+          <label>مميزات المنتج (نقاط رئيسية - افصل بين كل نقطة بسطر جديد)</label>
+          <textarea id="p-features" class="form-input" rows="5" placeholder="ميزة 1&#10;ميزة 2&#10;ميزة 3" required></textarea>
+
+          <button type="submit" class="btn" id="submit-btn" style="margin-top: 10px;">إضافة للموقع</button>
         </form>
       </div>
 
-      <!-- قائمة المنتجات -->
       <div class="card">
         <h3>إدارة المنتجات الحالية</h3>
         <div class="product-list" id="products-container">
@@ -96,12 +107,10 @@
     </div>
   </div>
 
-  <!-- استدعاء Firebase -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-    // إعدادات قاعدة البيانات الخاصة بك
     const firebaseConfig = {
       apiKey: "AIzaSyBEtrijGax-o4mPQk34UX3gVYm81WEpD3I",
       authDomain: "gamora-d47d9.firebaseapp.com",
@@ -114,20 +123,17 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // التحقق من حالة تسجيل الدخول المحفوظة
     if (localStorage.getItem('gamora_admin_auth') === 'true') {
       document.getElementById('login-screen').style.display = 'none';
       document.getElementById('dashboard').style.display = 'flex';
       fetchProducts();
     }
 
-    // دالة تسجيل الدخول (نظام حماية الواجهة)
     window.checkLogin = function() {
       const user = document.getElementById('admin-user').value.trim();
       const pass = document.getElementById('admin-pass').value;
       const errorMsg = document.getElementById('login-error');
 
-      // التحقق من الحسابين الذين قمت بتحديدهم
       const isValidAdmin1 = (user === 'ADMIN' && pass === 'passWORDKAreem1996');
       const isValidAdmin2 = (user === 'ADMIN' && pass === 'HussienFekry800700');
 
@@ -141,71 +147,92 @@
       }
     }
 
-    // تسجيل الخروج
     window.logout = function() {
       localStorage.removeItem('gamora_admin_auth');
       window.location.reload();
     }
 
-    // إضافة منتج لقاعدة البيانات (Firebase Firestore)
+    // إضافة منتج لقاعدة البيانات (بدون رفع صور لفايربيز)
     document.getElementById('add-product-form').addEventListener('submit', async function(e) {
       e.preventDefault();
-      const btn = this.querySelector('button');
-      btn.textContent = 'جاري الإضافة...';
+      const btn = document.getElementById('submit-btn');
+      
+      btn.textContent = 'جاري الإضافة... يرجى الانتظار';
+      btn.disabled = true;
       
       try {
+        const featuresText = document.getElementById('p-features').value;
+        const featuresArray = featuresText.split('\n').filter(line => line.trim() !== '');
+
         await addDoc(collection(db, "products"), {
           name: document.getElementById('p-name').value,
           category: document.getElementById('p-category').value,
           price: Number(document.getElementById('p-price').value),
-          image: document.getElementById('p-image').value,
+          details: document.getElementById('p-details').value,
+          features: featuresArray,
+          image: document.getElementById('p-image-url').value, // سحب الرابط المباشر
           createdAt: new Date()
         });
+
         alert('تمت إضافة المنتج بنجاح!');
         this.reset();
         fetchProducts();
+
       } catch (error) {
-        alert('حدث خطأ أثناء الإضافة: ' + error.message);
+        alert('حدث خطأ أثناء الإضافة:\n' + error.message);
       } finally {
         btn.textContent = 'إضافة للموقع';
+        btn.disabled = false;
       }
     });
 
-    // جلب المنتجات وعرضها
     async function fetchProducts() {
       const container = document.getElementById('products-container');
-      container.innerHTML = '';
+      container.innerHTML = '<p style="color: var(--muted); text-align: center;">جاري تحميل المنتجات...</p>';
+      
       try {
-        const querySnapshot = await getDocs(collection(db, "products"));
+        const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
+        const querySnapshot = await getDocs(q);
+        
+        container.innerHTML = '';
+        
         if(querySnapshot.empty) {
           container.innerHTML = '<p style="text-align:center;">لا توجد منتجات مضافة من لوحة التحكم حتى الآن.</p>';
           return;
         }
+
         querySnapshot.forEach((docSnap) => {
           const data = docSnap.data();
+          let catName = data.category === 'devices' ? 'الأجهزة' : data.category === 'accessories' ? 'الاكسسوارات' : 'اللوك';
+          
+          // تأمين عرض الصورة في حال الرابط كان مكسور
+          let imgSrc = data.image ? data.image : 'https://via.placeholder.com/60';
+
           container.innerHTML += `
             <div class="product-item">
-              <div class="product-info">
-                <h4>${data.name}</h4>
-                <span>${data.price} ج.م</span> - <small style="color:#b8afc7">${data.category}</small>
+              <div class="product-info-wrapper">
+                <img src="${imgSrc}" class="product-thumb" alt="${data.name}" onerror="this.src='https://via.placeholder.com/60'">
+                <div class="product-info">
+                  <h4>${data.name}</h4>
+                  <span>${data.price} ج.م</span> - <small style="color:#b8afc7">${catName}</small>
+                </div>
               </div>
               <button class="delete-btn" onclick="deleteProduct('${docSnap.id}')">حذف</button>
             </div>
           `;
         });
       } catch (error) {
-        console.error("Error fetching products:", error);
+        container.innerHTML = `<p style="color: var(--danger); text-align: center; font-weight: bold;">حدث خطأ في الاتصال:<br>${error.message}</p>`;
       }
     }
 
-    // دالة حذف المنتج
     window.deleteProduct = async function(id) {
       if(confirm('هل أنت متأكد من حذف هذا المنتج نهائياً؟')) {
         try {
           await deleteDoc(doc(db, "products", id));
-          fetchProducts();
+          fetchProducts(); 
         } catch (error) {
-          alert('حدث خطأ أثناء الحذف.');
+          alert('حدث خطأ أثناء الحذف:\n' + error.message);
         }
       }
     }
