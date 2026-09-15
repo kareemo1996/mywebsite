@@ -2151,5 +2151,28 @@
     });
 
   </script>
+<!-- حط الكود ده في آخر ملف index.html قبل الـ body -->
+<script type="module">
+  // 1. استدعاء أدوات فايربيز من الروابط المباشرة
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js"; // ده سطر استدعاء قاعدة البيانات
+
+  // 2. كود الإعدادات بتاعك إنت
+  const firebaseConfig = {
+    apiKey: "AIzaSyBEtrijGax-o4mPQk34UX3gVYm81WEpD3I",
+    authDomain: "gamora-d47d9.firebaseapp.com",
+    databaseURL: "https://gamora-d47d9-default-rtdb.firebaseio.com",
+    projectId: "gamora-d47d9",
+    storageBucket: "gamora-d47d9.firebasestorage.app",
+    messagingSenderId: "349051835313",
+    appId: "1:349051835313:web:9f0465f61aa68af7d4a390"
+  };
+
+  // 3. تشغيل المشروع وقاعدة البيانات
+  const app = initializeApp(firebaseConfig);
+  window.db = getFirestore(app); // ده سطر تشغيل الداتا بيز (خليناها window عشان نعرف نستخدمها بسهولة)
+
+  console.log("تم ربط قاعدة البيانات بنجاح يا وحش!");
+</script>
 </body>
 </html>
