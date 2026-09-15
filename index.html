@@ -2151,66 +2151,123 @@
     });
 
   </script>
-<!-- المكان اللي المنتجات هتترص فيه -->
-<div id="products-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px;">
-    <!-- المنتجات هتظهر هنا تلقائياً -->
-    <p>جاري تحميل أحدث المنتجات...</p>
-</div>
+<!-- قسم المنتجات المضافة من جوجل شيت (بتصميم المتجر الأصلي) -->
+<section class="shop-section" id="sheet-products-section">
+  <div class="shell">
+    <div class="section-heading">
+      <div><p class="section-kicker">DYNAMIC STORE / 04</p><h2>منتجات لوحة التحكم</h2></div>
+      <p>تتم إدارتها وتحديثها مباشرة من جوجل شيت بكل سهولة.</p>
+    </div>
+    <div class="products-grid" id="products-container">
+      <!-- سيتم تحميل المنتجات هنا برمجياً بالتصميم الأصلي -->
+      <p style="color: var(--muted);">جاري تحميل أحدث المنتجات...</p>
+    </div>
+  </div>
+</section>
 
-<!-- كود سحب المنتجات من جوجل شيت -->
+<!-- كود سحب وعرض المنتجات بالتصميم الاحترافي -->
 <script>
-    // الرابط السحري بتاعك
     const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRpHg7ldts1yu5ZK7oB4mOsbFgDii8JDpSUce_02Kc6S4AlBCmcuh736xFnjV-Eh46ORdBa0zH4u88Q/pub?output=csv";
 
-    async function loadProducts() {
+    async function loadSheetProducts() {
         try {
             const response = await fetch(sheetUrl);
             const data = await response.text();
 
-            // فصل الداتا لسطور وتجاهل أول سطر (اللي فيه العناوين: اسم المنتج، السعر، الخ)
             const rows = data.split('\n').slice(1);
             const container = document.getElementById('products-container');
-            
-            // تفريغ كلمة "جاري التحميل"
             container.innerHTML = ''; 
 
-            rows.forEach(row => {
-                // لو السطر فاضي في الشيت، تجاهله
+            if (rows.length === 0 || (rows.length === 1 && rows[0].trim() === "")) {
+                container.innerHTML = '<p style="color: var(--muted);">لا توجد منتجات مضافة في الشيت حتى الآن.</p>';
+                return;
+            }
+
+            rows.forEach((row, index) => {
                 if (row.trim() === '') return; 
                 
-                // تقسيم السطر لعواميد
                 const cols = row.split(',');
+                const productName = cols[0] ? cols[0].trim() : '';
+                const productPrice = cols[1] ? cols[1].trim() : '0';
+                const productSpecs = cols[2] ? cols[2].trim() : '';
+                const productImg = cols[3] ? cols[3].trim() : '';
 
-                const productName = cols[0];
-                const productPrice = cols[1];
-                const productSpecs = cols[2];
-                const productImg = cols[3];
+                if (!productName) return;
 
-                // تصميم كارت المنتج (تقدر تغير ألوانه وتصميمه براحتك)
-                const productCard = `
-                    <div style="background: #1e1e1e; color: white; border-radius: 10px; padding: 15px; width: 280px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                        <img src="${productImg}" alt="${productName}" style="width: 100%; border-radius: 5px; height: 180px; object-fit: cover;">
-                        <h3 style="margin-top: 15px; color: #00e5ff;">${productName}</h3>
-                        <p style="font-size: 14px; color: #ccc;">${productSpecs}</p>
-                        <h2 style="color: #ff4757; margin: 10px 0;">${productPrice} EGP</h2>
-                        <button style="background: #00e5ff; color: #000; font-weight: bold; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; width: 100%;">
-                            شراء الآن
-                        </button>
+                // بناء الكارد بنفس الهيكل والكلاسات الأصلية للموقع
+                const card = document.createElement('article');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div class="product-media">
+                      <span class="product-badge">جديد وحصري</span>
+                      <img src="${productImg}" alt="${productName}" loading="lazy">
+                    </div>
+                    <div class="product-body">
+                      <div class="product-topline">
+                        <span class="product-type">GAMORA / STORE</span>
+                        <span class="price">${productPrice} ج.م</span>
+                      </div>
+                      <h3>${productName}</h3>
+                      <button class="rating-bubble rating-bubble-dynamic" type="button" data-title="${productName}" data-details="${productSpecs}">
+                        <span class="stars-icon"></span> <span class="text">تقييم ومواصفات</span>
+                      </button>
+                      <ul class="product-features">
+                        <li>${productSpecs}</li>
+                      </ul>
+                      <button class="add-to-cart add-to-cart-dynamic" 
+                              data-id="sheet-item-${index}" 
+                              data-name="${productName}" 
+                              data-price="${productPrice}" 
+                              data-image="${productImg}">
+                        أضف إلى السلة
+                      </button>
                     </div>
                 `;
                 
-                // إضافة الكارت لصفحة الموقع
-                container.innerHTML += productCard;
+                container.appendChild(card);
             });
 
+            // ربط أحداث الإضافة للسلة وعرض المواصفات للعناصر الجديدة
+            attachDynamicEvents();
+
         } catch (error) {
-            console.error('حصل خطأ في تحميل المنتجات:', error);
-            document.getElementById('products-container').innerHTML = '<p>عفواً، حدث خطأ في تحميل المنتجات.</p>';
+            console.error('خطأ في تحميل المنتجات:', error);
+            document.getElementById('products-container').innerHTML = '<p style="color: #e64e64;">عفواً، حدث خطأ في تحميل المنتجات.</p>';
         }
     }
 
-    // تشغيل الكود فوراً أول ما الصفحة تفتح
-    loadProducts();
+    function attachDynamicEvents() {
+        // ربط زر أضف إلى السلة
+        document.querySelectorAll(".add-to-cart-dynamic").forEach(function (button) {
+            button.addEventListener("click", function () {
+                var item = {
+                    id: button.dataset.id,
+                    name: button.dataset.name,
+                    price: Number(button.dataset.price),
+                    image: button.dataset.image,
+                    key: button.dataset.id
+                };
+                var existing = cart.find(ci => ci.key === item.key);
+                if (existing) { existing.quantity += 1; } else { item.quantity = 1; cart.push(item); }
+                saveCart(); 
+                renderCart(); 
+                showToast("تمت إضافة المنتج إلى السلة.");
+            });
+        });
+
+        // ربط فقاعة التقييمات والمواصفات
+        document.querySelectorAll(".rating-bubble-dynamic").forEach(btn => {
+            btn.addEventListener("click", function(e) { 
+                e.preventDefault(); 
+                e.stopPropagation(); 
+                openDetails(this.dataset.title, this.dataset.title, this.dataset.details); 
+            });
+        });
+    }
+
+    // تشغيل الدالة فور تحميل الصفحة
+    loadSheetProducts();
+</script>
 </script>
 </script>
 </body>
