@@ -2151,28 +2151,67 @@
     });
 
   </script>
-<!-- حط الكود ده في آخر ملف index.html قبل الـ body -->
-<script type="module">
-  // 1. استدعاء أدوات فايربيز من الروابط المباشرة
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js"; // ده سطر استدعاء قاعدة البيانات
+<!-- المكان اللي المنتجات هتترص فيه -->
+<div id="products-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px;">
+    <!-- المنتجات هتظهر هنا تلقائياً -->
+    <p>جاري تحميل أحدث المنتجات...</p>
+</div>
 
-  // 2. كود الإعدادات بتاعك إنت
-  const firebaseConfig = {
-    apiKey: "AIzaSyBEtrijGax-o4mPQk34UX3gVYm81WEpD3I",
-    authDomain: "gamora-d47d9.firebaseapp.com",
-    databaseURL: "https://gamora-d47d9-default-rtdb.firebaseio.com",
-    projectId: "gamora-d47d9",
-    storageBucket: "gamora-d47d9.firebasestorage.app",
-    messagingSenderId: "349051835313",
-    appId: "1:349051835313:web:9f0465f61aa68af7d4a390"
-  };
+<!-- كود سحب المنتجات من جوجل شيت -->
+<script>
+    // الرابط السحري بتاعك
+    const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRpHg7ldts1yu5ZK7oB4mOsbFgDii8JDpSUce_02Kc6S4AlBCmcuh736xFnjV-Eh46ORdBa0zH4u88Q/pub?output=csv";
 
-  // 3. تشغيل المشروع وقاعدة البيانات
-  const app = initializeApp(firebaseConfig);
-  window.db = getFirestore(app); // ده سطر تشغيل الداتا بيز (خليناها window عشان نعرف نستخدمها بسهولة)
+    async function loadProducts() {
+        try {
+            const response = await fetch(sheetUrl);
+            const data = await response.text();
 
-  console.log("تم ربط قاعدة البيانات بنجاح يا وحش!");
+            // فصل الداتا لسطور وتجاهل أول سطر (اللي فيه العناوين: اسم المنتج، السعر، الخ)
+            const rows = data.split('\n').slice(1);
+            const container = document.getElementById('products-container');
+            
+            // تفريغ كلمة "جاري التحميل"
+            container.innerHTML = ''; 
+
+            rows.forEach(row => {
+                // لو السطر فاضي في الشيت، تجاهله
+                if (row.trim() === '') return; 
+                
+                // تقسيم السطر لعواميد
+                const cols = row.split(',');
+
+                const productName = cols[0];
+                const productPrice = cols[1];
+                const productSpecs = cols[2];
+                const productImg = cols[3];
+
+                // تصميم كارت المنتج (تقدر تغير ألوانه وتصميمه براحتك)
+                const productCard = `
+                    <div style="background: #1e1e1e; color: white; border-radius: 10px; padding: 15px; width: 280px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                        <img src="${productImg}" alt="${productName}" style="width: 100%; border-radius: 5px; height: 180px; object-fit: cover;">
+                        <h3 style="margin-top: 15px; color: #00e5ff;">${productName}</h3>
+                        <p style="font-size: 14px; color: #ccc;">${productSpecs}</p>
+                        <h2 style="color: #ff4757; margin: 10px 0;">${productPrice} EGP</h2>
+                        <button style="background: #00e5ff; color: #000; font-weight: bold; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; width: 100%;">
+                            شراء الآن
+                        </button>
+                    </div>
+                `;
+                
+                // إضافة الكارت لصفحة الموقع
+                container.innerHTML += productCard;
+            });
+
+        } catch (error) {
+            console.error('حصل خطأ في تحميل المنتجات:', error);
+            document.getElementById('products-container').innerHTML = '<p>عفواً، حدث خطأ في تحميل المنتجات.</p>';
+        }
+    }
+
+    // تشغيل الكود فوراً أول ما الصفحة تفتح
+    loadProducts();
+</script>
 </script>
 </body>
 </html>
