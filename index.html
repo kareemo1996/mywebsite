@@ -135,7 +135,17 @@
     .product-media { position: relative; display: grid; min-height: 310px; place-items: center; overflow: hidden; padding: 22px; background: radial-gradient(circle at 50% 31%, rgba(0, 243, 255, .15), transparent 37%), var(--surface-muted); }
     .product-media::before { position: absolute; inset: 14px; border: 1px solid rgba(255, 255, 255, .15); border-radius: 14px; content: ""; opacity: .6; }
     .product-media img { position: relative; z-index: 1; width: 100%; height: 270px; object-fit: contain; filter: drop-shadow(0 15px 14px rgba(0, 0, 0, .25)); transition: transform .4s cubic-bezier(.2, .75, .25, 1); }
-    .product-card:hover .product-media img { transform: scale(1.08) translateY(-6px); }
+    /* تصميمات أسهم تقليب الصور */
+.img-slider { position: relative; width: 100%; height: 270px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.img-slider img.slide-img { position: absolute; inset: 0; margin: auto; opacity: 0; transition: opacity 0.3s ease, transform .4s cubic-bezier(.2, .75, .25, 1); max-width: 100%; max-height: 100%; object-fit: contain; z-index: 1; filter: drop-shadow(0 15px 14px rgba(0, 0, 0, .25)); }
+.img-slider img.slide-img.active { opacity: 1; z-index: 2; }
+.product-card:hover .img-slider img.slide-img.active { transform: scale(1.08) translateY(-6px); }
+
+.slider-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; width: 32px; height: 32px; border-radius: 50%; background: rgba(12, 8, 18, 0.6); color: #fff; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transition: all 0.2s ease; backdrop-filter: blur(4px); font-weight: bold; }
+.slider-btn:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+.product-media:hover .slider-btn { opacity: 1; }
+.slider-prev { left: 10px; }
+.slider-next { right: 10px; }
     .product-badge { position: absolute; z-index: 2; top: 15px; right: 15px; padding: 6px 12px; border: 1px solid rgba(255, 255, 255, .24); border-radius: 999px; background: rgba(12, 8, 18, .75); color: #fff; font-size: .75rem; font-weight: 800; backdrop-filter: blur(8px); }
     .product-body { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; }
     .product-topline { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
@@ -2181,8 +2191,17 @@
             <article class="product-card">
               <div class="product-media">
                 ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ""}
-                <img src="${p.image}" alt="${p.title}" loading="lazy">
-              </div>
+                <div class="img-slider" data-current="0">
+                  <img src="${p.image}" class="slide-img active" alt="${p.title}" loading="lazy">
+                  ${p.image2 ? `<img src="${p.image2}" class="slide-img" alt="${p.title}" loading="lazy">` : ""}
+                  ${p.image3 ? `<img src="${p.image3}" class="slide-img" alt="${p.title}" loading="lazy">` : ""}
+                  
+                  ${(p.image2 || p.image3) ? `
+                    <button type="button" class="slider-btn slider-prev" onclick="event.preventDefault(); event.stopPropagation(); window.changeSlide(this, -1)">❮</button>
+                    <button type="button" class="slider-btn slider-next" onclick="event.preventDefault(); event.stopPropagation(); window.changeSlide(this, 1)">❯</button>
+                  ` : ""}
+                </div>
+                </div>
               <div class="product-body">
                 <div class="product-topline">
                   <span class="product-type">${p.type}</span>
@@ -2251,6 +2270,22 @@
         }
       });
     }, 500);
+
+    // دالة تقليب الصور
+    window.changeSlide = function(btn, direction) {
+      const slider = btn.closest('.img-slider');
+      const images = slider.querySelectorAll('.slide-img');
+      let current = parseInt(slider.getAttribute('data-current'));
+      
+      images[current].classList.remove('active');
+      
+      current += direction;
+      if (current >= images.length) current = 0;
+      if (current < 0) current = images.length - 1;
+      
+      images[current].classList.add('active');
+      slider.setAttribute('data-current', current);
+    };
   </script>
 </body>
 </html>
