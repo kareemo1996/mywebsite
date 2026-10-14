@@ -492,6 +492,7 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut, updatePassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
     import { getFirestore, doc, setDoc, getDoc, collection, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+    import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyBEtrijGax-o4mPQk34UX3gVYm81WEpD3I",
@@ -506,7 +507,7 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
-
+    const rtdb = getDatabase(app);
     // أسماء حسابات الإدارة المصرح لها فقط (بدون أي كلمات مرور في الكود نهائياً!)
     const ALLOWED_ADMIN_EMAILS = {
       "kareem@gamora.admin": "كريم (Kareem)",
@@ -877,9 +878,44 @@
       reader.readAsDataURL(file);
     }
 
-    document.getElementById("p-image-upload").addEventListener("change", (e) => compressAndSetImage(e.target.files[0], "p-image"));
-    document.getElementById("p-image2-upload").addEventListener("change", (e) => compressAndSetImage(e.target.files[0], "p-image2"));
-    document.getElementById("p-image3-upload").addEventListener("change", (e) => compressAndSetImage(e.target.files[0], "p-image3"));
+    // ضع مفتاح ImgBB الذي نسخته بين علامتي التنصيص هنا
+    const IMGBB_API_KEY = "dfacbf731ca33233e60eb215ab7f13ed";
+
+    async function uploadToImgBB(file, targetInputId) {
+      if (!file) return;
+      const inputEl = document.getElementById(targetInputId);
+      const oldVal = inputEl.value;
+      
+      // إظهار رسالة مؤقتة أثناء الرفع
+      inputEl.value = "⏳ جاري رفع الصورة...";
+      showToast("⏳ جاري رفع الصورة، انتظر ثواني...");
+
+      const formData = new FormData();
+      formData.append("image", file);
+
+      try {
+        const res = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+          method: "POST",
+          body: formData
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          inputEl.value = data.data.url; // وضع الرابط المباشر للصورة تلقائياً
+          showToast("✅ تم رفع الصورة بنجاح!");
+        } else {
+          inputEl.value = oldVal;
+          showToast("❌ فشل الرفع، تأكد من صحة مفتاح الـ API.");
+        }
+      } catch (err) {
+        inputEl.value = oldVal;
+        showToast("❌ حدث خطأ في الاتصال بالإنترنت أثناء الرفع.");
+      }
+    }
+
+    document.getElementById("p-image-upload").addEventListener("change", (e) => uploadToImgBB(e.target.files[0], "p-image"));
+    document.getElementById("p-image2-upload").addEventListener("change", (e) => uploadToImgBB(e.target.files[0], "p-image2"));
+    document.getElementById("p-image3-upload").addEventListener("change", (e) => uploadToImgBB(e.target.files[0], "p-image3"));
 
     function closeProdModal() { prodModal.classList.remove("open"); }
     document.getElementById("close-prod-modal").addEventListener("click", closeProdModal);
@@ -948,7 +984,8 @@
       localStorage.setItem("gamora_cms_data", JSON.stringify(storeData));
 
       try {
-        await setDoc(doc(db, "gamora_cms", "main_store"), storeData);
+        const cleanData = JSON.parse(JSON.stringify(storeData));
+       await set(ref(rtdb, "gamora_cms/main_store"), cleanData);
         showToast("✅ تم حفظ ونشر جميع التعديلات بشكل آمن على السيرفر!");
       } catch (err) {
         console.error(err);
