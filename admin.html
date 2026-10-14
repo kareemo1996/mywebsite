@@ -452,13 +452,20 @@
           </select>
         </div>
         <div class="field">
-          <label>مسار الصورة (مثال: look/genji-olive.png أو رابط مباشر)</label>
-          <input type="text" id="p-image" class="input" required>
-        </div>
-        <div class="field">
-          <label>أو اختر صورة من جهازك لتحويلها مباشرة</label>
-          <input type="file" id="p-image-upload" class="input" accept="image/*">
-        </div>
+  <label>مسار الصورة الأساسية (الأولى)</label>
+  <input type="text" id="p-image" class="input" required>
+  <input type="file" id="p-image-upload" class="input" accept="image/*" style="margin-top:8px;">
+</div>
+<div class="field">
+  <label>صورة إضافية 2 (اختياري)</label>
+  <input type="text" id="p-image2" class="input" placeholder="رابط أو مسار الصورة الثانية">
+  <input type="file" id="p-image2-upload" class="input" accept="image/*" style="margin-top:8px;">
+</div>
+<div class="field">
+  <label>صورة إضافية 3 (اختياري)</label>
+  <input type="text" id="p-image3" class="input" placeholder="رابط أو مسار الصورة الثالثة">
+  <input type="file" id="p-image3-upload" class="input" accept="image/*" style="margin-top:8px;">
+</div>
       </div>
       <div class="field">
         <label>المميزات النقطية تحت المنتج (اكتب كل ميزة في سطر مستقل)</label>
@@ -819,6 +826,8 @@
       document.getElementById("p-badge").value = p.badge || "";
       document.getElementById("p-hidden").value = String(Boolean(p.hidden));
       document.getElementById("p-image").value = p.image;
+      document.getElementById("p-image2").value = p.image2 || "";
+      document.getElementById("p-image3").value = p.image3 || "";
       document.getElementById("p-features").value = (p.features || []).join("\n");
       document.getElementById("p-detailsTitle").value = p.detailsTitle || p.title;
       document.getElementById("p-details").value = p.details || "";
@@ -828,13 +837,26 @@
     document.getElementById("add-new-prod-btn").addEventListener("click", () => {
       document.getElementById("prod-modal-title").textContent = "إضافة منتج جديد للمتجر";
       document.getElementById("prod-form").reset();
+      document.getElementById("p-image2").value = "";
+      document.getElementById("p-image3").value = "";
       document.getElementById("edit-prod-index").value = "-1";
       document.getElementById("p-id").value = "item-" + Date.now();
       document.getElementById("p-type").value = "GAMORA / NEW";
       prodModal.classList.add("open");
     });
 
-    document.getElementById("p-image-upload").addEventListener("change", (e) => {
+    document.getElementById("p-image2-upload").addEventListener("change", (e) => {
+  const file = e.target.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => { document.getElementById("p-image2").value = reader.result; };
+  reader.readAsDataURL(file);
+});
+document.getElementById("p-image3-upload").addEventListener("change", (e) => {
+  const file = e.target.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => { document.getElementById("p-image3").value = reader.result; };
+  reader.readAsDataURL(file);
+});
       const file = e.target.files[0];
       if (!file) return;
       const reader = new FileReader();
@@ -859,6 +881,8 @@
         badge: document.getElementById("p-badge").value.trim(),
         hidden: document.getElementById("p-hidden").value === "true",
         image: document.getElementById("p-image").value.trim(),
+        image2: document.getElementById("p-image2").value.trim(),
+image3: document.getElementById("p-image3").value.trim(),
         features: document.getElementById("p-features").value.split("\n").map(s => s.trim()).filter(Boolean),
         detailsTitle: document.getElementById("p-detailsTitle").value.trim(),
         details: document.getElementById("p-details").value.trim()
