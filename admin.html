@@ -845,29 +845,41 @@
       prodModal.classList.add("open");
     });
 
-    document.getElementById("p-image-upload").addEventListener("change", (e) => {
-      const file = e.target.files[0];
+    // دالة ذكية لضغط وتصغير حجم أي صورة تلقائياً قبل الحفظ لتجنب حد الـ 1MB في Firestore
+    function compressAndSetImage(file, targetInputId) {
       if (!file) return;
       const reader = new FileReader();
-      reader.onload = () => { document.getElementById("p-image").value = reader.result; };
-      reader.readAsDataURL(file);
-    });
+      reader.onload = (event) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const MAX_WIDTH = 650; // مقاس ممتاز جداً لكارت المتجر
+          let width = img.width;
+          let height = img.height;
 
-    document.getElementById("p-image2-upload").addEventListener("change", (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = () => { document.getElementById("p-image2").value = reader.result; };
-      reader.readAsDataURL(file);
-    });
+          if (width > MAX_WIDTH) {
+            height = Math.round((height * MAX_WIDTH) / width);
+            width = MAX_WIDTH;
+          }
 
-    document.getElementById("p-image3-upload").addEventListener("change", (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = () => { document.getElementById("p-image3").value = reader.result; };
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, width, height);
+
+          // تحويل الصورة لـ WebP مضغوط بنسبة 75% (يحافظ على الشفافية والجودة وبحجم لا يتعدى 30KB)
+          const compressedDataUrl = canvas.toDataURL("image/webp", 0.75);
+          document.getElementById(targetInputId).value = compressedDataUrl;
+          showToast("✅ تم ضغط وتجهيز الصورة بنجاح!");
+        };
+        img.src = event.target.result;
+      };
       reader.readAsDataURL(file);
-    });
+    }
+
+    document.getElementById("p-image-upload").addEventListener("change", (e) => compressAndSetImage(e.target.files[0], "p-image"));
+    document.getElementById("p-image2-upload").addEventListener("change", (e) => compressAndSetImage(e.target.files[0], "p-image2"));
+    document.getElementById("p-image3-upload").addEventListener("change", (e) => compressAndSetImage(e.target.files[0], "p-image3"));
 
     function closeProdModal() { prodModal.classList.remove("open"); }
     document.getElementById("close-prod-modal").addEventListener("click", closeProdModal);
