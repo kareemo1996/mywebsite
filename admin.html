@@ -985,7 +985,8 @@
 
       try {
         const cleanData = JSON.parse(JSON.stringify(storeData));
-       await set(ref(rtdb, "gamora_cms/main_store"), cleanData);
+        // تم تغيير الكود ليتم الحفظ في Firestore
+        await setDoc(doc(db, "gamora_cms", "main_store"), cleanData);
         showToast("✅ تم حفظ ونشر جميع التعديلات بشكل آمن على السيرفر!");
       } catch (err) {
         console.error(err);
