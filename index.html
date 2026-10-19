@@ -14,22 +14,22 @@
   <style>
     :root {
       color-scheme: light;
-      --bg: #f7f6fb;
-      --bg-soft: #efedf7;
-      --surface: rgba(255, 255, 255, .82);
-      --surface-solid: #ffffff;
-      --surface-muted: #f3f1f8;
-      --ink: #181423;
-      --muted: #726c80;
-      --line: rgba(42, 28, 72, .12);
-      --accent: #7d2cff;
-      --accent-strong: #5a12d5;
-      --accent-soft: rgba(125, 44, 255, .12);
+      --bg: #dfe3ec;
+      --bg-soft: #d5dae6;
+      --surface: rgba(235, 238, 245, .90);
+      --surface-solid: #ebeef5;
+      --surface-muted: #e1e5ef;
+      --ink: #181b22;
+      --muted: #586074;
+      --line: rgba(24, 27, 34, .12);
+      --accent: #e86600;
+      --accent-strong: #c95600;
+      --accent-soft: rgba(232, 102, 0, .14);
       --success: #1d9b70;
-      --hero-shadow: 0 26px 80px rgba(60, 28, 107, .24);
-      --shadow: 0 18px 44px rgba(35, 25, 55, .10);
-      --header: rgba(247, 246, 251, .78);
-      --footer: #100b1d;
+      --hero-shadow: 0 26px 80px rgba(20, 25, 40, .16);
+      --shadow: 0 14px 34px rgba(20, 25, 40, .08);
+      --header: rgba(223, 227, 236, .88);
+      --footer: #101218;
     }
 
     :root[data-theme="dark"] {
@@ -1509,6 +1509,179 @@
             </div>
           </article>
 
+        </div>
+      </div>
+    </section>
+
+    <!-- شريط البحث التفاعلي أسفل المنتجات -->
+    <section class="bottom-search-section" id="bottom-search-area">
+      <div class="shell">
+        <div class="bottom-search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="search" id="bottom-search-input" placeholder="ابحث عن جهاز، كارت شاشة، ماوس، أو تيشيرت..." autocomplete="off">
+          <button type="button" id="clear-bottom-search" aria-label="مسح البحث">✕</button>
+          <button type="button" id="bottom-search-btn">بحث</button>
+        </div>
+        <div id="search-status-msg"></div>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    .bottom-search-section { padding: 25px 0 40px; }
+    .bottom-search-box {
+      display: flex; align-items: center; gap: 8px;
+      max-width: 650px; margin: 0 auto;
+      background: var(--surface-solid); border: 2px solid var(--line);
+      border-radius: 999px; padding: 6px 8px;
+      box-shadow: var(--shadow); transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .bottom-search-box:focus-within {
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent-soft);
+    }
+    .bottom-search-box svg {
+      width: 20px; height: 20px; color: var(--accent);
+      flex-shrink: 0; margin-right: 10px;
+    }
+    .bottom-search-box input {
+      width: 100%; border: 0; background: transparent;
+      color: var(--ink); font-family: 'Cairo', sans-serif;
+      font-size: 0.9rem; font-weight: 700; padding: 8px 4px; outline: none;
+    }
+    .bottom-search-box input::placeholder { color: var(--muted); }
+    #clear-bottom-search {
+      display: none; place-items: center;
+      background: var(--surface-muted); color: var(--ink);
+      border: 0; width: 28px; height: 28px;
+      border-radius: 50%; font-size: 0.8rem; font-weight: bold; flex-shrink: 0;
+    }
+    #bottom-search-btn {
+      background: var(--accent); color: #000; border: 0;
+      border-radius: 999px; padding: 8px 18px;
+      font-family: 'Cairo', sans-serif; font-size: 0.85rem; font-weight: 900;
+      flex-shrink: 0; transition: transform 0.2s ease, background 0.2s ease;
+    }
+    #bottom-search-btn:hover { background: var(--accent-strong); transform: translateY(-1px); }
+    #search-status-msg {
+      display: none; text-align: center; max-width: 650px;
+      margin: 12px auto 0; padding: 10px 16px; border-radius: 12px;
+      background: var(--surface-muted); border: 1px dashed var(--accent);
+      color: var(--ink); font-weight: 700; font-size: 0.85rem;
+    }
+  </style>
+
+  <script>
+    (function() {
+      function runStoreSearch(scrollToFirst) {
+        const searchInput = document.getElementById("bottom-search-input");
+        const clearBtn = document.getElementById("clear-bottom-search");
+        const statusMsg = document.getElementById("search-status-msg");
+        if (!searchInput) return;
+
+        const query = searchInput.value.trim().toLowerCase();
+        const sections = document.querySelectorAll(".shop-section");
+        let totalVisible = 0;
+        let firstMatchedCard = null;
+
+        if (clearBtn) clearBtn.style.display = query.length > 0 ? "grid" : "none";
+
+        sections.forEach(sec => {
+          const cards = sec.querySelectorAll(".product-card");
+          let secMatches = 0;
+
+          cards.forEach(card => {
+            const visibleText = card.textContent.toLowerCase();
+            const bubble = card.querySelector(".rating-bubble");
+            const extraSpecs = bubble ? ((bubble.dataset.details || "") + " " + (bubble.dataset.title || "")).toLowerCase() : "";
+            const fullSearchableText = visibleText + " " + extraSpecs;
+
+            if (query === "" || fullSearchableText.includes(query)) {
+              card.style.display = "flex";
+              secMatches++;
+              totalVisible++;
+              if (!firstMatchedCard) firstMatchedCard = card;
+            } else {
+              card.style.display = "none";
+            }
+          });
+
+          if (query.length > 0) {
+            sec.style.display = secMatches > 0 ? "block" : "none";
+          } else {
+            const activeNav = document.querySelector(".main-nav a.is-active");
+            const activeTarget = activeNav ? activeNav.getAttribute("data-target") : "all";
+            sec.style.display = (activeTarget === "all" || sec.id === activeTarget) ? "block" : "none";
+          }
+        });
+
+        if (statusMsg) {
+          if (query.length === 0) {
+            statusMsg.style.display = "none";
+          } else if (totalVisible > 0) {
+            statusMsg.style.display = "block";
+            statusMsg.innerHTML = `تم العثور على <b style="color:var(--accent)">${totalVisible}</b> منتج مطابق — اضغط <b>"بحث"</b> لعرض النتائج بالأعلى ⬆️`;
+          } else {
+            statusMsg.style.display = "block";
+            statusMsg.textContent = "لا توجد منتجات مطابقة لبحثك حالياً.";
+          }
+        }
+
+        if (scrollToFirst && query.length > 0 && firstMatchedCard) {
+          searchInput.blur();
+          const topOffset = firstMatchedCard.getBoundingClientRect().top + window.pageYOffset - 110;
+          window.scrollTo({ top: topOffset, behavior: "smooth" });
+        }
+      }
+
+      document.addEventListener("input", function(e) {
+        if (e.target && e.target.id === "bottom-search-input") {
+          runStoreSearch(false);
+        }
+      });
+
+      document.addEventListener("click", function(e) {
+        if (e.target && e.target.id === "bottom-search-btn") {
+          runStoreSearch(true);
+        }
+        if (e.target && e.target.id === "clear-bottom-search") {
+          const input = document.getElementById("bottom-search-input");
+          if (input) {
+            input.value = "";
+            runStoreSearch(false);
+            input.focus();
+          }
+        }
+        if (e.target.closest(".main-nav a[data-target], .category-card")) {
+          const input = document.getElementById("bottom-search-input");
+          if (input && input.value !== "") {
+            input.value = "";
+            runStoreSearch(false);
+          }
+        }
+      });
+
+      document.addEventListener("keydown", function(e) {
+        if (e.target && e.target.id === "bottom-search-input" && e.key === "Enter") {
+          e.preventDefault();
+          runStoreSearch(true);
+        }
+      });
+    })();
+  </script>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <a class="brand footer-brand" href="#top">
+        <span class="brand-mark">G</span>
+        <span>GAMORA</span>&nbsp;STORE
+      </a>
+      <p class="footer-note">© <span id="year">2026</span> GAMORA STORE — Level Up Your Setup & Style.</p>
+    </div>
+  </footer>
        </div>
       </div>
     </section>
