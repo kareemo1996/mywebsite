@@ -172,6 +172,8 @@
 
     .product-features { margin: 0 0 20px; padding: 0 20px 0 0; color: var(--muted); font-size: .85rem; line-height: 1.6; flex-grow: 1; }
     .product-features li { margin-bottom: 6px; }
+    .product-details-link { display:block; width:100%; margin: 0 0 10px; padding: 11px 14px; border: 1px solid var(--accent); border-radius: 12px; background: var(--accent-soft); color: var(--accent); text-align:center; font-weight:900; transition: background .2s ease, color .2s ease; }
+    .product-details-link:hover { background: var(--accent); color:#000; }
     .add-to-cart { width: 100%; min-height: 48px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-muted); color: var(--ink); font-size: .95rem; font-weight: 900; transition: color .2s ease, background .2s ease, border-color .2s ease; cursor:pointer; margin-top: auto; }
     .add-to-cart:hover { border-color: var(--accent); background: var(--accent); color: #000; }
 
@@ -710,7 +712,22 @@
     </section>
 
     <!-- الأجهزة -->
-    <section class="shop-section" id="devices">
+    
+    <section class="bottom-search-section" id="bottom-search-area">
+      <div class="shell"><div class="search-heading"><strong>&#1575;&#1576;&#1581;&#1579; &#1593;&#1606; &#1605;&#1606;&#1578;&#1580;&#1603;</strong><span>&#1575;&#1603;&#1578;&#1576; &#1575;&#1587;&#1605; &#1575;&#1604;&#1605;&#1606;&#1578;&#1580; &#1604;&#1593;&#1585;&#1590; &#1575;&#1604;&#1606;&#1578;&#1575;&#1574;&#1580; &#1605;&#1576;&#1575;&#1588;&#1585;&#1577;</span></div>
+        <div class="bottom-search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="search" id="bottom-search-input" placeholder="ابحث عن جهاز، كارت شاشة، ماوس، أو تيشيرت..." autocomplete="off">
+          <button type="button" id="clear-bottom-search" aria-label="مسح البحث">✕</button>
+          <button type="button" id="bottom-search-btn">بحث</button>
+        </div>
+        <div id="search-status-msg"></div>
+      </div>
+    </section>
+<section class="shop-section" id="devices">
       <div class="shell">
         <div class="section-heading">
           <div><p class="section-kicker">HARDWARE / 01</p><h2>الأجهزة الاحترافية</h2></div>
@@ -1512,26 +1529,13 @@
         </div>
       </div>
     </section>
-
-    <!-- شريط البحث التفاعلي أسفل المنتجات -->
-    <section class="bottom-search-section" id="bottom-search-area">
-      <div class="shell">
-        <div class="bottom-search-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <input type="search" id="bottom-search-input" placeholder="ابحث عن جهاز، كارت شاشة، ماوس، أو تيشيرت..." autocomplete="off">
-          <button type="button" id="clear-bottom-search" aria-label="مسح البحث">✕</button>
-          <button type="button" id="bottom-search-btn">بحث</button>
-        </div>
-        <div id="search-status-msg"></div>
-      </div>
-    </section>
   </main>
 
   <style>
-    .bottom-search-section { padding: 25px 0 40px; }
+    .search-heading { max-width: 650px; margin: 0 auto 12px; text-align: right; }
+    .search-heading strong { display:block; color:var(--ink); font-size:1.15rem; font-weight:900; }
+    .search-heading span { color:var(--muted); font-size:.88rem; }
+    .bottom-search-section { padding: 24px 0 12px; }
     .bottom-search-box {
       display: flex; align-items: center; gap: 8px;
       max-width: 650px; margin: 0 auto;
@@ -1669,85 +1673,6 @@
           e.preventDefault();
           runStoreSearch(true);
         }
-      });
-    })();
-  </script>
-
-  <footer class="site-footer">
-    <div class="shell footer-inner">
-      <a class="brand footer-brand" href="#top">
-        <span class="brand-mark">G</span>
-        <span>GAMORA</span>&nbsp;STORE
-      </a>
-      <p class="footer-note">© <span id="year">2026</span> GAMORA STORE — Level Up Your Setup & Style.</p>
-    </div>
-  </footer>
-       </div>
-      </div>
-    </section>
-
-    <!-- شريط البحث أسفل المنتجات -->
-    <section class="bottom-search-section">
-      <div class="shell">
-        <div class="bottom-search-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <input type="text" id="bottom-search-input" placeholder="ابحث عن جهاز، اكسسوار، أو تيشيرت في جامورا..." autocomplete="off">
-          <button type="button" id="clear-bottom-search" aria-label="مسح البحث">✕</button>
-        </div>
-        <div id="no-search-results">لا توجد منتجات مطابقة لبحثك حالياً.</div>
-      </div>
-    </section>
-  </main>
-
-  <script>
-    (function() {
-      const searchInput = document.getElementById("bottom-search-input");
-      const clearBtn = document.getElementById("clear-bottom-search");
-      const noResults = document.getElementById("no-search-results");
-
-      function filterStoreProducts() {
-        const query = searchInput.value.trim().toLowerCase();
-        const sections = document.querySelectorAll(".shop-section");
-        let totalVisible = 0;
-
-        clearBtn.style.display = query.length > 0 ? "grid" : "none";
-
-        sections.forEach(sec => {
-          const cards = sec.querySelectorAll(".product-card");
-          let sectionVisibleCount = 0;
-
-          cards.forEach(card => {
-            const text = card.textContent.toLowerCase();
-            if (text.includes(query)) {
-              card.style.display = "flex";
-              sectionVisibleCount++;
-              totalVisible++;
-            } else {
-              card.style.display = "none";
-            }
-          });
-
-          // إظهار القسم إذا كان يحتوي على نتائج بحث
-          if (query.length > 0) {
-            sec.style.display = sectionVisibleCount > 0 ? "block" : "none";
-          } else {
-            const activeNav = document.querySelector(".main-nav a.is-active");
-            const activeTarget = activeNav ? activeNav.getAttribute("data-target") : "all";
-            sec.style.display = (activeTarget === "all" || sec.id === activeTarget) ? "block" : "none";
-          }
-        });
-
-        noResults.style.display = (query.length > 0 && totalVisible === 0) ? "block" : "none";
-      }
-
-      searchInput.addEventListener("input", filterStoreProducts);
-      clearBtn.addEventListener("click", function() {
-        searchInput.value = "";
-        filterStoreProducts();
-        searchInput.focus();
       });
     })();
   </script>
@@ -2365,12 +2290,34 @@
       });
     }
 
+    function ensureProductDetailsLinks() {
+      document.querySelectorAll(".product-card").forEach(card => {
+        if (card.querySelector(".product-details-link")) return;
+        const addButton = card.querySelector(".add-to-cart");
+        if (!addButton) return;
+        const link = document.createElement("button");
+        link.type = "button";
+        link.className = "product-details-link";
+        link.textContent = "عرض تفاصيل المنتج";
+        addButton.before(link);
+      });
+    }
+
     cart = getSavedCart();
     renderCart();
     initStyleSizeButtons();
+    ensureProductDetailsLinks();
 
     // ربط موحد لأزرار إضافة للسلة وفقاعات التقييمات (يعمل مع المنتجات الأصلية والمحدثة من لوحة التحكم)
     document.addEventListener("click", function (e) {
+      var detailsLink = e.target.closest(".product-details-link");
+      if (detailsLink) {
+        var detailsCard = detailsLink.closest(".product-card");
+        var detailsBubble = detailsCard && detailsCard.querySelector(".rating-bubble");
+        var detailsAdd = detailsCard && detailsCard.querySelector(".add-to-cart");
+        if (detailsBubble) openDetails(detailsAdd ? detailsAdd.dataset.id : "unknown", detailsBubble.dataset.title, detailsBubble.dataset.details);
+        return;
+      }
       var addBtn = e.target.closest(".add-to-cart");
       if (addBtn) {
         var size = addBtn.dataset.selectedSize || null;
@@ -2679,7 +2626,7 @@
       if (heroImg && s.heroImage) heroImg.src = s.heroImage;
 
       const footerNote = document.querySelector(".footer-note");
-      if (footerNote && s.footerText) footerNote.innerHTML = `© <span id="year">2026</span> ${s.footerText}`;
+      if (footerNote && s.footerText) footerNote.innerHTML = `© <span>2026</span> ${s.footerText}`;
 
       const catCards = document.querySelectorAll(".category-card .category-info");
       if (catCards[0] && s.cat1Title) catCards[0].innerHTML = `<strong>${s.cat1Title}</strong><span>${s.cat1Sub || ''}</span>`;
@@ -2761,6 +2708,7 @@
         });
 
         initStyleSizeButtons();
+        ensureProductDetailsLinks();
       }
     }
 
@@ -2803,13 +2751,22 @@
       box.classList.toggle("show");
     });
 
-    setInterval(() => {
+    function ensureSpecsMiniButtons() {
       document.querySelectorAll(".product-card .rating-bubble").forEach(b => {
-        if (!b.nextElementSibling || !b.nextElementSibling.classList.contains("specs-mini-btn")) {
-          b.insertAdjacentHTML("afterend", '<button type="button" class="specs-mini-btn" title="عرض المواصفات الكاملة">ℹ️ المواصفات ▾</button>');
-        }
+        if (b.nextElementSibling?.classList.contains("specs-mini-btn")) return;
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "specs-mini-btn";
+        button.title = "عرض المواصفات الكاملة";
+        button.textContent = "ℹ️ المواصفات ▾";
+        b.after(button);
       });
-    }, 500);
+    }
+
+    ensureSpecsMiniButtons();
+    document.querySelectorAll(".products-grid").forEach(grid => {
+      new MutationObserver(ensureSpecsMiniButtons).observe(grid, { childList: true, subtree: true });
+    });
 
     // دالة تقليب الصور
     window.changeSlide = function(btn, direction) {
