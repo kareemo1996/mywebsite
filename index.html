@@ -314,166 +314,318 @@
     .size-btn.is-active { background: var(--accent); color: #000; border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 243, 255, 0.25); }
 
     @media (max-width: 900px) { .products-grid { gap: 18px; } }
-    /* GAMORA — تحسين الموبايل */
-@media (max-width: 720px) {
+/* =========================================
+       تنسيق شريط البحث أسفل المنتجات
+       ========================================= */
+    .bottom-search-section {
+      padding: 20px 0 45px;
+    }
+    .bottom-search-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+      max-width: 650px;
+      margin: 0 auto;
+      background: var(--surface-solid);
+      border: 2px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 18px;
+      box-shadow: var(--shadow);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .bottom-search-box:focus-within {
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent-soft);
+    }
+    .bottom-search-box svg {
+      width: 22px;
+      height: 22px;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-left: 10px;
+    }
+    .bottom-search-box input {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 10px 0;
+      outline: none;
+    }
+    .bottom-search-box input::placeholder {
+      color: var(--muted);
+    }
+    #clear-bottom-search {
+      display: none;
+      background: var(--surface-muted);
+      color: var(--ink);
+      border: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      font-size: 0.85rem;
+      font-weight: bold;
+      place-items: center;
+      flex-shrink: 0;
+      margin-right: 8px;
+    }
+    #clear-bottom-search:hover {
+      background: var(--accent);
+      color: #000;
+    }
+    #no-search-results {
+      display: none;
+      text-align: center;
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 14px;
+      background: var(--surface-muted);
+      border: 1px dashed var(--line);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
 
-  .shell {
-    width: calc(100% - 24px);
-  }
+    /* =========================================
+       GAMORA — تحسين وتنظيم الموبايل (شريطين منتجات)
+       ========================================= */
+    @media (max-width: 720px) {
+      .shell {
+        width: calc(100% - 20px);
+      }
 
-  .header-inner {
-    min-height: 64px;
-    gap: 8px;
-  }
+      /* تنظيم الهيدر والروابط على الموبايل */
+      .header-inner {
+        flex-wrap: wrap;
+        min-height: auto;
+        padding: 10px 0;
+        gap: 10px;
+      }
+      .brand {
+        font-size: 1.05rem;
+        gap: 6px;
+      }
+      .brand-mark {
+        width: 28px;
+        height: 28px;
+        font-size: 1rem;
+      }
+      .header-actions {
+        gap: 6px;
+      }
+      .auth-text-btn {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+        border-radius: 9px;
+      }
+      .icon-button {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+      }
+      .main-nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 18px;
+        padding-top: 8px;
+        border-top: 1px solid var(--line);
+        font-size: 0.85rem;
+      }
 
-  .brand {
-    font-size: 1.05rem;
-    gap: 6px;
-    letter-spacing: .02em;
-  }
+      /* تنظيم البانر وكروت الأقسام الثلاثة */
+      .hero {
+        padding-top: 14px;
+      }
+      .hero-frame {
+        aspect-ratio: 16 / 10;
+        border-radius: 18px;
+      }
+      .category-nav {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin-top: 14px;
+      }
+      .category-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 12px 6px;
+        gap: 8px;
+        border-radius: 14px;
+      }
+      .category-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+      }
+      .category-icon svg {
+        width: 20px;
+        height: 20px;
+      }
+      .category-info strong {
+        font-size: 0.82rem;
+        margin-bottom: 2px;
+      }
+      .category-info span {
+        font-size: 0.68rem;
+      }
 
-  .brand-mark {
-    width: 29px;
-    height: 29px;
-  }
+      /* عناوين الأقسام */
+      .shop-section {
+        padding: 36px 0 20px;
+      }
+      .section-heading {
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 18px;
+      }
+      .section-heading h2 {
+        font-size: 1.45rem;
+      }
+      .section-heading p {
+        flex: 1 1 100%;
+        font-size: 0.85rem;
+      }
 
-  .header-actions {
-    gap: 6px;
-  }
+      /* جعل جميع أقسام المنتجات تعرض 2 شريط (عمودين) بجانب بعض بانتظام */
+      #devices .products-grid,
+      #accessories .products-grid,
+      #style .products-grid,
+      .products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px;
+      }
 
-  .icon-button {
-    width: 38px;
-    height: 38px;
-    border-radius: 11px;
-  }
+      /* ضبط مقاسات الكارت والصور ليتساوى الطول والعرض */
+      .product-card {
+        border-radius: 16px;
+      }
+      .product-media,
+      #style .product-media {
+        min-height: 155px;
+        padding: 10px;
+      }
+      .product-media::before {
+        inset: 8px;
+        border-radius: 10px;
+      }
+      .product-media img,
+      .img-slider,
+      .img-slider img.slide-img,
+      #style .product-media img,
+      #style .img-slider,
+      #style .img-slider img.slide-img {
+        height: 135px;
+      }
+      .product-badge {
+        top: 8px;
+        right: 8px;
+        padding: 3px 8px;
+        font-size: 0.65rem;
+      }
 
-  .main-nav {
-    top: 64px;
-  }
+      /* ضبط النصوص والأزرار داخل الكارت على الموبايل */
+      .product-body,
+      #style .product-body {
+        padding: 10px;
+      }
+      .product-topline {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+      }
+      .product-type {
+        font-size: 0.62rem;
+      }
+      .price,
+      #style .price {
+        font-size: 0.95rem;
+      }
+      .product-card h3,
+      #style .product-card h3 {
+        font-size: 0.85rem;
+        line-height: 1.35;
+        margin: 6px 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        min-height: 2.3rem;
+      }
 
-  .hero {
-    padding-top: 16px;
-  }
+      /* تصغير فقاعة التقييم وزر المواصفات ليناسب عرض العمودين */
+      .rating-bubble {
+        padding: 4px 8px;
+        gap: 4px;
+        margin-bottom: 6px;
+        width: 100%;
+        justify-content: center;
+      }
+      .rating-bubble .stars-icon::before {
+        font-size: 0.8rem;
+      }
+      .rating-bubble .text {
+        font-size: 0.68rem;
+      }
+      .specs-mini-btn {
+        width: 100%;
+        justify-content: center;
+        margin-right: 0 !important;
+        margin-bottom: 8px !important;
+        padding: 4px 8px !important;
+        font-size: 0.68rem !important;
+      }
 
-  .hero-frame {
-    aspect-ratio: 4 / 3;
-    border-radius: 18px;
-  }
+      /* اختصار قائمة المميزات على الموبايل لعدم إطالة الكارت */
+      .product-features,
+      #style .product-features {
+        font-size: 0.72rem;
+        padding-right: 14px;
+        margin-bottom: 10px;
+        line-height: 1.4;
+      }
+      .product-features li:nth-child(n+3) {
+        display: none; /* يكتفي بأول ميزتين في كارت الموبايل والتفاصيل الكاملة داخل زر المواصفات */
+      }
 
-  .category-nav {
-    gap: 10px;
-    margin-top: 18px;
-  }
+      /* تصغير أزرار المقاسات (S, M, L, XL, XXL) لتظهر في سطر واحد متناسق */
+      .style-size-container {
+        gap: 4px;
+        margin-bottom: 10px;
+      }
+      .size-btn {
+        min-width: 26px;
+        height: 26px;
+        padding: 0 4px;
+        font-size: 0.68rem;
+        border-radius: 6px;
+      }
 
-  .category-card {
-    padding: 14px;
-    gap: 12px;
-    border-radius: 15px;
-  }
+      .add-to-cart,
+      #style .add-to-cart {
+        min-height: 38px;
+        font-size: 0.8rem;
+        border-radius: 10px;
+      }
 
-  .shop-section {
-    padding: 42px 0 24px;
-  }
-
-  .section-heading {
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 22px;
-  }
-
-  .section-heading h2 {
-    font-size: 1.65rem;
-  }
-
-  .section-heading p {
-    max-width: none;
-    flex: 1 1 100%;
-    font-size: .9rem;
-  }
-
-  /* الأجهزة تظل في عمود واحد */
-  #devices .products-grid,
-  #accessories .products-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  /* التيشيرتات في عمودين */
-  #style .products-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-  }
-
-  #style .product-media {
-    min-height: 180px;
-    padding: 10px;
-  }
-
-  #style .product-media img {
-    height: 170px;
-  }
-
-  #style .img-slider {
-    height: 170px;
-  }
-
-  #style .img-slider img.slide-img {
-    height: 170px;
-  }
-
-  #style .product-body {
-    padding: 14px;
-  }
-
-  #style .product-card h3 {
-    font-size: .95rem;
-    line-height: 1.45;
-  }
-
-  #style .price {
-    font-size: .95rem;
-  }
-
-  #style .product-features {
-    font-size: .78rem;
-    padding-right: 16px;
-  }
-
-  #style .add-to-cart {
-    min-height: 44px;
-    font-size: .85rem;
-  }
-
-  .checkout-modal {
-    width: calc(100vw - 16px);
-    max-height: 92vh;
-    border-radius: 18px;
-  }
-
-  .checkout-header {
-    padding: 16px;
-  }
-
-  .checkout-right,
-  .checkout-left {
-    padding: 18px;
-  }
-
-  .auth-modal,
-  .details-modal {
-    width: calc(100vw - 24px);
-    padding: 22px 18px;
-    border-radius: 18px;
-  }
-}
-
-/* الهواتف شديدة الصغر */
-@media (max-width: 380px) {
-  #style .products-grid {
-    grid-template-columns: 1fr;
-  }
-}
+      /* النوافذ المنبثقة */
+      .checkout-modal {
+        width: calc(100vw - 16px);
+        max-height: 92vh;
+        border-radius: 18px;
+      }
+      .checkout-header { padding: 16px; }
+      .checkout-right, .checkout-left { padding: 18px; }
+      .auth-modal, .details-modal {
+        width: calc(100vw - 24px);
+        padding: 22px 18px;
+        border-radius: 18px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1357,10 +1509,75 @@
             </div>
           </article>
 
+       </div>
+      </div>
+    </section>
+
+    <!-- شريط البحث أسفل المنتجات -->
+    <section class="bottom-search-section">
+      <div class="shell">
+        <div class="bottom-search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="bottom-search-input" placeholder="ابحث عن جهاز، اكسسوار، أو تيشيرت في جامورا..." autocomplete="off">
+          <button type="button" id="clear-bottom-search" aria-label="مسح البحث">✕</button>
         </div>
+        <div id="no-search-results">لا توجد منتجات مطابقة لبحثك حالياً.</div>
       </div>
     </section>
   </main>
+
+  <script>
+    (function() {
+      const searchInput = document.getElementById("bottom-search-input");
+      const clearBtn = document.getElementById("clear-bottom-search");
+      const noResults = document.getElementById("no-search-results");
+
+      function filterStoreProducts() {
+        const query = searchInput.value.trim().toLowerCase();
+        const sections = document.querySelectorAll(".shop-section");
+        let totalVisible = 0;
+
+        clearBtn.style.display = query.length > 0 ? "grid" : "none";
+
+        sections.forEach(sec => {
+          const cards = sec.querySelectorAll(".product-card");
+          let sectionVisibleCount = 0;
+
+          cards.forEach(card => {
+            const text = card.textContent.toLowerCase();
+            if (text.includes(query)) {
+              card.style.display = "flex";
+              sectionVisibleCount++;
+              totalVisible++;
+            } else {
+              card.style.display = "none";
+            }
+          });
+
+          // إظهار القسم إذا كان يحتوي على نتائج بحث
+          if (query.length > 0) {
+            sec.style.display = sectionVisibleCount > 0 ? "block" : "none";
+          } else {
+            const activeNav = document.querySelector(".main-nav a.is-active");
+            const activeTarget = activeNav ? activeNav.getAttribute("data-target") : "all";
+            sec.style.display = (activeTarget === "all" || sec.id === activeTarget) ? "block" : "none";
+          }
+        });
+
+        noResults.style.display = (query.length > 0 && totalVisible === 0) ? "block" : "none";
+      }
+
+      searchInput.addEventListener("input", filterStoreProducts);
+      clearBtn.addEventListener("click", function() {
+        searchInput.value = "";
+        filterStoreProducts();
+        searchInput.focus();
+      });
+    })();
+  </script>
 
   <footer class="site-footer">
     <div class="shell footer-inner">
